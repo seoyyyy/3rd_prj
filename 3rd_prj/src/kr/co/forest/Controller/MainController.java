@@ -1,4 +1,4 @@
-package kr.co.forest.controller;
+package kr.co.forest.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
