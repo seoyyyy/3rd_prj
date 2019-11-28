@@ -75,7 +75,7 @@ $(function(){
 				<td><c:out value="${list.input_date}"/></td>
 				<td>
 				<c:choose>
-					<c:when test="${list.answer_flag eq 'N'}"><font color="red">답변 미완료<font></c:when>
+					<c:when test="${list.answer_flag eq 'N'}"><font color="red">답변 미완료</font></c:when>
 					<c:when test="${list.answer_flag eq 'Y'}"><font color="blue">답변 완료</font></c:when>
 				</c:choose>
 				

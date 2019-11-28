@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     info=""
     %>
-    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,22 +54,16 @@ $(function(){
 <table class="table" >
   <tbody>
     <tr>
-      <th scope="row" id="th">subject</th><td>이거 어떻게 하는거?</td>
+      <th scope="row" id="th">subject</th><td><c:out value="${nbdd.n_subject}"/></td>
     </tr>
     <tr>
-      <th scope="row" id="th">name</th><td>윤태식</td>
-    </tr>
-    <tr>
-      <th scope="row" id="th">Date</th><td>2019-10-11</td>
+      <th scope="row" id="th">Date</th><td><c:out value="${nbdd.n_input_Date}"/></td>
     </tr>
     <tr>
       <td colspan="2" style="height: 600px;">
       <div style="margin: 50px; text-align: left;">
-    안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      <img src="http://localhost:8080/3rd_pprj/view/images/dd.jpg" style="margin-left: 80px;"/>
+  		<c:out value="${nbdd.n_content}" escapeXml="false"/>
+     
       </div>
       </td>
     </tr>
@@ -80,7 +74,7 @@ $(function(){
 
 
 <div style="float: left;">
-	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='notice_list.jsp'">
+	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='notice_list.do'">
 </div>
 <div style="float:right;">
 	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost" onclick="location.href='modify_form.jsp'" >

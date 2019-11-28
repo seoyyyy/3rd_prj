@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.prj.domain.NoticeBoardDetailDomain;
+import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
 
@@ -70,8 +72,6 @@ public class BoardDAO {
 		try {
 			SqlSession ss = getSessionFactory().openSession();
 			qbdd = ss.selectOne("qnaPost", q_num);
-		
-			
 			ss.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -79,4 +79,30 @@ public class BoardDAO {
 		return qbdd;
 	}//selectDetailQnA
 	
+	public List<NoticeListDomain> selectAllNotice()throws SQLException{
+		List<NoticeListDomain> list = null;
+		
+		//3.Handler얻기
+		try {
+			SqlSession ss = getSessionFactory().openSession();
+			list=ss.selectList("noticeList"); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
+			ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		return list;
+		
+	}//selectAllNotice
+	public NoticeBoardDetailDomain selectDetailNotice(int n_num)throws SQLException{
+		NoticeBoardDetailDomain nbdd = null;
+		try {
+			SqlSession ss = getSessionFactory().openSession();
+			nbdd = ss.selectOne("noticePost", n_num);
+			ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		return nbdd;
+	}//selectDetailQnA
 }//class
