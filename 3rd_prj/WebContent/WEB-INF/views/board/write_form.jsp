@@ -57,13 +57,13 @@ $(function(){
 			confirm("비밀글로 작성하시겠습니까?")
 			
 		}
-			location.href="qna_post.jsp";
+			location.href="qna_post.do";
 		
 		
 	});//click
 	$("#backBtn").click(function(){
 		if(confirm('작성하지 않고 돌아가시겠습니까?')){
-		location.href="qna_list.jsp";
+		location.href="qna_list.do";
 		}//end if
 	});//click
 });//ready

@@ -106,7 +106,7 @@ $(function(){
       <input type="button" class="btn btn-outline-secondary alert-danger"  value="검색" id="btnSearch">
     </div>
     <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">
-      <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.jsp'">
+      <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.do'">
     </div>
 </div>
 </form>

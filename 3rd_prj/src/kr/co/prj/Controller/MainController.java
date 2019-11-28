@@ -10,31 +10,31 @@ public class MainController {
 		return "main/home";
 	}
 	//임시 매핑들
-	@RequestMapping(value="rsv_main.do")
+	@RequestMapping(value="reservation/rsv_main.do")
 	public String rsvForm() {
 		return "reservation/rsv_main";
 	}//rsvForm
-	@RequestMapping(value="introduce.do")
+	@RequestMapping(value="introduce/introduce.do")
 	public String introForm() {
 		return "introduce/about";
 	}//introduceForm
-	@RequestMapping(value="about1.do")
+	@RequestMapping(value="introduce/about1.do")
 	public String about1Form() {
 		return "introduce/about1";
 	}//introduceForm
-	@RequestMapping(value="about2.do")
+	@RequestMapping(value="introduce/about2.do")
 	public String about2Form() {
 		return "introduce/about2";
 	}//introduceForm
-	@RequestMapping(value="location.do")
+	@RequestMapping(value="contact/location.do")
 	public String locationForm() {
 		return "contact/location";
 	}//introduceForm
-	@RequestMapping(value="login.do")
+	@RequestMapping(value="login/login.do")
 	public String loginForm() {
 		return "login/login";
 	}//introduceForm
-	@RequestMapping(value="signUp.do")
+	@RequestMapping(value="login/signUp.do")
 	public String signUpForm() {
 		return "login/signUp";
 	}//introduceForm
