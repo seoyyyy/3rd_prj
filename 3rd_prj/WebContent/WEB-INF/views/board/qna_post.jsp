@@ -78,7 +78,7 @@ function del_process(){
     <tr>
       <td colspan="2" style="height: 600px;">
       <div style="margin: 50px; text-align: left;">
- 	 <c:out value="${qbdd.q_content}"/>
+ 	 <c:out value="${qbdd.q_content}" escapeXml="false"/>
       </div>
       </td>
    	</tr>
@@ -87,7 +87,7 @@ function del_process(){
    	<th style="vertical-align: middle; text-align: center;">관리자   </th>
       <td>
       <div style="float:left;">
-       <c:out value="${qbdd.q_answer}"/> <span style="font-size: 12px; color: gray; margin-left: 50px;" ><c:out value="${qbdd.q_answer_date}"/></span>
+       <c:out value="${qbdd.q_answer}" escapeXml="false"/> <span style="font-size: 12px; color: gray; margin-left: 50px;" ><c:out value="${qbdd.q_answer_date}"/></span>
        </div>
          <div style="float:right;">
     <input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyRp" />
