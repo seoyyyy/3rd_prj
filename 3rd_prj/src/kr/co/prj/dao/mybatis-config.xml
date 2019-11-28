@@ -6,13 +6,15 @@
  <properties resource="properties/database.properties"/>
  <typeAliases>
 	<typeAlias type="kr.co.prj.domain.QnABoardDetailDomain" alias="qbdd"/>
+	<typeAlias type="kr.co.prj.domain.NoticeBoardDetailDomain" alias="nbdd"/>
+	<typeAlias type="kr.co.prj.domain.NoticeListDomain" alias="nld"/>
 </typeAliases>
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
         <property name="driver" value="oracle.jdbc.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@211.63.89.159:1521:orcl"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
         <property name="username" value="space_rental"/>
         <property name="password" value="1234"/>
       </dataSource>
@@ -20,5 +22,6 @@
   </environments>
   <mappers>
     <mapper resource="kr/co/prj/mapper/qna_mapper.xml"/>
+    <mapper resource="kr/co/prj/mapper/notice_mapper.xml"/>
   </mappers>
 </configuration>

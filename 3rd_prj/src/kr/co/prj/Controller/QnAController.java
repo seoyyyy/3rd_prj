@@ -31,6 +31,11 @@ public class QnAController {
 		model.addAttribute("qbdd",qbdd);
 		return "board/qna_post";
 	}//searchQnADetail
+	@RequestMapping(value="board/write_form.do",method=GET)
+	public String writeForm() {
+		
+		return "board/write_form";
+	}//searchQnADetail
 	
 	
 }//class

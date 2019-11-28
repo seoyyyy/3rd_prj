@@ -1,10 +1,9 @@
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""
+    trimDirectiveWhitespaces="true"
     %>
-     
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,66 +47,23 @@ $(function(){
  	<!-- MENU 끝 -->
 </div>
 <div id="container">
-<% SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh시 mm분"); %>
 <h3>공지 게시판</h3>
 <table class="table table-hover" style="text-align: center;">
   <thead class="thead" style="background-color: #C8C4C1" >
     <tr>
       <th scope="col" >no</th>
       <th scope="col" style="width: 700px;">제목</th>
-      <th scope="col">작성자</th>
       <th scope="col" >작성일</th>
     </tr>
   </thead>
   <tbody>
+  <c:forEach var="list" items="${list}">
     <tr>
-      <th scope="row" >1</th>
-      <td><a href="notice_post.jsp" style="color: black;">★ 2019 공지사항 입니다 ★</a></td>
-      <td>윤태식</td>
-      <td><%=sdf.format(new Date()) %></td>
+      <th scope="row" ><c:out value="${list.num }"/></th>
+      <td><a href="notice_post.do?n_num=${list.num}" style="color: black;"><c:out value="${list.subject}"/></a></td>
+      <td><c:out value="${list.input_date}"/></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>김서영</td>
-   	 <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry the Bird</td>
-      <td>신수연</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Mark</td>
-      <td>윤태식</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td>Jacob</td>
-      <td>강다혜</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">6</th>
-      <td>Larry the Bird</td>
-      <td>강민경</td>
-	 <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">7</th>
-      <td>Jacob</td>
-      <td>곽우신</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">8</th>
-      <td>Larry the Bird</td>
-      <td>이하은</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
+    </c:forEach>
   </tbody>
 </table>
 
