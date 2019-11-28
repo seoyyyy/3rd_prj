@@ -1,9 +1,14 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.co.prj.domain.QnAListDomain"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.prj.service.QnAService"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""
     %>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +55,6 @@ $(function(){
  	<!-- MENU 끝 -->
 </div>
 <div id="container">
-<% SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh시 mm분"); %>
 <h3>문의 게시판</h3>
 <table class="table table-hover" style="text-align: center;">
   <thead class="table" style="background-color:#C8C4C1 ">
@@ -59,59 +63,34 @@ $(function(){
       <th scope="col" style="width: 700px;">제목</th>
       <th scope="col">작성자</th>
       <th scope="col" >작성일</th>
+      <th scope="col" >답변 여부</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td><a href="qna_post.do" style="color: black;">이거 어떻게하는거?</a></td>
-      <td>백승규</td>
-      <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>김서영</td>
-   	 <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry the Bird</td>
-      <td>신수연</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Mark</td>
-      <td>윤태식</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td>Jacob</td>
-      <td>강다혜</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">6</th>
-      <td>Larry the Bird</td>
-      <td>강민경</td>
-	 <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">7</th>
-      <td>Jacob</td>
-      <td>곽우신</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-    <tr>
-      <th scope="row">8</th>
-      <td>Larry the Bird</td>
-      <td>이하은</td>
-       <td><%=sdf.format(new Date()) %></td>
-    </tr>
-  </tbody>
+ <c:forEach var="list" items="${list}">
+			<tr>
+				<td><c:out value="${list.num}"/></td>
+				<td><a href="qna_post.do?q_num=${list.num}"><font color="black"><c:out value="${list.subject}"/></font></a></td>
+				<td><c:out value="${list.id}"/></td>
+				<td><c:out value="${list.input_date}"/></td>
+				<td>
+				<c:choose>
+					<c:when test="${list.answer_flag eq 'N'}"><font color="red">답변 미완료<font></c:when>
+					<c:when test="${list.answer_flag eq 'Y'}"><font color="blue">답변 완료</font></c:when>
+				</c:choose>
+				
+				
+				</td>
+			</tr>
+			</c:forEach>
+		<c:if test="${empty list}">
+			<tr>
+			<td colspan="3">부서 정보 없음.</td>
+			</tr>
+		</c:if>
+  
 </table>
+
 <form action="list.jsp"method="get" id="searchFrm">
 <div class="form-row" style="margin: 0px auto; margin-left: 250px; margin-top: 50px;">
   <div class="form-group col-mb-2">
@@ -139,9 +118,9 @@ $(function(){
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item"><a class="page-link" href="#"><font color="#000000">1</font></a></li>
-    <li class="page-item"><a class="page-link" href="#"><font color="#000000">2</font></a></li>
-    <li class="page-item"><a class="page-link" href="#"><font color="#000000">3</font></a></li>
+    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=1"><font color="#000000">1</font></a></li>
+    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=2""><font color="#000000">2</font></a></li>
+    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=3""><font color="#000000">3</font></a></li>
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>

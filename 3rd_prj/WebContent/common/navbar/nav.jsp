@@ -33,8 +33,8 @@
          	Board
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="notice_list.do" id="sub-menuItem">공지사항</a>
-          <a class="dropdown-item" href="qna_list.do" id="sub-menuItem">문의게시판</a>
+          <a class="dropdown-item" href="/3rd_prj/board/notice_list.do" id="sub-menuItem">공지사항</a>
+          <a class="dropdown-item" href="/3rd_prj/board/qna_list.do" id="sub-menuItem">문의게시판</a>
         </div>
       </li>
       <li class="nav-item" style="margin-left: 20px;" id="nav-link">

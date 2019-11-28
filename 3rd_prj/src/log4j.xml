@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="kr.co.forest">
+	<logger name="kr.co.prj">
 		<level value="info" />
 	</logger>
 	

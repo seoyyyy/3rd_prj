@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"
     info=""
     %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,37 +67,53 @@ function del_process(){
 <table class="table" >
   <tbody>
     <tr>
-      <th scope="row" id="th">subject</th><td>이거 어떻게 하는거?</td>
+      <th scope="row" id="th">subject</th><td><c:out value="${qbdd.q_subject}"/></td>
     </tr>
     <tr>
-      <th scope="row" id="th">name</th><td>윤태식</td>
+      <th scope="row" id="th">name</th><td><c:out value="${qbdd.user_id}"/></td>
     </tr>
     <tr>
-      <th scope="row" id="th">Date</th><td>2019-10-11</td>
+      <th scope="row" id="th">Date</th><td><c:out value="${qbdd.q_input_Date}"/></td>
     </tr>
     <tr>
       <td colspan="2" style="height: 600px;">
       <div style="margin: 50px; text-align: left;">
-    안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-         안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~안녕하세요~~
-      
+ 	 <c:out value="${qbdd.q_content}"/>
       </div>
       </td>
-    </tr>
+   	</tr>
+     <c:if test="${qbdd.q_answer_Flag eq 'Y'}">
+     <tr>
+   	<th style="vertical-align: middle; text-align: center;">관리자   </th>
+      <td>
+      <div style="float:left;">
+       <c:out value="${qbdd.q_answer}"/> <span style="font-size: 12px; color: gray;"><c:out value="${qbdd.q_answer_date}"/></span>
+       </div>
+         <div style="float:right;">
+    <input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyRp" />
+    	</div> 	
+      </td>
+      </tr>
+      </c:if>
     <tr>
+      <th scope="row" id="th" style="vertical-align: middle;">댓글</th>
+      <td>
+      <div>
+      <div style="float:left;">
+      <textarea class="form-control" style="width: 810px;" rows="5" placeholder="관리자만 작성 가능합니다."></textarea>
+      </div>
+      <div style="float:right;">
+    <input type="button" value="입력" class="btn btn-secondary alert-danger" id="addRp" onclick="" style="width: 110px; height: 135px;"/>
+    	</div>
+    	</div>
+    </td>
     </tr>
   </tbody>
 </table>
 
 <div>
 <div style="float: left;">
-	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='qna_list.jsp'">
+	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='/3rd_prj/board/qna_list.do'">
 </div>
 <div style="float:right;">
 	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost" onclick="location.href='modify_form.jsp'" >
