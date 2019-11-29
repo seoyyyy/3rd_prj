@@ -43,8 +43,16 @@
 </style>
 <script type="text/javascript">
 $(function(){
-
-});
+	$("#searchBtn").click(function(){
+		//유효성 검증
+		if ($("#keyword").val().trim() ==""){
+			alert("검색어를 입력해주세요");
+			$("#keyword").focus();
+			return;
+		};//end if /* id는 자바스크립트에서 편하게 쓰려고 하는거고 name은 백엔드로 넘길 값 */
+		$("#searchFrm").submit();
+	});//click
+});//ready
 </script>
 </head>
 <body>
@@ -90,9 +98,10 @@ $(function(){
 		</c:if>
   
 </table>
-
-<form action="list.jsp"method="get" id="searchFrm">
-<div class="form-row" style="margin: 0px auto; margin-left: 250px; margin-top: 50px;">
+</div>
+<div id="boardSearch" >	
+<form action="qna_list.do" id="searchFrm" class="form-inline">
+<div class="form-row" style="margin: 0px auto; margin-left: 250px; ">
   <div class="form-group col-mb-2">
       <select id="field" name="field" class="form-control" style="width: 150px;">
         <option value="subject"${param.field eq 'subject'?" selected='selected'":"" }>제목</option>
@@ -100,10 +109,10 @@ $(function(){
       </select>
     </div>
     <div class="form-group col-mb-2">
-      <input type="text" class="form-control" name="keyword" id="keyword">
+      <input type="text" class="form-control" name="keyword" value="${ param.keyword }" id="keyword">
     </div>
     <div class="form-group col-mb-2">
-      <input type="button" class="btn btn-outline-secondary alert-danger"  value="검색" id="btnSearch">
+      <input type="button" class="btn btn-outline-secondary alert-danger"  value="검색" id="searchBtn">
     </div>
     <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">
       <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.do'">
