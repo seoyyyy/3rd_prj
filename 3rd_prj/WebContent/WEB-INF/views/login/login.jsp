@@ -47,7 +47,7 @@ $(function(){
 </div>
 <div id="container">
 
-<form class="form-signin" style=" height:500px; margin-left:450px;" >
+<form class="form-signin" style=" height:500px; margin-left:450px;" action="login_process.do">
   <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal" >LOGIN</h1>
   <label for="inputEmail" class="sr-only">Username</label>
@@ -59,7 +59,7 @@ $(function(){
       <input type="checkbox" value="remember-me">아이디 저장
     </label>
   </div>
-  <button class="btn btn-secondary alert-secondary" type="submit" style="width: 300px;">로그인</button>
+  <button class="btn btn-secondary alert-secondary" type="button" style="width: 300px;">로그인</button>
 	<p class="text-muted">
 	<a href="find_id.jsp" class="text-reset">아이디찾기</a>&nbsp;|&nbsp;
 	<a href="#" class="text-reset">비밀번호 찾기</a>&nbsp;|&nbsp;

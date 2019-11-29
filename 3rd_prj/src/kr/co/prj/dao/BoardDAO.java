@@ -10,10 +10,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.prj.domain.LoginDomain;
 import kr.co.prj.domain.NoticeBoardDetailDomain;
 import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
+import kr.co.prj.vo.LoginVO;
 
 
 public class BoardDAO {
@@ -105,4 +107,5 @@ public class BoardDAO {
 		}//end catch
 		return nbdd;
 	}//selectDetailQnA
+
 }//class

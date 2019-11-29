@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.prj.dao.LoginMapper">
+<resultMap type="kr.co.prj.domain.LoginDomain" id="LoginMap">
+	<result column="user_id" property="id"/>
+	<result column="user_name" property="name"/>
+</resultMap>
+<!-- Login테이블에서 번호,제목,작성일,답변플래그를 받아온다. -->
+<select id="login" resultMap="LoginMap" parameterType="kr.co.prj.vo.LoginVO">
+	SELECT USER_ID,USER_NAME
+	FROM MEMBER_INFO
+	WHERE USER_ID=#{id} AND PASSWORD=#{pass}
+</select>
+</mapper>
+
+
+
