@@ -74,7 +74,7 @@ public class QnAController {
 		boolean flag = qs.insertQnAPost(qwVO)==1;
 		model.addAttribute("flag",flag);
 		System.out.println(qwVO.getQ_subject());
-		return "board/qna_list";
+		return "board/write_process";
 	}
 	
 }//class
