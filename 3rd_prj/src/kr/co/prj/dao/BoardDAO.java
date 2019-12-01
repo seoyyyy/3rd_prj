@@ -2,6 +2,9 @@ package kr.co.prj.dao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,6 +19,7 @@ import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
 import kr.co.prj.vo.LoginVO;
+import kr.co.prj.vo.SearchVO;
 
 
 public class BoardDAO {
@@ -24,6 +28,7 @@ public class BoardDAO {
 	public static SqlSessionFactory ssf;
 	
 	private BoardDAO() {
+		org.apache.ibatis.logging.LogFactory.useLog4JLogging();
 	}
 
 	public static BoardDAO getInstance() {
@@ -53,6 +58,31 @@ public class BoardDAO {
 		return ssf;
 	}//getSessionFactory
 	
+	
+	///////////////////////////////////////////////////ÆÛ¿Â°Í///////////////////////////////////////////////////////////////
+	
+	
+	/**
+	 * ÀüÃ¼ °Ô½Ã¹°ÀÇ ¼ö 
+	 * @return
+	 * @throws SQLException
+	 */
+	public int selectTotalCount(SearchVO dsVO) throws SQLException{
+		int cnt=0;
+		try {
+			SqlSession ss = getSessionFactory().openSession();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		
+			
+		return cnt;
+	}//selectTotalCount
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
 	public List<QnAListDomain> selectAllQnA()throws SQLException{
 		List<QnAListDomain> list = null;
 		
@@ -64,7 +94,7 @@ public class BoardDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
-		
+		System.out.println("¾È³çÇÏ¼¼¿é¿é¿é¤·”·ºÌ¿é¤·”·ºÌ¿é¿é¿äºÌ¶Ó¶ÓÀÌ~~");
 		return list;
 		
 	}//selectAllEmp

@@ -104,8 +104,8 @@ $(function(){
 <div class="form-row" style="margin: 0px auto; margin-left: 250px; ">
   <div class="form-group col-mb-2">
       <select id="field" name="field" class="form-control" style="width: 150px;">
-        <option value="subject"${param.field eq 'subject'?" selected='selected'":"" }>제목</option>
-        <option value="content"${param.field eq 'content'?" selected='selected'":"" }>내용</option>
+        <option value="q_subject" ${param.field eq 'q_subject'?" selected='selected'":"" }>제목</option>
+        <option value="q_content" ${param.field eq 'q_content'?" selected='selected'":"" }>내용</option>
       </select>
     </div>
     <div class="form-group col-mb-2">

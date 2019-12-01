@@ -22,6 +22,15 @@
 	FROM QNA
 	WHERE Q_NUM=#{q_num}
 </select>
+<select id="totalCount" resultType="int" parameterType="kr.co.prj.vo.SearchVO">
+	
+select count(*) cnt 
+from qna 
+where q_subject like ${columnName}='%'||#{String}||'%'
+</select>
+
+
+
 </mapper>
 
 

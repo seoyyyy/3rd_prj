@@ -18,6 +18,8 @@ public class QnAService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}//end catch
+		 
+		
 		return list;
 	}//searchAllQnA
 	public QnABoardDetailDomain searchDetailQnA(int num){
