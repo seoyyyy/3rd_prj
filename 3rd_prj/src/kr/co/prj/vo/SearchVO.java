@@ -6,12 +6,15 @@ public class SearchVO {
 		super();
 	}
 	
+
 	public SearchVO(String field, String keyword, int currentPage) {
 		super();
 		this.field = field;
 		this.keyword = keyword;
 		this.currentPage = currentPage;
 	}
+
+
 	public String getField() {
 		return field;
 	}
@@ -24,9 +27,11 @@ public class SearchVO {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
+
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}

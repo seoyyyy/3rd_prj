@@ -12,6 +12,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.jasper.tagplugins.jstl.core.If;
 
 import kr.co.prj.domain.LoginDomain;
 import kr.co.prj.domain.NoticeBoardDetailDomain;
@@ -19,6 +20,8 @@ import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
 import kr.co.prj.vo.LoginVO;
+import kr.co.prj.vo.QnAWriteVO;
+import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
 
@@ -67,14 +70,20 @@ public class BoardDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int selectTotalCount(SearchVO dsVO) throws SQLException{
+	public int selectTotalCount(SearchVO sVO) throws SQLException{
 		int cnt=0;
 		try {
 			SqlSession ss = getSessionFactory().openSession();
+			if( sVO != null && sVO.getKeyword() != null && !"".equals(sVO.getKeyword())){
+			cnt = ss.selectOne("totalCount",sVO);
+			}else {
+				cnt = ss.selectOne("totalCount");
+			}
+			
+			ss.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
-		
 			
 		return cnt;
 	}//selectTotalCount
@@ -83,18 +92,27 @@ public class BoardDAO {
 	
 	
 	
-	public List<QnAListDomain> selectAllQnA()throws SQLException{
+	public List<QnAListDomain> selectAllQnA(SearchRangeVO drVO ,SearchVO sVO)throws SQLException{
 		List<QnAListDomain> list = null;
 		
 		//3.Handler얻기
 		try {
 			SqlSession ss = getSessionFactory().openSession();
-			list=ss.selectList("qnaList"); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
+			
+			
+			if( sVO != null && sVO.getKeyword() != null && !"".equals(sVO.getKeyword())) {//검색값이 존재할 때 
+				list=ss.selectList("qnaList",sVO);
+				
+			}else {
+				list=ss.selectList("indexPage",drVO); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
+				
+			}//end else
 			ss.close();
+			System.out.println( "시작번호" + drVO.getStartNum()+"끝번호"+drVO.getEndNum());
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
-		System.out.println("안녕하세욥욥욥ㅇ뵹뵤욥ㅇ뵹뵤욥욥요뵤뚠뚠이~~");
 		return list;
 		
 	}//selectAllEmp
@@ -110,6 +128,23 @@ public class BoardDAO {
 		}//end catch
 		return qbdd;
 	}//selectDetailQnA
+	
+	public int insertQnAPost(QnAWriteVO qwVO) {
+		int flag = 0;
+		
+		try {
+			SqlSession ss = getSessionFactory().openSession();
+			flag=ss.insert("writePost", qwVO);
+			ss.commit();
+			ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//endcatch
+		
+		
+		return flag;
+	}
+	
 	
 	public List<NoticeListDomain> selectAllNotice()throws SQLException{
 		List<NoticeListDomain> list = null;

@@ -93,7 +93,7 @@ $(function(){
 			</c:forEach>
 		<c:if test="${empty list}">
 			<tr>
-			<td colspan="3">부서 정보 없음.</td>
+			<td colspan="5" style="text-align: center;">문의사항 내역이 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
   
@@ -127,10 +127,9 @@ $(function(){
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=1"><font color="#000000">1</font></a></li>
-    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=2""><font color="#000000">2</font></a></li>
-    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=3""><font color="#000000">3</font></a></li>
-    <li class="page-item">
+    <c:forEach var="i" begin="1" end="${totalPage}" step="1">
+    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=<c:out value="${i}"/>"><font color="#000000"><c:out value="${i}"/></font></a></li>
+    </c:forEach>
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
@@ -138,6 +137,10 @@ $(function(){
   </ul>
 </nav>
 </div>
+
+
+
+
 </div>
 <div id="footer">
 <a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%;  "/></a> 

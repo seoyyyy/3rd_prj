@@ -12,25 +12,57 @@
 	<result column="q_answer_flag" property="answer_flag"/>
 </resultMap>
 <!-- QnA테이블에서 번호,제목,작성일,답변플래그를 받아온다. -->
-<select id="qnaList" resultMap="qnaListMap">
+<select id="qnaList" resultMap="qnaListMap" parameterType="kr.co.prj.vo.SearchVO">
 	SELECT Q_NUM,USER_ID,Q_SUBJECT,TO_CHAR(Q_INPUT_DATE,'YYYY-MM-DD HH24:MI')Q_INPUT_DATE,Q_ANSWER_FLAG
 	FROM QNA
+	<where>
+				<if test="field!=null">
+					<if test="keyword!=null">
+					${field} like '%'||#{keyword}||'%'
+					</if>
+				</if>	
+			</where>
 	ORDER BY Q_NUM DESC
+		
 </select>
 <select id="qnaPost" resultType="qbdd" parameterType="int">
 	SELECT Q_NUM,Q_SUBJECT,Q_CONTENT,TO_CHAR(Q_INPUT_DATE,'YYYY-MM-DD HH24:MI')Q_INPUT_DATE,USER_ID ,Q_ANSWER_FLAG,Q_ANSWER,TO_CHAR(Q_ANSWER_DATE,'YYYY-MM-DD HH24:MI')Q_ANSWER_DATE
 	FROM QNA
 	WHERE Q_NUM=#{q_num}
-</select>
-<select id="totalCount" resultType="int" parameterType="kr.co.prj.vo.SearchVO">
 	
-select count(*) cnt 
-from qna 
-where q_subject like ${columnName}='%'||#{String}||'%'
+	
 </select>
+<select id="totalCount" resultType="int" parameterType="kr.co.prj.vo.SearchVO" >
+select count(q_num)cnt 
+from qna 
+<where>
+				<if test="field!=null">
+					<if test="keyword!=null">
+					${field} like '%'||#{keyword}||'%'
+					</if>
+				</if>	
+			</where>
 
 
 
+</select>
+<select id ="indexPage" resultMap="qnaListMap" parameterType="kr.co.prj.vo.SearchRangeVO">
+
+select  Q_NUM,USER_ID,Q_SUBJECT,TO_CHAR(Q_INPUT_DATE,'YYYY-MM-DD HH24:MI')Q_INPUT_DATE,Q_ANSWER_FLAG 
+from (select rownum rnum,  Q_NUM,USER_ID,Q_SUBJECT,Q_INPUT_DATE,Q_ANSWER_FLAG 
+from (select  Q_NUM,USER_ID,Q_SUBJECT,Q_INPUT_DATE,Q_ANSWER_FLAG
+from qna))
+where rnum between #{startNum} and #{endNum}
+order by q_num desc
+
+</select>
+<insert id="writePost"  parameterType="kr.co.prj.vo.QnAWriteVO">
+insert 
+into 
+qna(q_num,user_id,q_input_date,q_subject,q_content,q_answer_flag) 
+values
+(seq_qna_board.nextval,'shin',sysdate,#{q_subject},#{q_content},'N')
+</insert>
 </mapper>
 
 
