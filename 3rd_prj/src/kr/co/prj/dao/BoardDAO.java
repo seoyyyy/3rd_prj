@@ -92,7 +92,7 @@ public class BoardDAO {
 	
 	
 	
-	public List<QnAListDomain> selectAllQnA(SearchRangeVO drVO ,SearchVO sVO)throws SQLException{
+	public List<QnAListDomain> selectAllQnA(SearchVO sVO)throws SQLException{
 		List<QnAListDomain> list = null;
 		
 		//3.Handler얻기
@@ -101,14 +101,10 @@ public class BoardDAO {
 			
 			
 			if( sVO != null && sVO.getKeyword() != null && !"".equals(sVO.getKeyword())) {//검색값이 존재할 때 
-				list=ss.selectList("qnaList",sVO);
-				
-			}else {
-				list=ss.selectList("indexPage",drVO); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
-				
-			}//end else
+			}
+			list=ss.selectList("qnaList",sVO);
 			ss.close();
-			System.out.println( "시작번호" + drVO.getStartNum()+"끝번호"+drVO.getEndNum());
+			System.out.println( "시작번호" + sVO.getStartNum()+"끝번호"+sVO.getEndNum());
 
 		} catch (IOException e) {
 			e.printStackTrace();

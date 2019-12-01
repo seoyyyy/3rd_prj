@@ -36,12 +36,12 @@ public class QnAController {
 		}//end if
 		
 		QnAService qs = new QnAService();
-		SearchVO sVO = new SearchVO(field,keyword,tempPage);
-		int totalCount=qs.selectTotalCount(sVO); // 전체 글 조회
 		int pageScale=qs.pageScale(); //한 화면에 보여줄 글 수 
-		int totalPage=qs.totalPage(pageScale, totalCount); //총 페이지 수
 		int startNum=qs.startNum(pageScale, tempPage);// 시작번호
 		int endNum=qs.endNum(pageScale, startNum); //끝 번호
+		SearchVO sVO = new SearchVO(field,keyword,tempPage,startNum,endNum);
+		int totalCount=qs.selectTotalCount(sVO); // 전체 글 조회
+		int totalPage=qs.totalPage(pageScale, totalCount); //총 페이지 수
 		
 		
 		

@@ -128,7 +128,8 @@ $(function(){
       </a>
     </li>
     <c:forEach var="i" begin="1" end="${totalPage}" step="1">
-    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=<c:out value="${i}"/>"><font color="#000000"><c:out value="${i}"/></font></a></li>
+    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=<c:out value="${i}"/>
+    <c:if test="${param.keyword !=null}">&field=<c:out value="${param.field}"/>&keyword=<c:out value="${param.keyword}"/></c:if>"><font color="#000000"><c:out value="${i}"/></font></a></li>
     </c:forEach>
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>

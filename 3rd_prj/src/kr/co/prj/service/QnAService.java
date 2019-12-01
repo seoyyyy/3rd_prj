@@ -85,7 +85,7 @@ public class QnAService {
 		List<QnAListDomain> list= null;
 		BoardDAO bDao = BoardDAO.getInstance();
 		try {
-			list=bDao.selectAllQnA(srVO, sVO);
+			list=bDao.selectAllQnA(sVO);
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
