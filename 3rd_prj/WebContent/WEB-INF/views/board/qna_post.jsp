@@ -5,7 +5,7 @@
     info=""
     %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta charset="UTF-8">
@@ -43,14 +43,10 @@ $(function(){
 
 });
 function del_process(){
-	var pw= prompt("비밀번호를 입력해주세요.");
-	if("1234"==pw){
-		alert("삭제되었습니다.");
-		location.href = "notice_list.jsp";
-	}else{
-		alert("정확한 비밀번호를 입력해주세요.");
-		return;
-	}//삭제
+	if(confirm("정말 삭제하시겠습니까?")){
+		location.href="/3rd_prj/board/delete_post.do";
+	}//end if
+	
 	
 }//del_process
 </script>
@@ -111,12 +107,14 @@ function del_process(){
   </tbody>
 </table>
 
-<div>
+<div >
 <div style="float: left;">
 	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='/3rd_prj/board/qna_list.do'">
 </div>
 <div style="float:right;">
+	<c:if test="${qbdd.q_answer_Flag != 'Y'}">
 	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost" onclick="location.href='modify_form.jsp'" >
+	</c:if>
 	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" onclick="del_process()" >
 </div>
 </div>

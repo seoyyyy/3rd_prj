@@ -1,9 +1,4 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="kr.co.prj.domain.QnAListDomain"%>
-<%@page import="java.util.List"%>
-<%@page import="kr.co.prj.service.QnAService"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""
@@ -53,6 +48,9 @@ $(function(){
 		$("#searchFrm").submit();
 	});//click
 });//ready
+function checkId(){
+	alert("게시물을 작성하신 회원님만 열람 가능합니다.");
+}
 </script>
 </head>
 <body>
@@ -78,7 +76,19 @@ $(function(){
  <c:forEach var="list" items="${list}">
 			<tr>
 				<td><c:out value="${list.num}"/></td>
-				<td><a href="qna_post.do?q_num=${list.num}"><font color="black"><c:out value="${list.subject}"/></font></a></td>
+				<td>
+					 <c:choose>
+					 	<c:when test="${memberId != null and list.id eq memberId}">
+					 	<a href="qna_post.do?q_num=${list.num}">
+					 	</c:when>
+					 	<c:when test="${memberId eq null}">
+					 	<a href = "/3rd_prj/login/login.do">
+					 	</c:when>
+					 	<c:when test="${memberId != null and list.id ne memberId}">
+					 	<a href="javascript:checkId()">
+					 	</c:when>
+					 </c:choose>
+				<font color="black"><c:out value="${list.subject}"/></font></a></td>
 				<td><c:out value="${list.id}"/></td>
 				<td><c:out value="${list.input_date}"/></td>
 				<td>
@@ -99,9 +109,9 @@ $(function(){
   
 </table>
 </div>
-<div id="boardSearch" >	
+<div id="boardSearch" style="margin-left: 35%;">	
 <form action="qna_list.do" id="searchFrm" class="form-inline">
-<div class="form-row" style="margin: 0px auto; margin-left: 250px; ">
+<div class="form-row" >
   <div class="form-group col-mb-2">
       <select id="field" name="field" class="form-control" style="width: 150px;">
         <option value="q_subject" ${param.field eq 'q_subject'?" selected='selected'":"" }>제목</option>
@@ -114,12 +124,22 @@ $(function(){
     <div class="form-group col-mb-2">
       <input type="button" class="btn btn-outline-secondary alert-danger"  value="검색" id="searchBtn">
     </div>
-    <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">
-      <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.do'">
+    <div class="form-group col-mb-2" style="margin-left:200px; margin-top: 10px;">
+      <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" 
+      <c:choose>
+ 	<c:when test="${memberId != null}">
+ 	onclick="location.href='/3rd_prj/board/write_form.do'"
+ 	</c:when>
+ 	<c:when test="${memberId eq null}">
+ 	onclick="location.href='/3rd_prj/login/login.do'"
+ 	</c:when>
+ </c:choose>
+      >
+ 
     </div>
 </div>
 </form>
-<div style="margin-left: 420px;" >
+<div style="margin-left: 150px;">
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item">

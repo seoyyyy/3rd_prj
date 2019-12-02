@@ -22,9 +22,10 @@ public class QnAService {
 	 */
 	public int selectTotalCount(SearchVO sVO) {
 		int cnt = 0;
+		String mappedId="qnaTotalCount";
 		BoardDAO bDao = BoardDAO.getInstance();
 		try {
-			cnt = bDao.selectTotalCount(sVO);
+			cnt = bDao.selectTotalCount(mappedId,sVO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}//end catch
@@ -81,7 +82,7 @@ public class QnAService {
 	
 ///////////////////////////////////////////////////////////////
 	
-	public List<QnAListDomain> searchAllQnA(SearchRangeVO srVO, SearchVO sVO){
+	public List<QnAListDomain> searchAllQnA( SearchVO sVO){
 		List<QnAListDomain> list= null;
 		BoardDAO bDao = BoardDAO.getInstance();
 		try {
@@ -116,4 +117,11 @@ public class QnAService {
 		return cnt;
 	}//insertQnAPost
 	
+	public int deletePostQnA(int q_num) {
+		int cnt=0;
+		BoardDAO bDAO = BoardDAO.getInstance();
+		cnt = bDAO.deletePostQnA(q_num);
+		
+		return cnt;
+	}//deletePostQnA
 }//class

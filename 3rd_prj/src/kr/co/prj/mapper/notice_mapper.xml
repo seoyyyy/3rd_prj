@@ -11,9 +11,31 @@
 	<result column="n_delete_flag" property="delete_flag"/>
 </resultMap>
 <!-- QnA테이블에서 번호,제목,작성일,답변플래그를 받아온다. -->
-<select id="noticeList" resultMap="noticeListMap">
-	SELECT N_NUM,N_SUBJECT,TO_CHAR(N_INPUT_DATE,'YYYY-MM-DD HH24:MI')N_INPUT_DATE,N_DELETE_FLAG
-	FROM NOTICE
+
+<select id="noticeList" resultMap="noticeListMap" parameterType="kr.co.prj.vo.SearchVO">
+	select  n_NUM,n_SUBJECT,TO_CHAR(n_INPUT_DATE,'YYYY-MM-DD HH24:MI')n_INPUT_DATE,n_delete_flag
+	from (select rownum rnum,  n_NUM,n_SUBJECT,n_INPUT_DATE,n_delete_flag
+	from (select  n_NUM,n_SUBJECT,n_INPUT_DATE,n_delete_flag
+	from notice
+	<if test="field!=null and keyword!=null">
+	where  ${field} like '%'||#{keyword}||'%'
+	</if>
+	order by n_num desc))
+	where rnum between #{startNum} and #{endNum}
+</select>
+<select id="noticeTotalCount" resultType="int" parameterType="kr.co.prj.vo.SearchVO" >
+select count(n_num)cnt 
+from notice 
+<where>
+				<if test="field!=null">
+					<if test="keyword!=null">
+					${field} like '%'||#{keyword}||'%'
+					</if>
+				</if>	
+			</where>
+
+
+
 </select>
 <select id="noticePost" resultType="nbdd" parameterType="int">
  SELECT N_NUM,N_SUBJECT,N_CONTENT,N_INPUT_DATE,N_DELETE_FLAG	

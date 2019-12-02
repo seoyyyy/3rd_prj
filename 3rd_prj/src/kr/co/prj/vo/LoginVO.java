@@ -1,22 +1,22 @@
 package kr.co.prj.vo;
 
 public class LoginVO {
-	private String id, pass;
+	private String inputId, inputPassword;
 
-	public String getId() {
-		return id;
+	public String getInputId() {
+		return inputId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setInputId(String inputId) {
+		this.inputId = inputId;
 	}
 
-	public String getPass() {
-		return pass;
+	public String getInputPassword() {
+		return inputPassword;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setInputPassword(String inputPassword) {
+		this.inputPassword = inputPassword;
 	}
-	
+
 }//class

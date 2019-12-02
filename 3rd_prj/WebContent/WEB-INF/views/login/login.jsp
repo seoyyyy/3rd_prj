@@ -34,8 +34,38 @@
 <link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet">
 <script type="text/javascript">
 $(function(){
-
+	$("#btn").click(function(){
+		chkNull();
+	});//click
+	$("#inputId").keydown(function(evt){
+		if(evt.which == 13){
+		chkNull();
+		}//end if
+	});//keydown
+	$("#inputPassword").keydown(function(){
+		if(evt.which == 13){
+		chkNull();
+		}//end if
+	});//keydown
+	
 });//ready
+
+function chkNull(){
+	var id=$("#inputId").val();
+	if(id.trim()==""){
+		$("#inputId").focus();
+		return;
+	}//end if
+	var passwd=$("#inputPassword").val();
+	if(passwd.trim()==""){
+		$("#inputPassword").focus();
+		return;
+	}//end if
+	$("#logFrm").submit();
+	
+	
+}//chkNull
+
 </script>
 </head>
 <body>
@@ -47,23 +77,23 @@ $(function(){
 </div>
 <div id="container">
 
-<form class="form-signin" style=" height:500px; margin-left:450px;" action="login_process.do">
+<form class="form-signin" style=" height:500px; margin-left:450px;" action="login_process.do" method="post" id="logFrm">
   <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal" >LOGIN</h1>
   <label for="inputEmail" class="sr-only">Username</label>
-  <input type="text" id="inputId" class="form-control" placeholder="Username" required="" autofocus="" style="width:300px; margin-bottom: 10px;">
+  <input type="text" id="inputId" name="inputId" class="form-control" placeholder="Username" required="" autofocus="" style="width:300px; margin-bottom: 10px;">
   <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" style="width:300px; margin-bottom: 10px;">
+  <input type="password" id="inputPassword"   name="inputPassword" class="form-control" placeholder="Password" required="" style="width:300px; margin-bottom: 10px;">
   <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me">아이디 저장
     </label>
   </div>
-  <button class="btn btn-secondary alert-secondary" type="button" style="width: 300px;">로그인</button>
+  <button class="btn btn-secondary alert-secondary" type="button" style="width: 300px;" id="btn">로그인</button>
 	<p class="text-muted">
-	<a href="find_id.jsp" class="text-reset">아이디찾기</a>&nbsp;|&nbsp;
+	<a href="find_id.do" class="text-reset">아이디찾기</a>&nbsp;|&nbsp;
 	<a href="#" class="text-reset">비밀번호 찾기</a>&nbsp;|&nbsp;
-	<a href="signUp.jsp" class="text-reset">회원가입</a>
+	<a href="signUp.do" class="text-reset">회원가입</a>
 	</p>
 </form>
 
