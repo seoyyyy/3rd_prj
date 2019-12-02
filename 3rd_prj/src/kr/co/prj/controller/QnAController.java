@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,7 +81,7 @@ public class QnAController {
 	@RequestMapping(value="board/delete_post.do",method=GET)
 	public String deleteProcess(int q_num) {
 		QnAService qs = new QnAService();
-		
+	
 		qs.deletePostQnA(q_num);
 		return "board/delete_process";
 	}//deleteProcess
