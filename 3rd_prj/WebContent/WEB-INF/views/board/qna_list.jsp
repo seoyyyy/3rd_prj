@@ -48,6 +48,9 @@ $(function(){
 		$("#searchFrm").submit();
 	});//click
 });//ready
+function checkId(){
+	alert("게시물을 작성하신 회원님만 열람 가능합니다.");
+}
 </script>
 </head>
 <body>
@@ -73,7 +76,19 @@ $(function(){
  <c:forEach var="list" items="${list}">
 			<tr>
 				<td><c:out value="${list.num}"/></td>
-				<td><a href="qna_post.do?q_num=${list.num}"><font color="black"><c:out value="${list.subject}"/></font></a></td>
+				<td>
+					 <c:choose>
+					 	<c:when test="${memberId != null and list.id eq memberId}">
+					 	<a href="qna_post.do?q_num=${list.num}">
+					 	</c:when>
+					 	<c:when test="${memberId eq null}">
+					 	<a href = "/3rd_prj/login/login.do">
+					 	</c:when>
+					 	<c:when test="${memberId != null and list.id ne memberId}">
+					 	<a href="javascript:checkId()">
+					 	</c:when>
+					 </c:choose>
+				<font color="black"><c:out value="${list.subject}"/></font></a></td>
 				<td><c:out value="${list.id}"/></td>
 				<td><c:out value="${list.input_date}"/></td>
 				<td>
@@ -110,7 +125,17 @@ $(function(){
       <input type="button" class="btn btn-outline-secondary alert-danger"  value="검색" id="searchBtn">
     </div>
     <div class="form-group col-mb-2" style="margin-left:200px; margin-top: 10px;">
-      <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.do'">
+      <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" 
+      <c:choose>
+ 	<c:when test="${memberId != null}">
+ 	onclick="location.href='/3rd_prj/board/write_form.do'"
+ 	</c:when>
+ 	<c:when test="${memberId eq null}">
+ 	onclick="location.href='/3rd_prj/login/login.do'"
+ 	</c:when>
+ </c:choose>
+      >
+ 
     </div>
 </div>
 </form>

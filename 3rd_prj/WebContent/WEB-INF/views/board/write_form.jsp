@@ -94,9 +94,10 @@ $(function(){
 				<input type="button" value="돌아가기" class="btn btn-secondary alert-secondary" id="backBtn">
 				
 			</div>
+	<input type="hidden" name="user_id" value="<c:out value='${memberId}'/>"/>
          </form>
+         
 </div>
-
 <div id="footer">
 <a href="#"><img src="http://localhost:8080/3rd_pprj/view/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
 	<!-- 900(w)x150(h) -->

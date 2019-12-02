@@ -6,6 +6,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,16 +69,21 @@ public class QnAController {
 	
 		return "board/write_form";
 	}//searchQnADetail
+	/**
+	 * @param session
+	 * @param qwVO
+	 * @return
+	 */
 	@RequestMapping(value="board/write_post.do",method=POST)
-	public String writeProcess(QnAWriteVO qwVO) {
+	public String writeProcess(HttpSession session,QnAWriteVO qwVO) {
 		QnAService qs = new QnAService();
 		 qs.insertQnAPost(qwVO);
-	
 		return "board/write_process";
 	}
 	@RequestMapping(value="board/delete_post.do",method=GET)
 	public String deleteProcess(int q_num) {
 		QnAService qs = new QnAService();
+		
 		qs.deletePostQnA(q_num);
 		return "board/delete_process";
 	}//deleteProcess
