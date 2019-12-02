@@ -94,9 +94,11 @@ $(function(){
     <div class="form-group col-mb-2">
       <input type="button" class="btn btn-outline-secondary alert-secondary btn-sm" value="검색" id="searchBtn">
     </div>
+    <c:if test="${admin_id ne null }">
      <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">
       <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.jsp'">
     </div>
+    </c:if>
 </div>
 </form>
 

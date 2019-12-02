@@ -12,7 +12,6 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.jasper.tagplugins.jstl.core.If;
 
 import kr.co.prj.domain.LoginDomain;
 import kr.co.prj.domain.NoticeBoardDetailDomain;

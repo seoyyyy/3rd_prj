@@ -76,10 +76,12 @@ $(function(){
 <div style="float: left;">
 	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='notice_list.do'">
 </div>
+ <c:if test="${admin_id ne null }">
 <div style="float:right;">
 	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost" onclick="location.href='modify_form.jsp'" >
 	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" onclick="confirm('정말 삭제하시겠습니까?')" >
 </div>
+</c:if>
 </div>
 
 

@@ -42,11 +42,11 @@
 $(function(){
 
 });
-function del_process(){
+function del_process(q_num){
 	if(confirm("정말 삭제하시겠습니까?")){
-		location.href="/3rd_prj/board/delete_post.do";
+		var q_num = q_num
+		location.href="/3rd_prj/board/delete_post.do?q_num="+q_num;
 	}//end if
-	
 	
 }//del_process
 </script>
@@ -85,13 +85,17 @@ function del_process(){
       <div style="float:left;">
        <c:out value="${qbdd.q_answer}" escapeXml="false"/> <span style="font-size: 12px; color: gray; margin-left: 50px;" ><c:out value="${qbdd.q_answer_date}"/></span>
        </div>
+        <c:if test="${admin_id ne null }">
          <div style="float:right;">
     <input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyRp" />
     	</div> 	
+    	</c:if>
       </td>
       </tr>
       </c:if>
+      
     <tr>
+     <c:if test="${admin_id ne null }">
       <th scope="row" id="th" style="vertical-align: middle;">댓글</th>
       <td>
       <div>
@@ -103,6 +107,7 @@ function del_process(){
     	</div>
     	</div>
     </td>
+    </c:if>
     </tr>
   </tbody>
 </table>
@@ -115,7 +120,7 @@ function del_process(){
 	<c:if test="${qbdd.q_answer_Flag != 'Y'}">
 	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost" onclick="location.href='modify_form.jsp'" >
 	</c:if>
-	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" onclick="del_process()" >
+	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" onclick="del_process('${qbdd.q_num}')" >
 </div>
 </div>
 

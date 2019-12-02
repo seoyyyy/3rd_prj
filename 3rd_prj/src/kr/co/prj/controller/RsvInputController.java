@@ -2,7 +2,6 @@ package kr.co.prj.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-import javax.websocket.Session;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
