@@ -70,21 +70,21 @@ public class BoardDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int selectTotalCount(SearchVO sVO) throws SQLException{
+	public int selectTotalCount(String mappedId,SearchVO sVO) throws SQLException{
 		int cnt=0;
 		try {
 			SqlSession ss = getSessionFactory().openSession();
 			if( sVO != null && sVO.getKeyword() != null && !"".equals(sVO.getKeyword())){
-			cnt = ss.selectOne("totalCount",sVO);
+			cnt = ss.selectOne(mappedId,sVO);
+			System.out.println(mappedId+"-----------------------"+sVO.getField());
 			}else {
-				cnt = ss.selectOne("totalCount");
+				cnt = ss.selectOne(mappedId);
 			}
-			
 			ss.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
-			
+			System.out.println(cnt+"쿄콬");
 		return cnt;
 	}//selectTotalCount
 	
@@ -104,7 +104,7 @@ public class BoardDAO {
 			}
 			list=ss.selectList("qnaList",sVO);
 			ss.close();
-			System.out.println( "시작번호" + sVO.getStartNum()+"끝번호"+sVO.getEndNum());
+		
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -142,14 +142,15 @@ public class BoardDAO {
 	}
 	
 	
-	public List<NoticeListDomain> selectAllNotice()throws SQLException{
+	public List<NoticeListDomain> selectAllNotice(SearchVO sVO)throws SQLException{
 		List<NoticeListDomain> list = null;
 		
 		//3.Handler얻기
 		try {
 			SqlSession ss = getSessionFactory().openSession();
-			list=ss.selectList("noticeList"); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
+			list=ss.selectList("noticeList",sVO); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
 			ss.close();
+			System.out.println( "시작번호" + sVO.getStartNum()+"끝번호"+sVO.getEndNum());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch

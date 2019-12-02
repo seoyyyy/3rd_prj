@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
@@ -48,7 +47,7 @@ public class QnAController {
 	
 
 		SearchRangeVO srVO = new SearchRangeVO(startNum,endNum);
-		 List<QnAListDomain> list = qs.searchAllQnA(srVO,sVO);
+		 List<QnAListDomain> list = qs.searchAllQnA(sVO);
 		 model.addAttribute("list", list);
 		 model.addAttribute("totalPage", totalPage);
 		 return "board/qna_list";

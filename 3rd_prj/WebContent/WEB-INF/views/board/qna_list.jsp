@@ -1,9 +1,4 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="kr.co.prj.domain.QnAListDomain"%>
-<%@page import="java.util.List"%>
-<%@page import="kr.co.prj.service.QnAService"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""
@@ -99,9 +94,9 @@ $(function(){
   
 </table>
 </div>
-<div id="boardSearch" >	
+<div id="boardSearch" style="margin-left: 35%;">	
 <form action="qna_list.do" id="searchFrm" class="form-inline">
-<div class="form-row" style="margin: 0px auto; margin-left: 250px; ">
+<div class="form-row" >
   <div class="form-group col-mb-2">
       <select id="field" name="field" class="form-control" style="width: 150px;">
         <option value="q_subject" ${param.field eq 'q_subject'?" selected='selected'":"" }>제목</option>
@@ -114,12 +109,12 @@ $(function(){
     <div class="form-group col-mb-2">
       <input type="button" class="btn btn-outline-secondary alert-danger"  value="검색" id="searchBtn">
     </div>
-    <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">
+    <div class="form-group col-mb-2" style="margin-left:200px; margin-top: 10px;">
       <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.do'">
     </div>
 </div>
 </form>
-<div style="margin-left: 420px;" >
+<div style="margin-left: 150px;">
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item">

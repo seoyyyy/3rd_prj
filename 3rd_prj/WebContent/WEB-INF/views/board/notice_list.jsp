@@ -35,8 +35,16 @@
 <link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet">
 <script type="text/javascript">
 $(function(){
-
-});
+	$("#searchBtn").click(function(){
+		//유효성 검증
+		if ($("#keyword").val().trim() ==""){
+			alert("검색어를 입력해주세요");
+			$("#keyword").focus();
+			return;
+		};//end if /* id는 자바스크립트에서 편하게 쓰려고 하는거고 name은 백엔드로 넘길 값 */
+		$("#searchFrm").submit();
+	});//click
+});//ready
 </script>
 </head>
 <body>
@@ -64,22 +72,27 @@ $(function(){
       <td><c:out value="${list.input_date}"/></td>
     </tr>
     </c:forEach>
+    <c:if test="${empty list}">
+			<tr>
+			<td colspan="5" style="text-align: center;">공지사항 내역이 존재하지 않습니다.</td>
+			</tr>
+		</c:if>
   </tbody>
 </table>
 
-<form action="list.jsp"method="get" id="searchFrm">
+<form action="notice_list.do"method="get" id="searchFrm">
 <div class="form-row" style="margin: 0px auto; margin-left: 250px;">
   <div class="form-group col-mb-2">
       <select id="field" name="field" class="form-control" style="width: 150px;">
-        <option value="subject"${param.field eq 'subject'?" selected='selected'":"" }>제목</option>
-        <option value="content"${param.field eq 'content'?" selected='selected'":"" }>내용</option>
+        <option value="n_subject"${param.field eq 'n_subject'?" selected='selected'":"" }>제목</option>
+        <option value="n_content"${param.field eq 'n_content'?" selected='selected'":"" }>내용</option>
       </select>
     </div>
     <div class="form-group col-mb-2">
-      <input type="text" class="form-control" name="keyword" id="keyword">
+      <input type="text" class="form-control" value="${param.keyword}" name="keyword" id="keyword">
     </div>
     <div class="form-group col-mb-2">
-      <input type="button" class="btn btn-outline-secondary alert-secondary btn-sm" value="검색" id="btnSearch">
+      <input type="button" class="btn btn-outline-secondary alert-secondary btn-sm" value="검색" id="searchBtn">
     </div>
      <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">
       <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.jsp'">
@@ -95,10 +108,10 @@ $(function(){
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item"><a class="page-link" href="#"><font color="#000000">1</font></a></li>
-    <li class="page-item"><a class="page-link" href="#"><font color="#000000">2</font></a></li>
-    <li class="page-item"><a class="page-link" href="#"><font color="#000000">3</font></a></li>
-    <li class="page-item">
+   <c:forEach var="i" begin="1" end="${totalPage}" step="1">
+    <li class="page-item"><a class="page-link" href="/3rd_prj/board/notice_list.do?page=<c:out value="${i}"/>
+    <c:if test="${param.keyword !=null}">&field=<c:out value="${param.field}"/>&keyword=<c:out value="${param.keyword}"/></c:if>"><font color="#000000"><c:out value="${i}"/></font></a></li>
+    </c:forEach>
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>

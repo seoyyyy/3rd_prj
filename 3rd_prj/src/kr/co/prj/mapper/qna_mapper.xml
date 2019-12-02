@@ -28,22 +28,20 @@
 	FROM QNA
 	WHERE Q_NUM=#{q_num}
 	
-	
 </select>
-<select id="totalCount" resultType="int" parameterType="kr.co.prj.vo.SearchVO" >
+<select id="qnaTotalCount" resultType="int" parameterType="kr.co.prj.vo.SearchVO" >
 select count(q_num)cnt 
 from qna 
 <where>
-				<if test="field!=null">
-					<if test="keyword!=null">
-					${field} like '%'||#{keyword}||'%'
-					</if>
-				</if>	
-			</where>
+		<if test="field!=null and keyword!=null">
+				${field} like '%'||#{keyword}||'%'
+		</if>	
+</where>
 
 
 
 </select>
+
 
 <insert id="writePost"  parameterType="kr.co.prj.vo.QnAWriteVO">
 insert 
