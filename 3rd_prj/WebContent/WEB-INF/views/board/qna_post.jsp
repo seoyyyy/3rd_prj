@@ -44,7 +44,7 @@ $(function(){
 });
 function del_process(){
 	if(confirm("정말 삭제하시겠습니까?")){
-		
+		location.href="/3rd_prj/board/delete_post.do";
 	}//end if
 	
 	

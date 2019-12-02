@@ -30,14 +30,7 @@ public class MainController {
 	public String locationForm() {
 		return "contact/location";
 	}//introduceForm
-	@RequestMapping(value="login/signUp.do")
-	public String signUpForm() {
-		return "login/signUp";
-	}//introduceForm
-	@RequestMapping(value="login/login.do")
-	public String loginForm() {
-		return "login/login";
-	}//introduceForm
+
 	
 	
 	

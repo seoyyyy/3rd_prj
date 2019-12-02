@@ -140,8 +140,22 @@ public class BoardDAO {
 		
 		return flag;
 	}
+	public int deletePostQnA(int q_num) {
+	int flag =0;
 	
+	SqlSession ss;
+	try {
+		ss = getSessionFactory().openSession();
+		ss.delete("deletePost",q_num);
+		ss.commit();
+		ss.close();
+} catch (IOException e) {
+		e.printStackTrace();
+	}//end catch
 	
+	return flag;
+	}//deletePostQnA
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	public List<NoticeListDomain> selectAllNotice(SearchVO sVO)throws SQLException{
 		List<NoticeListDomain> list = null;
 		
@@ -169,5 +183,6 @@ public class BoardDAO {
 		}//end catch
 		return nbdd;
 	}//selectDetailQnA
-
+	
+	
 }//class

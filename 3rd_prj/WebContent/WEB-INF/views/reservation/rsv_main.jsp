@@ -57,12 +57,12 @@ $(function(){
 			 </span>
 		</div>	
 		<div align="center">
-			<img src="http://localhost:8080/3rd_pprj/view/images/%ED%8C%8C%ED%8B%B0%EB%A3%B81.jpg" style="width:450px; height:300px; margin-right: 50px;" >
-			<img src="http://localhost:8080/3rd_pprj/view/images/%ED%8C%8C%ED%8B%B0%EB%A3%B82.jpg" style="width:450px; height:300px">
+			<img src="http://localhost:8080/3rd_prj/common/images/%ED%8C%8C%ED%8B%B0%EB%A3%B81.jpg" style="width:450px; height:300px; margin-right: 50px;" >
+			<img src="http://localhost:8080/3rd_prj/common/images/%ED%8C%8C%ED%8B%B0%EB%A3%B82.jpg" style="width:450px; height:300px">
 		</div>
 		<div align="center">
-			<img src="http://localhost:8080/3rd_pprj/view/images/%ED%8C%8C%ED%8B%B0%EB%A3%B83.jpg" style="width:450px; height:300px; margin-right: 50px; margin-top: 30px;">
-			<img src="http://localhost:8080/3rd_pprj/view/images/%ED%8C%8C%ED%8B%B0%EB%A3%B84.jpg" style="width:450px; height:300px; margin-top: 30px">
+			<img src="http://localhost:8080/3rd_prj/common/images/%ED%8C%8C%ED%8B%B0%EB%A3%B83.jpg" style="width:450px; height:300px; margin-right: 50px; margin-top: 30px;">
+			<img src="http://localhost:8080/3rd_prj/common/images/%ED%8C%8C%ED%8B%B0%EB%A3%B84.jpg" style="width:450px; height:300px; margin-top: 30px">
 		</div>
 	</div>
 </div>

@@ -36,7 +36,7 @@ public class LoginDAO {
 					SqlSessionFactoryBuilder ssfb = new SqlSessionFactoryBuilder();
 				//3.SqlSessionFactory ¾ò±â
 					ssf= ssfb.build(reader);
-				
+				 
 			}finally {
 				if(reader!=null) {reader.close();}//end if
 			}//end finally
@@ -46,7 +46,7 @@ public class LoginDAO {
 	}//getSessionFactory
 	public String login(LoginVO lVo) throws SQLException{
 		String id ="";
-		
+		System.out.println(lVo);
 		SqlSession ss;
 		try {
 			ss = getSessionFactory().openSession();

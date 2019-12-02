@@ -68,12 +68,16 @@ public class QnAController {
 		return "board/write_form";
 	}//searchQnADetail
 	@RequestMapping(value="board/write_post.do",method=POST)
-	public String writeProcess(QnAWriteVO qwVO,Model model) {
+	public String writeProcess(QnAWriteVO qwVO) {
 		QnAService qs = new QnAService();
-		boolean flag = qs.insertQnAPost(qwVO)==1;
-		model.addAttribute("flag",flag);
-		System.out.println(qwVO.getQ_subject());
+		 qs.insertQnAPost(qwVO);
+	
 		return "board/write_process";
 	}
-	
+	@RequestMapping(value="board/delete_post.do",method=GET)
+	public String deleteProcess(int q_num) {
+		QnAService qs = new QnAService();
+		qs.deletePostQnA(q_num);
+		return "board/delete_process";
+	}//deleteProcess
 }//class

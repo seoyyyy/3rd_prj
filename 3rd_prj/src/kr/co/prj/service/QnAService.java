@@ -117,4 +117,11 @@ public class QnAService {
 		return cnt;
 	}//insertQnAPost
 	
+	public int deletePostQnA(int q_num) {
+		int cnt=0;
+		BoardDAO bDAO = BoardDAO.getInstance();
+		cnt = bDAO.deletePostQnA(q_num);
+		
+		return cnt;
+	}//deletePostQnA
 }//class

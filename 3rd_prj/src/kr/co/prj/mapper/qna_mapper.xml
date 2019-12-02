@@ -50,6 +50,11 @@ qna(q_num,user_id,q_input_date,q_subject,q_content,q_answer_flag)
 values
 (seq_qna_board.nextval,'shin',sysdate,#{q_subject},#{q_content},'N')
 </insert>
+<delete id="deletePost" parameterType="int">
+delete 
+from qna 
+where q_num = #{q_num}
+</delete>
 </mapper>
 
 
