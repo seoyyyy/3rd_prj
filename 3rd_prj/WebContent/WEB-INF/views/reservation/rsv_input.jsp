@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"
     info=""
     %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/3rd_prj/common/css/main.css"/>
 <style type="text/css">
 	#class4Wrap{ min-width:1100px; min-height: 1800px; margin: 0px auto;}
 	/* 헤더 시작*/
@@ -39,6 +40,64 @@
 <script type="text/javascript">
 $(function(){
 	
+	$("#infoCheckBtn").click(function(){
+
+		if (document.getElementById("infoCheckBtn").checked ) {
+			alert("체크함");
+			
+			$.ajax({
+				url:"/3rd_prj/reservation/rsv_input1.do",
+				type:"get",
+				data:"user_id=shin",
+				dataType:"json",
+				contentType: "application/json; charset=utf-8" ,
+				error:function( xhr ){
+					alert("문제발생\n"+ xhr.status+"\n"+xhr.statusText);
+					
+				},
+				success:function( json ){
+					var output="정보 없음";
+					var phoneNum=json.phone;
+					var phone1=phoneNum.substring(0, phoneNum.indexOf("-"));
+					var phone2=phoneNum.substring(phoneNum.indexOf("-")+1,phoneNum.lastIndexOf("-"));
+					var phone3=phoneNum.substring(phoneNum.lastIndexOf("-")+1);
+					
+					if( json.resultFlag ){
+						output="<strong>"+json.data+"</strong>";
+					}//end if
+					$("#rsv_person").val ( decodeURIComponent(json.user_name) );
+					$("#num1").val(phone1);
+					$("#num2").val(phone2);
+					$("#num3").val(phone3);
+					$("#email").val(json.email);
+				}
+			});//ajax
+			
+						
+/* 			$.ajax({
+				url:"select/single_column.do",
+				type:"get",
+				data:"deptno="+$("#deptno").val(),
+				dataType:"json",
+				error:function( xhr ){
+					alert("문제발생\n"+ xhr.status+"\n"+xhr.statusText);
+					
+				},
+				success:function( json ){
+					var output="부서정보 없음";
+					if( json.resultFlag ){
+						output="<strong>"+json.data+"</strong>";
+					}//end if
+					$("#dname").html( output );
+				}
+			}); */
+			
+		} else {
+			alert("체크 노노");
+		}//end else
+		
+	});//click
+	
 });//ready
 </script>
 </head>
@@ -46,14 +105,14 @@ $(function(){
 <div id="class4Wrap">
 <div id="naviBar">
  	<!-- MENU 시작 -->
- 	<%@include file="../../../common/navbar/nav.jsp" %>
+	<%@include file="../../../common/navbar/nav.jsp" %>
  	<!-- MENU 끝 -->
 </div>
 <div id="container">   
 			
 		<div id="leftside">
 			<h3><strong> [ :P ] / Room1 </strong></h3><br/>
-			<img src="http://localhost:8080/3rd_pprj/view/images/%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A43.jpg" style="width: 500px">
+			<img src="http://localhost:8080/3rd_prj/common/images/%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A43.jpg" style="width: 400px">
 			<br/><br/><br/>
 		
 			<div>
@@ -159,60 +218,49 @@ $(function(){
 			</div>
 			
 		</div>
-		
-		
-<!-- 			<h4><strong>2019-12-07</strong>&nbsp; &nbsp; &nbsp;
-		<input type="button" name="btn" class="btn" value="날짜변경" style="border: 1px solid #333"></h4>
-		<input type="checkbox" name="checkbox" class="checkbox"> 기존 회원정보와 동일 <br/>
-		<br/>
-		예약자<br/>
-		<input type="text" name="text"><br/>
-		연락처<br/>
-		<input type="text" ><br/>
-		메일주소<br/>
-		<input type="text" ><br/>
-		<br/>
-		사용시간<br/>
-		<input type="checkbox" name="checkbox" class="checkbox"> 8~12 (+40000) <br/>
-		<input type="checkbox" name="checkbox" class="checkbox"> 12~4 (+40000) <br/>
-		<input type="checkbox" name="checkbox" class="checkbox"> 4~8 (+40000) <br/>
-		<input type="checkbox" name="checkbox" class="checkbox"> 8~12 (+40000) <br/><br/>
-		<strong>총 예상 금액 : 160000 원</strong><br/><br/>
-		요청사항<br/>
-		<textarea rows="5" cols="40">
-		</textarea><br/>
-		<br/> -->
-		
+
 		
 		
 		<div id="rightside">
-			<h6>2019-11-19&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="변경" class="btn btn-secondary alert-secondary" id="backBtn" style="width:60px; height:35px; text-align: center;"></h6>
-			<input type="checkbox" class="checkbox"> 기존 회원정보와 동일 <br/><br/>
+		<form action="/3rd_prj/payment/confirm_parameter.do" method="post">
+			<h6><c:out value="${ param.param_year }"/>-<c:out value="${ param.param_month }"/>-<c:out value="${ param.param_day }"/>
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="변경" class="btn btn-secondary alert-secondary" id="backBtn" style="width:60px; height:35px; text-align: center;"></h6>
+			<input type="checkbox" class="checkbox" id="infoCheckBtn"> 기존 회원정보와 동일 <br/><br/>
 			
-			예약자<br/>
-			<input type="text" class="form-control-sm" id="rsv_person">			
-			<br/><br/>
+
 			
-			연락처<br/>
-			<input type="text" class="form-control-sm" id="num1" style="width:100px">-
-			<input type="text" class="form-control-sm" id="num2" style="width:100px">-
-			<input type="text" class="form-control-sm" id="num3" style="width:100px">
-			<br/><br/>
+					예약자<br/>
+					<input type="text" class="form-control form-control-sm" id="rsv_person" name="rsv_person">			
+					<br/>
+					
+					연락처<br/>
+				<div class="form-inline"> 
+						<input type="text" class="form-control form-control-sm" id="num1" name="phone" style="width:100px">&nbsp;- &nbsp;
+						<input type="text" class="form-control form-control-sm" id="num2" name="phone" style="width:100px">&nbsp;- &nbsp;
+						<input type="text" class="form-control form-control-sm" id="num3" name="phone" style="width:100px">
+					</div> 
+					<br/>
+					
+					메일주소<br/>
+					<input type="text" class="form-control form-control-sm" id="email" name="email"><br/>
+					
+	
+
 			
-			메일주소<br/>
-			<input type="text" class="form-control-sm" id="email"><br/><br/>
+			
 			
 			사용시간<br/>
-			<input type="checkbox" name="checkbox" class="checkbox"> 8~12 (+40000) <br/>
-			<input type="checkbox" name="checkbox" class="checkbox"> 12~4 (+40000) <br/>
-			<input type="checkbox" name="checkbox" class="checkbox"> 4~8 (+40000) <br/>
-			<input type="checkbox" name="checkbox" class="checkbox"> 8~12 (+40000) <br/><br/>
+			<input type="checkbox" name="timetouse" class="checkbox"> 8~12 (+40000) <br/>
+			<input type="checkbox" name="timetouse" class="checkbox"> 12~4 (+40000) <br/>
+			<input type="checkbox" name="timetouse" class="checkbox"> 4~8 (+40000) <br/>
+			<input type="checkbox" name="timetouse" class="checkbox"> 8~12 (+40000) <br/><br/>
 			
 			<strong>총 예상 금액 : 160000 원</strong><br/><br/>
 			
 			요청사항<br/>
-			<textarea rows="5" cols="40"></textarea><br/>
+			<textarea class="form-control" id="request" rows="5" name="rsvRequest"></textarea><br/>
 			<br/>
+			
 				개인정보 수집 및 동의
 				<div style="width: 500px; height: 200px; border: 1px solid #333; overflow: auto;">
 				회사명(이하 ‘회사’라 한다)는 개인정보 보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립․공개합니다.
@@ -253,7 +301,7 @@ $(function(){
 				제3조 (개인정보의 제3자 제공)
 				① 회사는 정보주체의 개인정보를 제1조(개인정보의 처리목적)에서 명시한 범위 내에서만 처리하며, 정보주체의 동의, 법률의 특별한 규정 등 개인정보 보호법 제17조에 해당하는 경우에만 개인정보를 제3자에게 제공합니다.
 				② 회사는 다음과 같이 개인정보를 제3자에게 제공하고 있습니다.
-				- 개인정보를 제공받는 자 : <예) (주) OOO 카드>
+				- 개인정보를 제공받는 자 :  <![CDATA[   <예) (주) OOO 카드>
 				- 제공받는 자의 개인정보 이용목적 : <예) 이벤트 공동개최 등 업무제휴 및 제휴 신용카드 발급>
 				- 제공하는 개인정보 항목 : <예) 성명, 주소, 전화번호, 이메일주소, 카드결제계좌정보>
 				- 제공받는 자의 보유․이용기간 : <예) 신용카드 발급계약에 따른 거래기간동안>
@@ -371,20 +419,28 @@ $(function(){
 				
 				제13조(개인정보 처리방침 시행 및 변경)
 				이 개인정보 처리방침은 20XX. X. X부터 적용됩니다.
+				]]>
 				</div>
 				<br/>
-				<input type="checkbox" name="checkbox" class="checkbox"> 기존 회원정보와 동일 <br/><br/><br/><br/><br/>
-				<input type="button" value="작성" class="btn btn-secondary alert-danger" id="goBtn" style="margin-right: 25px;margin-left: 200px" ><br/>
+				<input type="checkbox" name="checkbox" class="checkbox"> 개인정보 수집 및 이용에 동의합니다. <br/>
+				<input type="submit" value="작성" class="btn btn-secondary alert-danger" id="goBtn" style="margin-right: 25px;margin-left: 200px" ><br/>
+					
+			</form>
+		    
 			</div>
-
+			
 		</div>
 
 </div>
 
 <div id="footer">
-  <div id="fContent">
+	<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
+	<div id="fLogo">
+		
+	</div>
+	<div id="fContent">
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
-		<h4><strong>[:P]</strong></h4>
+		<h4><strong>[;P]</strong></h4>
 		사업자명 : (주)Baek's company<br/>
 		 대표이사 : 윤태식   <br/> 
 		이메일 : wo2015@naver.com<br/>
@@ -405,7 +461,6 @@ $(function(){
 			&copy;CopyRight. AllRight Reserved.<br/>
 		</div>
 	</div>
-</div>
 </div>
 
 </body>

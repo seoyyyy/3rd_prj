@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
  <properties resource="properties/database.properties"/>
- <typeAliases>
+  <typeAliases>
 	<typeAlias type="kr.co.prj.domain.QnABoardDetailDomain" alias="qbdd"/>
 	<typeAlias type="kr.co.prj.domain.NoticeBoardDetailDomain" alias="nbdd"/>
 	<typeAlias type="kr.co.prj.domain.NoticeListDomain" alias="nld"/>
@@ -21,8 +21,11 @@
     </environment>
   </environments>
   <mappers>
+    <mapper resource="kr/co/prj/mapper/roominfo_mapper.xml"/>
+    <mapper resource="kr/co/prj/mapper/memberchk_mapper.xml"/>
     <mapper resource="kr/co/prj/mapper/qna_mapper.xml"/>
     <mapper resource="kr/co/prj/mapper/notice_mapper.xml"/>
-    <mapper resource="kr/co/prj/mapper/login_mapper.xml"/>
+     <mapper resource="kr/co/prj/mapper/login_mapper.xml"/>
+    
   </mappers>
 </configuration>

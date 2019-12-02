@@ -10,7 +10,7 @@
 	<!-- HOME Logo 끝-->
 	
  	<!-- MENU 시작 -->
-   <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-left: 55%; font-family:'Amaranth','Yeseva One', cursive ; font-size: 22px;">
+   <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-left: 52%; font-family:'Amaranth','Yeseva One', cursive ; font-size: 22px;">
     <ul class="navbar-nav ">
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
