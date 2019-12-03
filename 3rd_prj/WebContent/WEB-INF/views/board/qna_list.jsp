@@ -79,7 +79,7 @@ function checkId(){
 				<td>
 					 <c:choose>
 					 	<c:when test="${memberId != null and list.id eq memberId}">
-					 	<a href="qna_post.do?q_num=${list.num}">
+					 	<a href="/3rd_prj/board/qna_post.do?q_num=${list.num}">
 					 	</c:when>
 					 	<c:when test="${memberId eq null}">
 					 	<a href = "/3rd_prj/login/login.do">

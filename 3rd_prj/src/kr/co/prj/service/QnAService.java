@@ -6,6 +6,7 @@ import java.util.List;
 import kr.co.prj.dao.BoardDAO;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
+import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
 import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
@@ -122,6 +123,12 @@ public class QnAService {
 		BoardDAO bDAO = BoardDAO.getInstance();
 		cnt = bDAO.deletePostQnA(q_num);
 		
+		return cnt;
+	}//deletePostQnA
+	public int updatePostQnA(QnAModifyVO qVo) {
+		int cnt = 0;
+		BoardDAO bDAO = BoardDAO.getInstance();
+		cnt = bDAO.updatePostQnA(qVo);
 		return cnt;
 	}//deletePostQnA
 }//class

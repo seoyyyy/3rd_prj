@@ -36,6 +36,7 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	
 	$("#goBtn").click(function() {
 		
 		if($("#q_subject").val()==""){
@@ -48,6 +49,7 @@ $(function(){
 			return
 		}//end if
 		
+		
 	$("#writeFrm").submit();
 		
 	});//click
@@ -56,6 +58,7 @@ $(function(){
 		location.href="qna_list.do";
 		}//end if
 	});//click
+	
 });//ready
 </script>
 </head>

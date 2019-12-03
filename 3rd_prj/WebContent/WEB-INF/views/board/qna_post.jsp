@@ -40,11 +40,13 @@
 </style>
 <script type="text/javascript">
 $(function(){
-
-});
+	$("#modifyPost").click(function(){
+	$("#modify_frm").submit();
+	});//click
+});//ready
 function del_process(q_num){
 	if(confirm("정말 삭제하시겠습니까?")){
-		var q_num = q_num
+		var q_num = q_num;
 		location.href="/3rd_prj/board/delete_post.do?q_num="+q_num;
 	}//end if
 	
@@ -60,6 +62,7 @@ function del_process(q_num){
 </div>
 <div id="container">
 <h2 style="margin-bottom: 40px; text-align: center; font-weight: bold;"> Q & A </h2>
+<form action="/3rd_prj/board/modify_form.do" method="post" name="modify_frm" id="modify_frm">
 <table class="table" >
   <tbody>
     <tr>
@@ -111,16 +114,19 @@ function del_process(q_num){
     </tr>
   </tbody>
 </table>
-
+<input type="hidden" name="q_num" value="<c:out value="${qbdd.q_num}"/>"/>
+<input type="hidden" name="q_subject" value="${qbdd.q_subject}"/>
+<input type="hidden" name="q_content" value="${qbdd.q_content}"/>
+</form>
 <div >
 <div style="float: left;">
-	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='/3rd_prj/board/qna_list.do'">
+	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='/3rd_prj/board/qna_list.do'"/>
 </div>
 <div style="float:right;">
 	<c:if test="${qbdd.q_answer_Flag != 'Y'}">
-	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost" onclick="location.href='modify_form.jsp'" >
+	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost"  >
 	</c:if>
-	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" onclick="del_process('${qbdd.q_num}')" >
+	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" onclick="del_process('${qbdd.q_num}')" />
 </div>
 </div>
 

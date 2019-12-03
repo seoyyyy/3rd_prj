@@ -55,6 +55,11 @@ delete
 from qna 
 where q_num = #{q_num}
 </delete>
+<update id="updatePost" parameterType="kr.co.prj.vo.QnAModifyVO">
+update qna
+set q_content=#{q_content}, q_subject=#{q_subject}
+where q_num= #{q_num}
+</update>
 </mapper>
 
 

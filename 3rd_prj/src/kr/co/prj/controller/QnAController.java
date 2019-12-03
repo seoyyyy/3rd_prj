@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
 import kr.co.prj.service.QnAService;
+import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
 import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
@@ -22,7 +23,7 @@ import kr.co.prj.vo.SearchVO;
 @Controller
 public class QnAController {
 
-	@RequestMapping(value="/board/qna_list.do",method =GET)
+	@RequestMapping(value="board/qna_list.do",method =GET)
 	public String searchQnABoard(HttpServletRequest request,Model model) {
 
 		String currentPage = request.getParameter("page");
@@ -53,7 +54,7 @@ public class QnAController {
 		 return "board/qna_list";
 	}//searchBoard
 	
-	@RequestMapping(value="board/qna_post.do",method=GET)
+	@RequestMapping(value="board/qna_post.do",method= {GET,POST})
 	public String searchQnADetail(int q_num,Model model) {
 
 		QnAService qs = new QnAService();
@@ -85,4 +86,16 @@ public class QnAController {
 		qs.deletePostQnA(q_num);
 		return "board/delete_process";
 	}//deleteProcess
+	@RequestMapping(value="board/modify_form.do",method=POST)
+	public String modifyForm() {
+		
+		return "board/modify_form";
+	}
+	@RequestMapping(value="board/modify_process.do",method=POST)
+	public String modifyProcess(QnAModifyVO qVo) {
+		QnAService qs = new QnAService();
+		
+		qs.updatePostQnA(qVo);
+		return "board/modify_process";
+	}
 }//class

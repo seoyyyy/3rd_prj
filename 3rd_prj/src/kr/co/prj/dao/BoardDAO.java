@@ -19,6 +19,7 @@ import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
 import kr.co.prj.vo.LoginVO;
+import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
 import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
@@ -61,9 +62,6 @@ public class BoardDAO {
 	}//getSessionFactory
 	
 	
-	///////////////////////////////////////////////////퍼온것///////////////////////////////////////////////////////////////
-	
-	
 	/**
 	 * 전체 게시물의 수 
 	 * @return
@@ -75,7 +73,6 @@ public class BoardDAO {
 			SqlSession ss = getSessionFactory().openSession();
 			if( sVO != null && sVO.getKeyword() != null && !"".equals(sVO.getKeyword())){
 			cnt = ss.selectOne(mappedId,sVO);
-			System.out.println(mappedId+"-----------------------"+sVO.getField());
 			}else {
 				cnt = ss.selectOne(mappedId);
 			}
@@ -83,11 +80,10 @@ public class BoardDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
-			System.out.println(cnt+"쿄콬");
 		return cnt;
 	}//selectTotalCount
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////QNA/////////////////////////////////////////////////////////////////////
 	
 	
 	
@@ -140,46 +136,62 @@ public class BoardDAO {
 		return flag;
 	}
 	public int deletePostQnA(int q_num) {
-	int flag =0;
-	
-	SqlSession ss;
-	try {
-		ss = getSessionFactory().openSession();
-		ss.delete("deletePost",q_num);
+		int flag =0;
+		
+		
+			try {
+			SqlSession ss = getSessionFactory().openSession();
+				ss.delete("deletePost",q_num);
+				ss.commit();
+				ss.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}//end catch
+			
+		return flag;
+	}//deletePostQnA
+	public int updatePostQnA(QnAModifyVO qVo) {
+		int flag=0;
+		
+		SqlSession ss;
+		try {
+			ss = getSessionFactory().openSession();
+		flag = ss.update("updatePost",qVo);
 		ss.commit();
 		ss.close();
-} catch (IOException e) {
-		e.printStackTrace();
-	}//end catch
-	
-	return flag;
-	}//deletePostQnA
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		return flag;
+	}//updatePostQnA
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////Notice//////////////////////////////////////////////////////////////////////
 	public List<NoticeListDomain> selectAllNotice(SearchVO sVO)throws SQLException{
 		List<NoticeListDomain> list = null;
 		
 		//3.Handler얻기
-		try {
-			SqlSession ss = getSessionFactory().openSession();
-			list=ss.selectList("noticeList",sVO); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
-			ss.close();
-			System.out.println( "시작번호" + sVO.getStartNum()+"끝번호"+sVO.getEndNum());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}//end catch
+			try {
+				SqlSession ss = getSessionFactory().openSession();
+				list=ss.selectList("noticeList",sVO); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
+				ss.close();
+				System.out.println( "시작번호" + sVO.getStartNum()+"끝번호"+sVO.getEndNum());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}//end catch
 		
 		return list;
 		
 	}//selectAllNotice
 	public NoticeBoardDetailDomain selectDetailNotice(int n_num)throws SQLException{
 		NoticeBoardDetailDomain nbdd = null;
-		try {
-			SqlSession ss = getSessionFactory().openSession();
-			nbdd = ss.selectOne("noticePost", n_num);
-			ss.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}//end catch
+			try {
+				SqlSession ss = getSessionFactory().openSession();
+				nbdd = ss.selectOne("noticePost", n_num);
+				ss.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}//end catch
 		return nbdd;
 	}//selectDetailQnA
 	

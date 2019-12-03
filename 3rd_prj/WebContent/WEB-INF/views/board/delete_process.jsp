@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
+
  location.href="/3rd_prj/board/qna_list.do";
+
 </script>
 <body>
 </body>
