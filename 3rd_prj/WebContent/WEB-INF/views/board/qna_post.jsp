@@ -40,6 +40,10 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$("#addRp").click(function(){
+		$("#rpFrm").submit();
+		
+	});//click
 	$("#modifyPost").click(function(){
 	$("#modify_frm").submit();
 	});//click
@@ -62,9 +66,9 @@ function del_process(q_num){
 </div>
 <div id="container">
 <h2 style="margin-bottom: 40px; text-align: center; font-weight: bold;"> Q & A </h2>
-<form action="/3rd_prj/board/modify_form.do" method="post" name="modify_frm" id="modify_frm">
 <table class="table" >
   <tbody>
+
     <tr>
       <th scope="row" id="th">subject</th><td><c:out value="${qbdd.q_subject}"/></td>
     </tr>
@@ -83,12 +87,12 @@ function del_process(q_num){
    	</tr>
      <c:if test="${qbdd.q_answer_Flag eq 'Y'}">
      <tr>
-   	<th style="vertical-align: middle; text-align: center;">관리자   </th>
-      <td>
+   	<th id="th"  style="vertical-align: middle; height:150px; text-align: center;">관리자   </th>
+      <td style="background-color: #FFFAF0;">
       <div style="float:left;">
        <c:out value="${qbdd.q_answer}" escapeXml="false"/> <span style="font-size: 12px; color: gray; margin-left: 50px;" ><c:out value="${qbdd.q_answer_date}"/></span>
        </div>
-        <c:if test="${admin_id ne null }">
+        <c:if test="${admin_id eq null }">
          <div style="float:right;">
     <input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyRp" />
     	</div> 	
@@ -96,38 +100,40 @@ function del_process(q_num){
       </td>
       </tr>
       </c:if>
-      
     <tr>
-     <c:if test="${admin_id ne null }">
+     <c:if test="${admin_id eq null }">
       <th scope="row" id="th" style="vertical-align: middle;">댓글</th>
       <td>
       <div>
+     <form action="/3rd_prj/board/addRp.do" method="post" id="rpFrm" name="rpFrm">
       <div style="float:left;">
-      <textarea class="form-control" style="width: 810px;" rows="5" placeholder="관리자만 작성 가능합니다."></textarea>
+      <textarea class="form-control" style="width: 810px;" rows="5"></textarea>
       </div>
       <div style="float:right;">
-    <input type="button" value="입력" class="btn btn-secondary alert-danger" id="addRp" onclick="" style="width: 110px; height: 135px;"/>
+    <input type="button" value="입력" class="btn btn-secondary alert-danger" id="addRp" name="addRp" style="width: 110px; height: 135px;"/>
     	</div>
+    </form>
     	</div>
     </td>
     </c:if>
     </tr>
   </tbody>
 </table>
-<input type="hidden" name="q_num" value="<c:out value="${qbdd.q_num}"/>"/>
-<input type="hidden" name="q_subject" value="${qbdd.q_subject}"/>
-<input type="hidden" name="q_content" value="${qbdd.q_content}"/>
-</form>
 <div >
 <div style="float: left;">
 	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='/3rd_prj/board/qna_list.do'"/>
 </div>
+<form action="/3rd_prj/board/modify_form.do" method="post" name="modify_frm" id="modify_frm">
+<input type="hidden" name="q_num" value="<c:out value="${qbdd.q_num}"/>"/>
+<input type="hidden" name="q_subject" value="${qbdd.q_subject}"/>
+<input type="hidden" name="q_content" value="${qbdd.q_content}"/>
 <div style="float:right;">
 	<c:if test="${qbdd.q_answer_Flag != 'Y'}">
 	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost"  >
 	</c:if>
 	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" onclick="del_process('${qbdd.q_num}')" />
 </div>
+</form>
 </div>
 
 </div>

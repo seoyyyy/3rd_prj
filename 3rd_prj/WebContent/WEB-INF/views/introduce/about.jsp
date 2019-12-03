@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     info=""
     %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,43 +49,46 @@ $(function(){
  	<!-- MENU 끝 -->
 </div>
 <div id="container">   
-          
 	<div style="font-size: 30px; font-weight: bold; text-align: center">
 	about
 	</div>
 	<div style="font-size: 20px; margin: auto; text-align: center">
 	가치에 의미를 더하다
 	</div><br/>
-	
 	<div style="margin: auto;">
-	<img style="width:1100px;height:300px" src="http://localhost:8080/3rd_pprj/view/images/main.PNG"></div><br/>
+	<img style="width:1100px;height:300px" src="http://localhost:8080/3rd_prj/common/images/main.PNG"></div><br/>
 	
-	<div class="card-deck" style="margin-top: 100px">
-	  <div class="card">
-	    <img src="http://localhost:8080/3rd_pprj/view/images/2.PNG" id="roomA"  class="card-img-top" alt="...">
-	    <div class="card-body">
-	      <h5 class="card-title" style="font-weight: bold">"파티룸+브라이덜샤워+프로포즈"</h5>
-	      <p class="card-text">행복이 시작되는 다목적 복합문화공간 <br/>
-	강남구 중심에 위치해 접근성이 편리하며 9m의 높은 천고를 가진 넓은 홀에 콘서트도 가능한 최고의 조명, 음향 및 영상 시설을 보유하고 있어 세미나, 강연, 파티, 기업 행사등 다양한 목적에 따라 맞춤형 공간을 즐기실 수 있습니다.<br/><br/>
-	특별한 순간 이니에스타 등 국내에서 접하기 쉽지 않은 와인들을 엄선해 구비하여 와인 파티의 공간 및 찾아주시는 모든 분들께 특별함을 선사해 드립니다.
-	    </div>
-	  </div>
-	  <div class="card">
-	    <img src="http://localhost:8080/3rd_pprj/view/images/4.jpg"  id="roomC" class="card-img-top" alt="...">
-	    <div class="card-body">
-	      <h5 class="card-title" style="font-weight: bold">"그룹스터디룸+세미나실+강연장"</h5>
-	      <p class="card-text">각각  구분된 공간으로서, 사용하고자 하시는 목적에 따라 선택하실 수 있습니다.<br/><br/>
-	2인실에서부터 16인실까지의 그룹 스터디 또는 세미너 룸과
-	1인실에서부터 5인실까지의 Co-working 공유 오피스, 
-	그리고, 각종 행사와 모임 진행이 가능한 전망 좋은 카페테리아, 
-	12층 건물의 최상층에 위치하여, 멋진 낙조를 매일 저녁 감상하실 수 있는 곳입니다.<br/>
-	    </div>
-	  </div>
-	</div>	
-    
+  <div class="card-deck">
+  <c:forEach var="list"  items="${RoomInfo}">
+			<c:if test="${ list.room_name eq 'RoomA' or list.room_name eq 'RoomC'}">
+  <div class="card">
+			<c:choose>
+				<c:when test="${ list.room_name eq 'RoomA' }"><a href="about1.do"></c:when>
+				<c:when test="${ list.room_name eq 'RoomC' }"><a href="about2.do"></c:when>
+				</c:choose>
+    <img src='http://localhost:8080/3rd_prj/common/images/<c:out value="${list.image3}"/>' class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title" style="font-weight: bold"><c:out value="${list.room_name2}"/></h5>
+      <p class="card-text"><c:out value="${list.info}"/></p>
+    </div>
+    </div>
+    </c:if>
+    </c:forEach>
+  </div>
+  
+ 
+</div>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 </div>
 
 <div id="footer">
+<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
   <div id="fContent">
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
 		<h4><strong>[:P]</strong></h4>

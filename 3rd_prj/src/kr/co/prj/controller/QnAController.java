@@ -90,12 +90,17 @@ public class QnAController {
 	public String modifyForm() {
 		
 		return "board/modify_form";
-	}
+	}//modifyForm
 	@RequestMapping(value="board/modify_process.do",method=POST)
 	public String modifyProcess(QnAModifyVO qVo) {
 		QnAService qs = new QnAService();
 		
 		qs.updatePostQnA(qVo);
 		return "board/modify_process";
+	}//modifyProcess
+	@RequestMapping(value="board/addRp.do" , method=POST)
+	public String addRp_process() {
+		
+		return "board/addRp_process";
 	}
 }//class

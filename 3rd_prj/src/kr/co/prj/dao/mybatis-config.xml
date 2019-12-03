@@ -22,6 +22,7 @@
   </environments>
   <mappers>
     <mapper resource="kr/co/prj/mapper/roominfo_mapper.xml"/>
+    <mapper resource="kr/co/prj/mapper/room_mapper.xml"/>
     <mapper resource="kr/co/prj/mapper/memberchk_mapper.xml"/>
     <mapper resource="kr/co/prj/mapper/qna_mapper.xml"/>
     <mapper resource="kr/co/prj/mapper/notice_mapper.xml"/>
