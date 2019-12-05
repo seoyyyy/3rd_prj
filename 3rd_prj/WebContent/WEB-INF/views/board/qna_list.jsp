@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""
+    trimDirectiveWhitespaces="true"
     %>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -35,6 +36,7 @@
 <link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet">
 <style type="text/css">
 .alert-danger{color: #000000; background-color: #E3C6C2}
+bg-secondary{ background-color: #E3C6C2}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -139,27 +141,15 @@ function checkId(){
     </div>
 </div>
 </form>
-<div style="margin-left: 150px;">
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <c:forEach var="i" begin="1" end="${totalPage}" step="1">
-    <li class="page-item"><a class="page-link" href="/3rd_prj/board/qna_list.do?page=<c:out value="${i}"/>
-    <c:if test="${param.keyword !=null}">&field=<c:out value="${param.field}"/>&keyword=<c:out value="${param.keyword}"/></c:if>"><font color="#000000"><c:out value="${i}"/></font></a></li>
-    </c:forEach>
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-</div>
 
-
+<div style="margin:0px auto; margin-left: 130px; margin-top: 10px;">
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+			<c:out value="${ indexList }" escapeXml="false"/>
+		    
+		  </ul>
+		</nav>
+	 </div>
 
 
 </div>

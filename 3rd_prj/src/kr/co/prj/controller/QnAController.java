@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
 import kr.co.prj.service.QnAService;
+import kr.co.prj.vo.IndexListVO;
 import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
@@ -44,15 +46,22 @@ public class QnAController {
 		SearchVO sVO = new SearchVO(field,keyword,tempPage,startNum,endNum);
 		int totalCount=qs.selectTotalCount(sVO); // 전체 글 조회
 		int totalPage=qs.totalPage(pageScale, totalCount); //총 페이지 수
+		String indexList="";
 		
-		
-		
-	
+		//인덱스 리스트 생성
+		if(field==null&&keyword==null) {
+			 indexList=qs.indexList(new IndexListVO(tempPage, totalPage, "qna_list.do?"));
+			
+		}else {
+			 indexList=qs.indexList(new IndexListVO(tempPage, totalPage, "qna_list.do?field="+field+"&keyword="+keyword+"&"));
+		}
 
 		SearchRangeVO srVO = new SearchRangeVO(startNum,endNum);
 		 List<QnAListDomain> list = qs.searchAllQnA(sVO);
 		 model.addAttribute("list", list);
 		 model.addAttribute("totalPage", totalPage);
+		 //view에서 값을 사용할 수 있도록 scope객체에 값을 설정
+		 model.addAttribute("indexList", indexList);
 		 return "board/qna_list";
 	}//searchBoard
 	

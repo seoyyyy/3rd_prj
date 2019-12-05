@@ -42,6 +42,15 @@ from notice
 FROM	NOTICE
 WHERE N_NUM=#{num}
 </select>
+
+<insert id="n_writePost"  parameterType="kr.co.prj.vo.NoticeWriteVO">
+insert 
+into 
+notice(n_num,n_input_date,n_subject,n_content,n_delete_flag) 
+values
+(seq_notice_board.nextval,sysdate,#{n_subject},#{n_content},'N')
+</insert>
+
 </mapper>
 
 

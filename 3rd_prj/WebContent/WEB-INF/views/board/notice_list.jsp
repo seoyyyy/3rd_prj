@@ -94,33 +94,24 @@ $(function(){
     <div class="form-group col-mb-2">
       <input type="button" class="btn btn-outline-secondary alert-secondary btn-sm" value="검색" id="searchBtn">
     </div>
-    <c:if test="${admin_id ne null }">
+    <c:if test="${admin_id eq null }">
      <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">
-      <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='write_form.jsp'">
+      <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='n_write_form.do'">
     </div>
     </c:if>
 </div>
 </form>
+	
 
-<div style="margin-left: 420px;" >
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-   <c:forEach var="i" begin="1" end="${totalPage}" step="1">
-    <li class="page-item"><a class="page-link" href="/3rd_prj/board/notice_list.do?page=<c:out value="${i}"/>
-    <c:if test="${param.keyword !=null}">&field=<c:out value="${param.field}"/>&keyword=<c:out value="${param.keyword}"/></c:if>"><font color="#000000"><c:out value="${i}"/></font></a></li>
-    </c:forEach>
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-</div>
+
+<div style="margin:0px auto; margin-left: 40%; margin-top: 10px;">
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+			<c:out value="${ indexList }" escapeXml="false"/>
+		    
+		  </ul>
+		</nav>
+	 </div>
 </div>
 <div id="footer">
 <a href="#"><img src="http://localhost:8080/3rd_pprj/view/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%;  "/></a> 

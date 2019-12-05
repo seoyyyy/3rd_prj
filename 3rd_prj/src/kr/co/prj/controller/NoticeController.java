@@ -1,17 +1,28 @@
 package kr.co.prj.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.prj.domain.NoticeBoardDetailDomain;
 import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.service.NoticeService;
+import kr.co.prj.vo.IndexListVO;
+import kr.co.prj.vo.NoticeWriteVO;
 import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
@@ -40,11 +51,24 @@ public class NoticeController {
 		int totalCount=ns.selectTotalCount(sVO); // 전체 글 조회
 		int totalPage=ns.totalPage(pageScale, totalCount); //총 페이지 수
 		
+		String indexList="";
+		
+		//인덱스 리스트 생성
+		if(field==null&&keyword==null) {
+			 indexList=ns.indexList(new IndexListVO(tempPage, totalPage, "notice_list.do?"));
+			
+		}else {
+			 indexList=ns.indexList(new IndexListVO(tempPage, totalPage, "notice_list.do?field="+field+"&keyword="+keyword+"&"));
+		}
+
+		
+		
 		SearchRangeVO srVO = new SearchRangeVO(startNum,endNum);
 		List<NoticeListDomain> list= ns.searchAllNotice(sVO);
 		model.addAttribute("list",list);
 		model.addAttribute("totalPage", totalPage);
-		
+		 //view에서 값을 사용할 수 있도록 scope객체에 값을 설정
+		 model.addAttribute("indexList", indexList);
 		return "board/notice_list";
 	}//searchBoard
 	
@@ -56,6 +80,34 @@ public class NoticeController {
 		return "board/notice_post";
 	}//searchBoard
 	
-
+	@RequestMapping(value="board/n_write_form.do",method=GET)
+	public String writeForm() {
+	
+		return "board/n_write_form";
+	}//searchQnADetail
+	
+	/**
+	 * @param session
+	 * @param qwVO
+	 * @return
+	 */
+	@RequestMapping(value="board/n_write_process.do",method=POST)
+	@ResponseBody
+	public String writeProcess(NoticeWriteVO nwVO,@RequestParam(value ="image",required = false, defaultValue = "null")MultipartFile file) {
+		JSONObject json = null;
+		NoticeService ns = new NoticeService();
+		String addfile="";
+		if(file.getName()!=null) {
+			nwVO.setN_content(nwVO.getN_content()+"<br/><img src='http://localhost:8080/3rd_prj/common/images/"+file.getOriginalFilename()+"'>");
+			System.out.println(nwVO.getN_content()+"Ddddddddddddd");
+			json = ns.insertNoticePost(nwVO,file);
+		}else {
+			json = ns.insertNoticePost(nwVO,file);
+		}
+			
+			
+		 
+		return json.toJSONString();
+	}//
 	
 }//class

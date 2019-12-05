@@ -123,7 +123,7 @@ function del_process(q_num){
       </div>
       
        </div>
-        <c:if test="${admin_id eq null }">
+        <c:if test="${admin_id ne null }">
          <div style="float:right;">
          <input type="hidden" name="q_num" value="${qbdd.q_num }"/>
          <input type="hidden" name="c_answer" id="c_answer" value="${qbdd.q_answer}"/>
@@ -135,7 +135,7 @@ function del_process(q_num){
       </tr>
       </c:if>
     <tr>
-     <c:if test="${admin_id eq null }">
+     <c:if test="${admin_id ne null }">
       <th scope="row" id="th" style="vertical-align: middle;">댓글</th>
       <td>
       <div>

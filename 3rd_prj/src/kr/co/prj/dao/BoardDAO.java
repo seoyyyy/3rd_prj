@@ -14,6 +14,7 @@ import kr.co.prj.domain.NoticeBoardDetailDomain;
 import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
+import kr.co.prj.vo.NoticeWriteVO;
 import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
@@ -222,6 +223,20 @@ public class BoardDAO {
 		return nbdd;
 	}//selectDetailQnA
 	
-	
+
+	public int insertNoticePost(NoticeWriteVO nwVO) {
+		int flag = 0;
+		try {
+			SqlSession ss = getSessionFactory().openSession();
+			flag=ss.insert("n_writePost", nwVO);
+			ss.commit();
+			ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//endcatch
+		
+		
+		return flag;
+	}
 	
 }//class

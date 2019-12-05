@@ -54,7 +54,7 @@ $(function(){
 <table class="table" >
   <tbody>
     <tr>
-      <th scope="row" id="th">subject</th><td><c:out value="${nbdd.n_subject}"/></td>
+      <th scope="row" id="th">subject</th><td align="center"><c:out value="${nbdd.n_subject}"/></td>
     </tr>
     <tr>
       <th scope="row" id="th">Date</th><td><c:out value="${nbdd.n_input_Date}"/></td>
