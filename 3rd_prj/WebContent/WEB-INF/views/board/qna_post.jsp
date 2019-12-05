@@ -41,11 +41,35 @@
 <script type="text/javascript">
 $(function(){
 	$("#addRp").click(function(){
+		var q_answer_flag = $("#q_answer_flag").val();
+		if(q_answer_flag =="N"){
 		$("#rpFrm").submit();
+		}else{
+			alert("댓글을 이미 작성하셨습니다.");
+			
+		}//end else
 		
 	});//click
+	
 	$("#modifyPost").click(function(){
 	$("#modify_frm").submit();
+	});//click
+	
+	$("#modifyRp").click(function(){
+		var obj = document.repFrm;
+		$("#replyPre").toggle();
+		$("#replyNext").toggle();
+		
+		var q_answer = $("#c_answer").val().trim();
+		var n_answer = $("#n_answer").val().trim();
+		if(q_answer != n_answer){
+			if(confirm("변경내용을 저장하시겠습니까??")){
+			obj.action="/3rd_prj/board/rp_modify.do";
+		$("#repFrm").submit();		
+			}//end if
+		}//end if
+		
+		
 	});//click
 });//ready
 function del_process(q_num){
@@ -89,14 +113,24 @@ function del_process(q_num){
      <tr>
    	<th id="th"  style="vertical-align: middle; height:150px; text-align: center;">관리자   </th>
       <td style="background-color: #FFFAF0;">
-      <div style="float:left;">
-       <c:out value="${qbdd.q_answer}" escapeXml="false"/> <span style="font-size: 12px; color: gray; margin-left: 50px;" ><c:out value="${qbdd.q_answer_date}"/></span>
+        <form id="repFrm" name="repFrm" method="post">
+      <div style="float:left;" id="reply">
+      <div id="replyPre" >
+      <c:out value="${qbdd.q_answer}" escapeXml="false"/><span style="font-size: 12px; color: gray; margin-left: 50px;" ><c:out value="${qbdd.q_answer_date}"/></span>
+      </div>
+      <div id="replyNext" style="display: none">
+      <textarea rows="5" style="width: 810px;"   class="form-control" id="n_answer" name="q_answer"> <c:out value="${qbdd.q_answer}" escapeXml="false"/></textarea>
+      </div>
+      
        </div>
         <c:if test="${admin_id eq null }">
          <div style="float:right;">
-    <input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyRp" />
+         <input type="hidden" name="q_num" value="${qbdd.q_num }"/>
+         <input type="hidden" name="c_answer" id="c_answer" value="${qbdd.q_answer}"/>
+   		 <input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyRp" />
     	</div> 	
     	</c:if>
+    	 </form>
       </td>
       </tr>
       </c:if>
@@ -107,9 +141,12 @@ function del_process(q_num){
       <div>
      <form action="/3rd_prj/board/addRp.do" method="post" id="rpFrm" name="rpFrm">
       <div style="float:left;">
-      <textarea class="form-control" style="width: 810px;" rows="5"></textarea>
+      <textarea name="q_answer" class="form-control" style="width: 810px;" rows="5" 
+      <c:if test="${qbdd.q_answer_Flag eq 'Y'}">readonly="readonly" placeholder="답글을 이미 작성 하셨습니다."</c:if>></textarea>
       </div>
       <div style="float:right;">
+	<input type="hidden" name="q_num" id="q_num" value="<c:out value="${qbdd.q_num}"/>"/>
+	<input type="hidden" id="q_answer_flag" name="q_answer_flag" value="<c:out value="${qbdd.q_answer_Flag}"/>"/>
     <input type="button" value="입력" class="btn btn-secondary alert-danger" id="addRp" name="addRp" style="width: 110px; height: 135px;"/>
     	</div>
     </form>

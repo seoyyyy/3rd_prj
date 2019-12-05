@@ -3,11 +3,15 @@ package kr.co.prj.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import kr.co.prj.dao.BoardDAO;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
+import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
+import kr.co.prj.vo.RpModifyVO;
 import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
@@ -131,4 +135,17 @@ public class QnAService {
 		cnt = bDAO.updatePostQnA(qVo);
 		return cnt;
 	}//deletePostQnA
+	public int updateQnARp(QnAAddRpVO qarVO) {
+		int cnt = 0;
+		BoardDAO bDAO = BoardDAO.getInstance();
+		cnt = bDAO.updateQnARp(qarVO);
+		return cnt;
+	}//deletePostQnA
+	
+	public int replyModify(RpModifyVO rmVO) {
+		int cnt =0;
+		BoardDAO bDAO = BoardDAO.getInstance();
+		cnt = bDAO.replyModify(rmVO);
+		return cnt;
+	}//replyModify 
 }//class

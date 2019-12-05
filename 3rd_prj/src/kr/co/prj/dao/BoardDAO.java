@@ -2,9 +2,6 @@ package kr.co.prj.dao;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,15 +10,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import kr.co.prj.domain.LoginDomain;
 import kr.co.prj.domain.NoticeBoardDetailDomain;
 import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
-import kr.co.prj.vo.LoginVO;
+import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
-import kr.co.prj.vo.SearchRangeVO;
+import kr.co.prj.vo.RpModifyVO;
 import kr.co.prj.vo.SearchVO;
 
 
@@ -165,6 +161,37 @@ public class BoardDAO {
 		
 		return flag;
 	}//updatePostQnA
+	public int updateQnARp(QnAAddRpVO qarVO) {
+		int flag=0;
+		
+		SqlSession ss;
+		try {
+			ss = getSessionFactory().openSession();
+			flag = ss.update("updateRp",qarVO);
+			ss.commit();
+			ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		return flag;
+	}//updatePostQnA
+	
+	public int replyModify(RpModifyVO rmVO) {
+		int cnt=0;
+		
+		try {
+			SqlSession ss = getSessionFactory().openSession();
+			cnt = ss.update("rpModify",rmVO);
+			ss.commit();
+			ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		
+		return cnt=0;
+	}//replyModify
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////Notice//////////////////////////////////////////////////////////////////////
 	public List<NoticeListDomain> selectAllNotice(SearchVO sVO)throws SQLException{
@@ -194,6 +221,7 @@ public class BoardDAO {
 			}//end catch
 		return nbdd;
 	}//selectDetailQnA
+	
 	
 	
 }//class

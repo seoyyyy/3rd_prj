@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
 import kr.co.prj.service.QnAService;
+import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
+import kr.co.prj.vo.RpModifyVO;
 import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
@@ -99,8 +101,18 @@ public class QnAController {
 		return "board/modify_process";
 	}//modifyProcess
 	@RequestMapping(value="board/addRp.do" , method=POST)
-	public String addRp_process() {
-		
+	public String addRp_process(QnAAddRpVO qarVO,Model model) {
+		QnAService qs = new QnAService();
+		qs.updateQnARp(qarVO);
+		model.addAttribute("q_num",qarVO.getQ_num());
 		return "board/addRp_process";
-	}
+	}//addRp_process
+	@RequestMapping(value="board/rp_modify.do", method=POST)
+	public String rpModifyProcess(RpModifyVO rmVO,Model model) {
+		QnAService qs = new QnAService();
+		qs.replyModify(rmVO);
+		model.addAttribute("q_num",rmVO.getQ_num());
+		System.out.println(rmVO.getQ_answer()+"dd");
+		return "board/reply_process";
+	}//rpModifyProcess
 }//class

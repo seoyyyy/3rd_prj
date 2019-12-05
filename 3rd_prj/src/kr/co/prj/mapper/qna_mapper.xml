@@ -60,6 +60,17 @@ update qna
 set q_content=#{q_content}, q_subject=#{q_subject}
 where q_num= #{q_num}
 </update>
+<update id="updateRp" parameterType="kr.co.prj.vo.QnAAddRpVO">
+update qna
+set q_answer_flag='Y', q_answer=#{q_answer},q_answer_date=sysdate
+where q_num= #{q_num}
+</update>
+<update id="rpModify" parameterType="kr.co.prj.vo.RpModifyVO">
+update qna
+set q_answer=#{q_answer},q_answer_date=sysdate
+where q_num= #{q_num}
+</update>
+
 </mapper>
 
 
