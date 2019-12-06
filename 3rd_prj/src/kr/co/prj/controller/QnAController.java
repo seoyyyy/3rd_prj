@@ -8,9 +8,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
@@ -85,17 +87,20 @@ public class QnAController {
 	 * @return
 	 */
 	@RequestMapping(value="board/write_post.do",method=POST)
+	@ResponseBody
 	public String writeProcess(HttpSession session,QnAWriteVO qwVO) {
+		JSONObject json = null;
 		QnAService qs = new QnAService();
-		 qs.insertQnAPost(qwVO);
-		return "board/write_process";
+		 json = qs.insertQnAPost(qwVO);
+		return json.toJSONString();
 	}
 	@RequestMapping(value="board/delete_post.do",method=GET)
+	@ResponseBody
 	public String deleteProcess(int q_num) {
+		JSONObject json=null;
 		QnAService qs = new QnAService();
-	
-		qs.deletePostQnA(q_num);
-		return "board/delete_process";
+		json = qs.deletePostQnA(q_num);
+		return json.toJSONString();
 	}//deleteProcess
 	@RequestMapping(value="board/modify_form.do",method=POST)
 	public String modifyForm() {
@@ -103,25 +108,30 @@ public class QnAController {
 		return "board/modify_form";
 	}//modifyForm
 	@RequestMapping(value="board/modify_process.do",method=POST)
+	@ResponseBody
 	public String modifyProcess(QnAModifyVO qVo) {
+		JSONObject json = null;
 		QnAService qs = new QnAService();
-		
-		qs.updatePostQnA(qVo);
-		return "board/modify_process";
+		json =qs.updatePostQnA(qVo);
+		return json.toJSONString();
 	}//modifyProcess
+	
 	@RequestMapping(value="board/addRp.do" , method=POST)
-	public String addRp_process(QnAAddRpVO qarVO,Model model) {
+	@ResponseBody
+	public String addRp_process(QnAAddRpVO qarVO) {
+		JSONObject json = null;
 		QnAService qs = new QnAService();
-		qs.updateQnARp(qarVO);
-		model.addAttribute("q_num",qarVO.getQ_num());
-		return "board/addRp_process";
+		json = qs.updateQnARp(qarVO);
+		
+		return json.toJSONString();
 	}//addRp_process
 	@RequestMapping(value="board/rp_modify.do", method=POST)
-	public String rpModifyProcess(RpModifyVO rmVO,Model model) {
+	@ResponseBody
+	public String rpModifyProcess(RpModifyVO rmVO) {
+		JSONObject json = null;
 		QnAService qs = new QnAService();
-		qs.replyModify(rmVO);
-		model.addAttribute("q_num",rmVO.getQ_num());
-		System.out.println(rmVO.getQ_answer()+"dd");
-		return "board/reply_process";
+		json = qs.replyModify(rmVO);
+		
+		return  json.toJSONString();
 	}//rpModifyProcess
 }//class

@@ -14,6 +14,7 @@ import kr.co.prj.domain.NoticeBoardDetailDomain;
 import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.domain.QnAListDomain;
+import kr.co.prj.vo.NoticeModifyVO;
 import kr.co.prj.vo.NoticeWriteVO;
 import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
@@ -135,10 +136,9 @@ public class BoardDAO {
 	public int deletePostQnA(int q_num) {
 		int flag =0;
 		
-		
 			try {
 			SqlSession ss = getSessionFactory().openSession();
-				ss.delete("deletePost",q_num);
+				flag = ss.delete("deletePost",q_num);
 				ss.commit();
 				ss.close();
 			} catch (IOException e) {
@@ -221,7 +221,7 @@ public class BoardDAO {
 				e.printStackTrace();
 			}//end catch
 		return nbdd;
-	}//selectDetailQnA
+	}//selectDetailNotice
 	
 
 	public int insertNoticePost(NoticeWriteVO nwVO) {
@@ -237,6 +237,37 @@ public class BoardDAO {
 		
 		
 		return flag;
-	}
+	}//inserNoticePost
+	
+	
+	public int deletePostNotice(int q_num) {
+		int flag =0;
+		
+			try {
+			SqlSession ss = getSessionFactory().openSession();
+				flag = ss.delete("n_deletePost",q_num);
+				ss.commit();
+				ss.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}//end catch
+			
+		return flag;
+	}//deletePostNotice
+	public int updatePostNotice(NoticeModifyVO nmVO) {
+		int flag=0;
+		
+		try {
+			SqlSession ss = getSessionFactory().openSession();
+		flag = ss.update("n_updatePost",nmVO);
+		ss.commit();
+		ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		return flag;
+	}//updatePostNotice
+	
 	
 }//class

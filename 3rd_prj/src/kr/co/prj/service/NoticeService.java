@@ -14,7 +14,9 @@ import kr.co.prj.domain.NoticeBoardDetailDomain;
 import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.domain.QnABoardDetailDomain;
 import kr.co.prj.vo.IndexListVO;
+import kr.co.prj.vo.NoticeModifyVO;
 import kr.co.prj.vo.NoticeWriteVO;
+import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
 import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
@@ -137,7 +139,6 @@ public class NoticeService {
 		
 			BoardDAO bDAO = BoardDAO.getInstance();
 			
-			
 
 			flag = bDAO.insertNoticePost(nwVO)==1;
 		
@@ -149,6 +150,48 @@ public class NoticeService {
 		json.put("result", flag);
 		return json;
 	}//insertNoticePost
+	
+	
+	public JSONObject deletePostNotice(int n_num) {
+		JSONObject json = new JSONObject();
+		BoardDAO bDAO = BoardDAO.getInstance();
+		boolean flag = bDAO.deletePostNotice(n_num)==1;
+		json.put("result" , flag);
+		return json;
+	}//deletePostNotice
+	
+	public JSONObject updatePostNotice(NoticeModifyVO nmVO, MultipartFile multipartFile) {
+		boolean flag=false;
+		JSONObject json = new JSONObject();
+		
+		File file = null;
+		String uploadPath = "C:/Users/owner/git/3rd_prj/3rd_prj/WebContent/common/images/";
+		
+		try {
+			if(!multipartFile.isEmpty()&&multipartFile.getName()!=null) {
+				file = new File(uploadPath, multipartFile.getOriginalFilename());
+
+				if(!file.exists()) {
+					multipartFile.transferTo(file);
+				}//end if
+				}//end if
+		
+		BoardDAO bDAO = BoardDAO.getInstance();
+		flag = bDAO.updatePostNotice(nmVO)==1;
+		
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		json.put("result", flag);
+		
+		return json;
+	}//deletePostNotice
+	
+	
+	
 	
 	// 현재 게시판의 페이지 인덱스 설정
 public String indexList(IndexListVO ilVO) {

@@ -33,6 +33,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet">
+<style type="text/css">
+.alert-danger{color: #000000; background-color: #E3C6C2}
+bg-secondary{ background-color: #E3C6C2}
+</style>
 <script type="text/javascript">
 $(function(){
 	$("#searchBtn").click(function(){
@@ -92,7 +96,7 @@ $(function(){
       <input type="text" class="form-control" value="${param.keyword}" name="keyword" id="keyword">
     </div>
     <div class="form-group col-mb-2">
-      <input type="button" class="btn btn-outline-secondary alert-secondary btn-sm" value="검색" id="searchBtn">
+      <input type="button" class="btn btn-outline-secondary alert-danger" value="검색" id="searchBtn">
     </div>
     <c:if test="${admin_id eq null }">
      <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">

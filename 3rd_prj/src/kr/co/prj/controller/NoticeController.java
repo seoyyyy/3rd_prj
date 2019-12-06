@@ -21,8 +21,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import kr.co.prj.domain.NoticeBoardDetailDomain;
 import kr.co.prj.domain.NoticeListDomain;
 import kr.co.prj.service.NoticeService;
+import kr.co.prj.service.QnAService;
 import kr.co.prj.vo.IndexListVO;
+import kr.co.prj.vo.NoticeModifyVO;
 import kr.co.prj.vo.NoticeWriteVO;
+import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
@@ -86,28 +89,49 @@ public class NoticeController {
 		return "board/n_write_form";
 	}//searchQnADetail
 	
-	/**
-	 * @param session
-	 * @param qwVO
-	 * @return
-	 */
 	@RequestMapping(value="board/n_write_process.do",method=POST)
 	@ResponseBody
 	public String writeProcess(NoticeWriteVO nwVO,@RequestParam(value ="image",required = false, defaultValue = "null")MultipartFile file) {
 		JSONObject json = null;
 		NoticeService ns = new NoticeService();
-		String addfile="";
-		if(file.getName()!=null) {
-			nwVO.setN_content(nwVO.getN_content()+"<br/><img src='http://localhost:8080/3rd_prj/common/images/"+file.getOriginalFilename()+"'>");
-			System.out.println(nwVO.getN_content()+"Ddddddddddddd");
+		
+		if(file.getOriginalFilename()!=null&&file.getOriginalFilename()!=""&&file.getOriginalFilename()!="null") {
+			String nfile = "<br/><img src='http://localhost:8080/3rd_prj/common/images/"+file.getOriginalFilename()+"'>";
+			nwVO.setN_content(nwVO.getN_content()+nfile);
 			json = ns.insertNoticePost(nwVO,file);
 		}else {
 			json = ns.insertNoticePost(nwVO,file);
-		}
-			
-			
-		 
+		}//end else
 		return json.toJSONString();
-	}//
+	}//writeProcess
 	
+	@RequestMapping(value="board/n_delete_post.do",method=POST)
+	@ResponseBody
+	public String deleteProcess(int n_num) {
+		JSONObject json=null;
+		NoticeService ns = new NoticeService();
+		json = ns.deletePostNotice(n_num);
+		return json.toJSONString();
+	}//deleteProcess
+	
+	@RequestMapping(value="board/n_modify_form.do",method=POST)
+	public String modifyForm(int n_num,Model model) {
+		model.addAttribute("n_num",n_num);
+		return "board/n_modify_form";
+	}//modifyForm
+	
+	@RequestMapping(value="board/n_modify_process.do",method=POST)
+	@ResponseBody
+	public String modifyProcess(NoticeModifyVO nmVO,@RequestParam(value ="image",required = false, defaultValue = "null")MultipartFile file) {
+		JSONObject json = null;
+		NoticeService ns = new NoticeService();
+		System.out.println(file.getOriginalFilename());
+		if(file.getOriginalFilename()!=null&&file.getOriginalFilename()!=""&&file.getOriginalFilename()!="null") {
+		json =ns.updatePostNotice(nmVO,file);
+		
+			
+		
+		}
+		return json.toJSONString();
+	}//modifyProcess
 }//class

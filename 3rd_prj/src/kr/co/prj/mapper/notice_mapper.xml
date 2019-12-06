@@ -50,7 +50,16 @@ notice(n_num,n_input_date,n_subject,n_content,n_delete_flag)
 values
 (seq_notice_board.nextval,sysdate,#{n_subject},#{n_content},'N')
 </insert>
-
+<delete id="n_deletePost" parameterType="int">
+delete 
+from notice 
+where n_num = #{n_num}
+</delete>
+<update id="n_updatePost" parameterType="kr.co.prj.vo.NoticeModifyVO">
+update notice
+set n_content=#{n_content}, n_subject=#{n_subject},n_input_date=sysdate
+where n_num= #{n_num}
+</update>
 </mapper>
 
 

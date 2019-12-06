@@ -16,7 +16,7 @@
 	#naviBar{ min-width:1100px; min-height: 130px; position:relative; font-size: 20px;}
 	/* 헤더 끝 */
 	/* 컨테이너 시작  */
-	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%;}
+	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 20%;}
 	.btn{width: 100px;height: 40px;}
 	.nav-item{margin: 10px;}
 	#sub-menuItem{font-family:"고딕";}
@@ -35,31 +35,38 @@
 <link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet">
 <script type="text/javascript">
 $(function(){
-	var str = $("#q_content").val();
-
+	$("#image").on("change", handleImgFileSelect);	
+	var str = $("#n_content").val();
+	
 	str = str.split('<br/>').join("\r\n");
 
-	$("#q_content").val(str);
+	$("#n_content").val(str);
 	
 	$("#goBtn").click(function() {
-		
-		if($("#q_subject").val()==""){
+	
+		if($("#n_subject").val()==""){
 			alert("게시글 제목을 입력해주세요.");
 			return;
 		}//end if
 	
-		if($("#q_content").val().trim()==""){
+		if($("#n_content").val().trim()==""){
 			alert("내용을 작성해주세요.");
 			return
 		}//end if
 	 if(confirm("변경사항을 수정하시겠습니까?")){
-		 var str = $("#q_content").val();
+		 
+		 
+			var str = $('#n_content').val();
+
 			str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-			$("#q_content").val(str);
+
+
+			$('#n_content').val(str);
+		 
 		 
 		 var formData = new FormData(document.getElementById('modify_process'));
 		 $.ajax({
-				url:"/3rd_prj/board/modify_process.do",
+				url:"/3rd_prj/board/n_modify_process.do",
 				processData: false,
 				contentType: false,
 				data:formData,
@@ -70,9 +77,9 @@ $(function(){
 				},
 				success:function(json){
 					if(json.result == true){
-						location.href="/3rd_prj/board/qna_post.do?q_num="+$("#q_num").val();
+						location.href="/3rd_prj/board/notice_post.do?n_num="+$("#n_num").val();
 					}else{
-						alert("게시글이 변경지 않았습니다.");
+						alert("게시글이 변경되지 않았습니다.");
 					}//end if
 				}//success
 			});//ajax 	
@@ -85,6 +92,30 @@ $(function(){
 		}//end if
 	});//click
 });//ready
+
+
+var sel_file;
+function handleImgFileSelect(e){
+	var files = e.target.files;
+	/* console.log(files[0]); */
+	var fileArr = Array.prototype.slice.call(files);
+	
+	fileArr.forEach(function(f){
+		if(!f.type.match("image.*")){
+			alert("확장자는 이미지 확장자만 가능합니다.");
+			return;
+		}//end if
+		
+		sel_file = f;
+		
+		var reader = new FileReader();
+		reader.onload = function(e){
+			$("#img").attr("src", e.target.result);
+		}
+		reader.readAsDataURL(f);
+		
+	});
+}//handleImgFileSelect
 </script>
 </head>
 <body>
@@ -95,14 +126,14 @@ $(function(){
  	<!-- MENU 끝 -->
 </div>
 <div id="container">   
-   <form id="modify_process" >
+   <form id="modify_process" enctype="multipart/form-data">
    <div style="margin-left: 50px;">
          <table>
            
             <tr>
                <td id="ex">제목</td>
                <td>
-         			<input class="form-control form-control-sm" type="text" name="q_subject" id="q_subject" autofocus="autofocus" value='${param.q_subject}' style="width: 734px;"/>
+         			<input class="form-control form-control-sm" type="text" name="n_subject" id="n_subject" autofocus="autofocus" value='${param.n_subject}' style="width: 734px;"/>
         			<br/>
         		</td>
             </tr>
@@ -110,18 +141,24 @@ $(function(){
            
             <tr>
                <td colspan="2" style="padding-left:150px;">
-                  <textarea class="form-control form-control-sm" name="q_content" id="q_content" rows="15" cols="100" ><c:out value="${param.q_content}"/></textarea>
+                  <textarea class="form-control form-control-sm" name="n_content" id="n_content" rows="15" cols="100" ><c:out value="${param.n_content}"/></textarea>
                </td>
             </tr>         
             </table>
              
             </div>
-           <div id="btnClass"style="position: relative; margin-top: 50px;" align="center">
+            <div>
+           <div id="btnClass"style="position: relative; float:left; margin-left:400px; margin-top: 50px;" align="center">
 				<input type="button" value="수정" class="btn btn-outline-secondary alert-danger" id="goBtn" style="margin-right: 25px;" >
 				<input type="button" value="돌아가기" class="btn btn-outline-secondary alert-secondary" id="backBtn">
 				
 			</div>
-			<input type="hidden" id="q_num" name="q_num" value="<c:out value="${param.q_num}"/>"/>
+			<div style=" position: relative; float:right; margin-left:80px; margin-top: 10px; ">       
+         <input type="file" id="image" name="image" ><br/>
+         <img style="margin-top: 10px;" id="img" width="150" height="150"/>
+            </div>
+            </div>
+			<input type="hidden" id="n_num" name="n_num" value="<c:out value="${param.n_num}"/>"/>
          </form>
 </div>
 <div id="footer">

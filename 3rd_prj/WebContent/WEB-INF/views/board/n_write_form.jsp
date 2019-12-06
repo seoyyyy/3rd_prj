@@ -14,7 +14,7 @@
 	#naviBar{ min-width:1100px; min-height: 130px; position:relative; font-size: 20px;}
 	/* 헤더 끝 */
 	/* 컨테이너 시작  */
-	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%;}
+	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 20%;}
 	.btn{width: 100px;height: 40px;}
 	.nav-item{margin: 10px;}
 	#sub-menuItem{font-family:"고딕";}
@@ -39,8 +39,9 @@ $(function(){
 	
 	$("#image").on("change", handleImgFileSelect);	
 	
+	
 	$("#goBtn").click(function() {
-		
+	
 		if($("#n_subject").val().trim()==""){
 			alert("게시글 제목을 입력해주세요.");
 			return;
@@ -52,15 +53,19 @@ $(function(){
 		}//end if
 		
 		if(confirm("방정보를 추가하시겠습니까?")){
+			
+			var str = $("#n_content").val();
+			str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+			$("#n_content").val(str);
+			
 			var formData = new FormData(document.getElementById('writeFrm'));
 			
 			$.ajax({
-				url:"n_write_process.do",
+				url:"/3rd_prj/board/n_write_process.do",
 				processData: false,
 				contentType: false,
 				data:formData,
 				type:"post",
-				
 				dataType:"json",
 				error:function(xhr){
 					alert("문제발생\n" + xhr.status + "\n" + xhr.statusText);
@@ -75,11 +80,11 @@ $(function(){
 						
 					}//end if
 					
-				}
+				}//success
 				
 			});//ajax 	
 		
-		};
+		}//end if
 		
 	
 		
@@ -94,6 +99,12 @@ $(function(){
 
 var sel_file;
 function handleImgFileSelect(e){
+	var fileName = $("#image").val();
+	fileName=fileName.substr(fileName.lastIndexOf('\\')+1);
+	
+	$("#n_content").val($("#n_content").val()+"<img src='http://localhost:8080/3rd_prj/common/images/'"+fileName+"'/>");
+	
+	alert(fileName);
 	var files = e.target.files;
 	/* console.log(files[0]); */
 	var fileArr = Array.prototype.slice.call(files);
@@ -144,15 +155,18 @@ function handleImgFileSelect(e){
                </td>
             </tr>         
             </table>
-          <div style="margin-left: 650px; margin-top: 10px;">       
-         <input type="file" id="image" name="image"><img id="img"/>
             </div>
-            </div>
-           <div id="btnClass"style="position: relative; margin-top: 50px;" align="center">
+           
+           <div  id="btnClass"style="position: relative; float:left; margin-left:400px; margin-top: 30px;"  align="center" >
 				<input type="button" value="등록" class="btn btn-secondary alert-danger" id="goBtn" style="margin-right: 25px;" >
 				<input type="button" value="돌아가기" class="btn btn-secondary alert-secondary" id="backBtn">
-				
+		<div style=" position: relative; float:right; margin-left:80px; ">       
+         <input type="file" id="image" name="image" ><br/>
+         <img style="margin-top: 10px;" id="img" width="150" height="150"/>
+            </div>
+		
 			</div>
+			
          </form>
        	
     

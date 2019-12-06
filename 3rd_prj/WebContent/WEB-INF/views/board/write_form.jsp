@@ -49,9 +49,33 @@ $(function(){
 			return
 		}//end if
 		
-		
-	$("#writeFrm").submit();
-		
+		if(confirm("문의글을 등록하시겠습니까?")){
+			
+			var str = $("#q_content").val();
+			str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+			$("#q_content").val(str);
+			
+			var formData = new FormData(document.getElementById('writeFrm'));
+		$.ajax({
+			url:"/3rd_prj/board/write_post.do",
+			processData: false,
+			contentType: false,
+			data:formData,
+			type:"post",
+			
+			dataType:"json",
+			error:function(xhr){
+				alert("문제발생\n" + xhr.status + "\n" + xhr.statusText);
+			},
+			success:function(json){
+				if(json.result == true){
+					location.href="/3rd_prj/board/qna_list.do"
+				}else{
+					alert("게시글이 등록되지 않았습니다.");
+				}//end if
+			}//success
+		});//ajax 	
+		}//end if
 	});//click
 	$("#backBtn").click(function(){
 		if(confirm('작성하지 않고 돌아가시겠습니까?')){
@@ -71,7 +95,7 @@ $(function(){
 </div>
 <div id="container">   
 
-   <form action="write_post.do" method="post" id="writeFrm">
+   <form id="writeFrm" name="writeFrm">
    <div style="margin-left: 50px;">
          <table>
             

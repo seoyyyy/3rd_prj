@@ -48,7 +48,8 @@ insert
 into 
 qna(q_num,user_id,q_input_date,q_subject,q_content,q_answer_flag) 
 values
-(seq_qna_board.nextval,#{user_id},sysdate,#{q_subject},#{q_content},'N')
+(seq_qna_board.nextval,#{user_id},sysdate,#{q_subject},#{q_content},'N'
+)
 </insert>
 <delete id="deletePost" parameterType="int">
 delete 
@@ -57,7 +58,7 @@ where q_num = #{q_num}
 </delete>
 <update id="updatePost" parameterType="kr.co.prj.vo.QnAModifyVO">
 update qna
-set q_content=#{q_content}, q_subject=#{q_subject}
+set q_content=#{q_content}, q_subject=#{q_subject},q_input_date=sysdate
 where q_num= #{q_num}
 </update>
 <update id="updateRp" parameterType="kr.co.prj.vo.QnAAddRpVO">

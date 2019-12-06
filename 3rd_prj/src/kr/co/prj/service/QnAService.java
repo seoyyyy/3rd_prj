@@ -3,6 +3,7 @@ package kr.co.prj.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.ui.Model;
 
 import kr.co.prj.dao.BoardDAO;
@@ -114,40 +115,45 @@ public class QnAService {
 		return qbdd;
 	}//searchDetailQnA
 	
-	public int insertQnAPost(QnAWriteVO qwVO) {
-		int cnt = 0;
+	public JSONObject insertQnAPost(QnAWriteVO qwVO) {
+		JSONObject json = new JSONObject();
 		
 		BoardDAO bDAO = BoardDAO.getInstance();
-		cnt = bDAO.insertQnAPost(qwVO);
+		boolean flag = bDAO.insertQnAPost(qwVO)==1;
 		
-		return cnt;
+		json.put("result", flag);
+		
+		return json;
 	}//insertQnAPost
 	
-	public int deletePostQnA(int q_num) {
-		int cnt=0;
+	public JSONObject deletePostQnA(int q_num) {
+		JSONObject json = new JSONObject();
 		BoardDAO bDAO = BoardDAO.getInstance();
-		cnt = bDAO.deletePostQnA(q_num);
-		
-		return cnt;
+		boolean flag = bDAO.deletePostQnA(q_num)==1;
+		json.put("result" , flag);
+		return json;
 	}//deletePostQnA
-	public int updatePostQnA(QnAModifyVO qVo) {
-		int cnt = 0;
+	public JSONObject updatePostQnA(QnAModifyVO qVo) {
+		JSONObject json = new JSONObject();
 		BoardDAO bDAO = BoardDAO.getInstance();
-		cnt = bDAO.updatePostQnA(qVo);
-		return cnt;
-	}//deletePostQnA
-	public int updateQnARp(QnAAddRpVO qarVO) {
-		int cnt = 0;
-		BoardDAO bDAO = BoardDAO.getInstance();
-		cnt = bDAO.updateQnARp(qarVO);
-		return cnt;
+		boolean flag = bDAO.updatePostQnA(qVo)==1;
+		json.put("result", flag);
+		return json;
 	}//deletePostQnA
 	
-	public int replyModify(RpModifyVO rmVO) {
-		int cnt =0;
+	public JSONObject updateQnARp(QnAAddRpVO qarVO) {
+		JSONObject json = new JSONObject();
 		BoardDAO bDAO = BoardDAO.getInstance();
-		cnt = bDAO.replyModify(rmVO);
-		return cnt;
+		boolean flag = bDAO.updateQnARp(qarVO)==1;
+		json.put("result", flag);
+		return json;
+	}//deletePostQnA
+	
+	public JSONObject replyModify(RpModifyVO rmVO) {
+		JSONObject json = new JSONObject();
+		BoardDAO bDAO = BoardDAO.getInstance();
+		boolean flag =bDAO.replyModify(rmVO)==1;
+		return json;
 	}//replyModify 
 	
 	// 현재 게시판의 페이지 인덱스 설정

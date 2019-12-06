@@ -38,8 +38,35 @@
 </style>
 <script type="text/javascript">
 $(function(){
-
-});
+	var obj = document.n_frm;
+	$("#modifyPost").click(function(){
+	obj.action="/3rd_prj/board/n_modify_form.do" ;
+		$("#n_frm").submit();
+	});//click
+	$("#deletePost").click(function(){
+	
+	if(confirm("정말 삭제하시겠습니까?")){
+	
+	var formData = new FormData(document.getElementById('n_frm'));
+	$.ajax({
+		url:"/3rd_prj/board/n_delete_post.do",
+		processData: false,
+		contentType: false,
+		data:formData,
+		type:"post",
+		dataType:"json",
+		error:function(xhr){
+			alert("문제발생\n" + xhr.status + "\n" + xhr.statusText);
+		},
+		success:function(json){
+		location.href="/3rd_prj/board/notice_list.do";	
+		}//success
+	});//ajax 	
+	
+	}//end if
+	
+	});//click
+});//ready
 </script>
 </head>
 <body>
@@ -51,6 +78,7 @@ $(function(){
 </div>
 <div id="container">
 <h2 style="margin-bottom: 40px; text-align: center; font-weight: bold;"> notice </h2>
+<form method="post" name="n_frm" id="n_frm">
 <table class="table" >
   <tbody>
     <tr>
@@ -63,7 +91,7 @@ $(function(){
       <td colspan="2" style="height: 600px;">
       <div style="margin: 50px; text-align: left;">
   		<c:out value="${nbdd.n_content}" escapeXml="false"/>
-     
+     	
       </div>
       </td>
     </tr>
@@ -76,15 +104,18 @@ $(function(){
 <div style="float: left;">
 	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='notice_list.do'">
 </div>
- <c:if test="${admin_id ne null }">
+ <c:if test="${admin_id eq null }">
+ <input type="hidden" name="n_subject" value="${nbdd.n_subject}"/>
+ <input type="hidden" name="n_content" value="${nbdd.n_content}"/>
+ <input type="hidden" name="n_num" value="${nbdd.n_num }"/>
 <div style="float:right;">
-	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost" onclick="location.href='modify_form.jsp'" >
-	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" onclick="confirm('정말 삭제하시겠습니까?')" >
+	<input type="button" value="수정" class="btn btn-secondary alert-secondary" id="modifyPost">
+	<input type="button" value="삭제" class="btn btn-secondary alert-secondary" id="deletePost" >
 </div>
 </c:if>
+</form>
+
 </div>
-
-
 
 </div>
 <div id="footer">
