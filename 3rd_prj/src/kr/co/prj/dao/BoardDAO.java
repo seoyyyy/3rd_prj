@@ -203,7 +203,6 @@ public class BoardDAO {
 				SqlSession ss = getSessionFactory().openSession();
 				list=ss.selectList("noticeList",sVO); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
 				ss.close();
-				System.out.println( "시작번호" + sVO.getStartNum()+"끝번호"+sVO.getEndNum());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}//end catch
