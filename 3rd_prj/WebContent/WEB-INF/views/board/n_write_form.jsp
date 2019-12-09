@@ -39,9 +39,16 @@ $(function(){
 	
 	$("#image").on("change", handleImgFileSelect);	
 	
+	$("#n_subject").keypress(function() {
+		if($("#n_subject").val().length>50){
+			alert("제목은 50자 이하만 작성 가능합니다.");
+			$("#n_subject").val($("#n_subject").val().substr(0, 50));
+			return;
+		}//end if
+	})
 	
 	$("#goBtn").click(function() {
-	
+		
 		if($("#n_subject").val().trim()==""){
 			alert("게시글 제목을 입력해주세요.");
 			return;
@@ -51,6 +58,7 @@ $(function(){
 			alert("내용을 작성해주세요.");
 			return
 		}//end if
+		
 		
 		if(confirm("방정보를 추가하시겠습니까?")){
 			
@@ -91,7 +99,7 @@ $(function(){
 	});//click
 	$("#backBtn").click(function(){
 		if(confirm('작성하지 않고 돌아가시겠습니까?')){
-		location.href="qna_list.do";
+		location.href="notice_list.do";
 		}//end if
 	});//click
 	
@@ -102,9 +110,6 @@ function handleImgFileSelect(e){
 	var fileName = $("#image").val();
 	fileName=fileName.substr(fileName.lastIndexOf('\\')+1);
 	
-	$("#n_content").val($("#n_content").val()+"<img src='http://localhost:8080/3rd_prj/common/images/'"+fileName+"'/>");
-	
-	alert(fileName);
 	var files = e.target.files;
 	/* console.log(files[0]); */
 	var fileArr = Array.prototype.slice.call(files);
@@ -122,8 +127,36 @@ function handleImgFileSelect(e){
 			$("#img").attr("src", e.target.result);
 		}
 		reader.readAsDataURL(f);
-		
+		$("#n_content").val($("#n_content").val()+"<img src='http://localhost:8080/3rd_prj/common/images/"+fileName+"'/>");
 	});
+	
+	var formData = new FormData(document.getElementById('addFile'));
+	$.ajax({
+		url:"/3rd_prj/board/addFile.do",
+		processData: false,
+		contentType: false,
+		data:formData,
+		type:"post",
+		dataType:"json",
+		error:function(xhr){
+			/* alert("문제발생\n" + xhr.status + "\n" + xhr.statusText); */
+		},
+		success:function(json){
+			if(json.result == true){
+				alert("추가하였습니다.");
+				
+			}else{
+				alert("죄송합니다.");
+				
+			}//end if
+			
+		}//success
+		
+	});//ajax 	
+	
+	
+	
+	
 	
 }//handleImgFileSelect
 </script>
@@ -137,7 +170,7 @@ function handleImgFileSelect(e){
 </div>
 <div id="container">   
 
-   <form id="writeFrm" enctype="multipart/form-data">
+   <form id="writeFrm">
    <div style="margin-left: 50px;">
          <table>
             
@@ -156,18 +189,20 @@ function handleImgFileSelect(e){
             </tr>         
             </table>
             </div>
+	</form>
            
            <div  id="btnClass"style="position: relative; float:left; margin-left:400px; margin-top: 30px;"  align="center" >
 				<input type="button" value="등록" class="btn btn-secondary alert-danger" id="goBtn" style="margin-right: 25px;" >
 				<input type="button" value="돌아가기" class="btn btn-secondary alert-secondary" id="backBtn">
 		<div style=" position: relative; float:right; margin-left:80px; ">       
+   <form id="addFile" enctype="multipart/form-data">
          <input type="file" id="image" name="image" ><br/>
          <img style="margin-top: 10px;" id="img" width="150" height="150"/>
+         </form>
             </div>
 		
 			</div>
 			
-         </form>
        	
     
          

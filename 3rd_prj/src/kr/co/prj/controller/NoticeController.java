@@ -91,17 +91,11 @@ public class NoticeController {
 	
 	@RequestMapping(value="board/n_write_process.do",method=POST)
 	@ResponseBody
-	public String writeProcess(NoticeWriteVO nwVO,@RequestParam(value ="image",required = false, defaultValue = "null")MultipartFile file) {
+	public String writeProcess(NoticeWriteVO nwVO) {
 		JSONObject json = null;
 		NoticeService ns = new NoticeService();
 		
-		if(file.getOriginalFilename()!=null&&file.getOriginalFilename()!=""&&file.getOriginalFilename()!="null") {
-			String nfile = "<br/><img src='http://localhost:8080/3rd_prj/common/images/"+file.getOriginalFilename()+"'>";
-			nwVO.setN_content(nwVO.getN_content()+nfile);
-			json = ns.insertNoticePost(nwVO,file);
-		}else {
-			json = ns.insertNoticePost(nwVO,file);
-		}//end else
+			json = ns.insertNoticePost(nwVO);
 		return json.toJSONString();
 	}//writeProcess
 	
@@ -120,18 +114,24 @@ public class NoticeController {
 		return "board/n_modify_form";
 	}//modifyForm
 	
-	@RequestMapping(value="board/n_modify_process.do",method=POST)
-	@ResponseBody
-	public String modifyProcess(NoticeModifyVO nmVO,@RequestParam(value ="image",required = false, defaultValue = "null")MultipartFile file) {
+	@RequestMapping(value="board/addFile.do",method=POST)
+	public String addFile(@RequestParam(value ="image",required = false, defaultValue = "null")MultipartFile file) {
 		JSONObject json = null;
 		NoticeService ns = new NoticeService();
-		System.out.println(file.getOriginalFilename());
-		if(file.getOriginalFilename()!=null&&file.getOriginalFilename()!=""&&file.getOriginalFilename()!="null") {
-		json =ns.updatePostNotice(nmVO,file);
 		
-			
+		json = ns.addFile(file);
 		
-		}
+		
+		return json.toJSONString();
+	}//addFile
+	
+	@RequestMapping(value="board/n_modify_process.do",method=POST)
+	@ResponseBody
+	public String modifyProcess(NoticeModifyVO nmVO) {
+		JSONObject json = null;
+		NoticeService ns = new NoticeService();
+		json =ns.updatePostNotice(nmVO);
+		
 		return json.toJSONString();
 	}//modifyProcess
 }//class

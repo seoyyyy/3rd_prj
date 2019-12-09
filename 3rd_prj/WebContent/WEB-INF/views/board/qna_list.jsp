@@ -40,6 +40,8 @@ bg-secondary{ background-color: #E3C6C2}
 </style>
 <script type="text/javascript">
 $(function(){
+
+	
 	$("#searchBtn").click(function(){
 		//유효성 검증
 		if ($("#keyword").val().trim() ==""){

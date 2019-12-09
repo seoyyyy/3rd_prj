@@ -36,6 +36,16 @@
 <script type="text/javascript">
 $(function(){
 	$("#image").on("change", handleImgFileSelect);	
+	
+	$("#n_subject").keypress(function() {
+		if($("#n_subject").val().length>50){
+			alert("제목은 50자 이하만 작성 가능합니다.");
+			$("#n_subject").val($("#n_subject").val().substr(0, 50));
+			return;
+		}//end if
+	})
+	
+	
 	var str = $("#n_content").val();
 	
 	str = str.split('<br/>').join("\r\n");
@@ -43,7 +53,9 @@ $(function(){
 	$("#n_content").val(str);
 	
 	$("#goBtn").click(function() {
-	
+		
+		
+		
 		if($("#n_subject").val()==""){
 			alert("게시글 제목을 입력해주세요.");
 			return;
@@ -97,9 +109,10 @@ $(function(){
 var sel_file;
 function handleImgFileSelect(e){
 	var files = e.target.files;
-	/* console.log(files[0]); */
 	var fileArr = Array.prototype.slice.call(files);
-	
+	var fileName = $("#image").val();
+	fileName=fileName.substr(fileName.lastIndexOf('\\')+1);
+	alert(fileName);
 	fileArr.forEach(function(f){
 		if(!f.type.match("image.*")){
 			alert("확장자는 이미지 확장자만 가능합니다.");
@@ -113,8 +126,33 @@ function handleImgFileSelect(e){
 			$("#img").attr("src", e.target.result);
 		}
 		reader.readAsDataURL(f);
+		$("#n_content").val($("#n_content").val()+"<img src='http://localhost:8080/3rd_prj/common/images/"+fileName+"'/>");
 		
 	});
+		var formData = new FormData(document.getElementById('addFile'));
+		$.ajax({
+			url:"/3rd_prj/board/addFile.do",
+			processData: false,
+			contentType: false,
+			data:formData,
+			type:"post",
+			dataType:"json",
+			error:function(xhr){
+				/* alert("문제발생\n" + xhr.status + "\n" + xhr.statusText); */
+			},
+			success:function(json){
+				if(json.result == true){
+					alert("추가하였습니다.");
+					
+				}else{
+					alert("죄송합니다.");
+					
+				}//end if
+				
+			}//success
+			
+		});//ajax 	
+		
 }//handleImgFileSelect
 </script>
 </head>
@@ -126,7 +164,7 @@ function handleImgFileSelect(e){
  	<!-- MENU 끝 -->
 </div>
 <div id="container">   
-   <form id="modify_process" enctype="multipart/form-data">
+   <form id="modify_process" >
    <div style="margin-left: 50px;">
          <table>
            
@@ -137,8 +175,6 @@ function handleImgFileSelect(e){
         			<br/>
         		</td>
             </tr>
-           
-           
             <tr>
                <td colspan="2" style="padding-left:150px;">
                   <textarea class="form-control form-control-sm" name="n_content" id="n_content" rows="15" cols="100" ><c:out value="${param.n_content}"/></textarea>
@@ -148,21 +184,22 @@ function handleImgFileSelect(e){
              
             </div>
             <div>
+			<input type="hidden" id="n_num" name="n_num" value="<c:out value="${param.n_num}"/>"/>
+			</form>				
+			</div>
            <div id="btnClass"style="position: relative; float:left; margin-left:400px; margin-top: 50px;" align="center">
 				<input type="button" value="수정" class="btn btn-outline-secondary alert-danger" id="goBtn" style="margin-right: 25px;" >
 				<input type="button" value="돌아가기" class="btn btn-outline-secondary alert-secondary" id="backBtn">
-				
-			</div>
-			<div style=" position: relative; float:right; margin-left:80px; margin-top: 10px; ">       
+		<div style=" position: relative; float:right; margin-left:80px; margin-top: 10px; ">       
+		   <form id="addFile" enctype="multipart/form-data">
          <input type="file" id="image" name="image" ><br/>
          <img style="margin-top: 10px;" id="img" width="150" height="150"/>
-            </div>
-            </div>
-			<input type="hidden" id="n_num" name="n_num" value="<c:out value="${param.n_num}"/>"/>
          </form>
+            </div>
+            </div>
 </div>
 <div id="footer">
-	<a href="#"><img src="http://localhost:8080/3rd_pprj/view/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
+	<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
 	<div id="fLogo">
 		
 	</div>

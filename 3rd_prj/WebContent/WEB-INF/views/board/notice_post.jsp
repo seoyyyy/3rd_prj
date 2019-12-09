@@ -104,7 +104,7 @@ $(function(){
 <div style="float: left;">
 	<input type="button" value="목록" class="btn btn-secondary alert-danger btn-sm" id="golist" onclick="location.href='notice_list.do'">
 </div>
- <c:if test="${admin_id eq null }">
+ <c:if test="${admin_id ne null }">
  <input type="hidden" name="n_subject" value="${nbdd.n_subject}"/>
  <input type="hidden" name="n_content" value="${nbdd.n_content}"/>
  <input type="hidden" name="n_num" value="${nbdd.n_num }"/>
@@ -119,7 +119,7 @@ $(function(){
 
 </div>
 <div id="footer">
-<a href="#"><img src="http://localhost:8080/3rd_pprj/view/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
+<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
 	<div id="fLogo">
 		
 	</div>

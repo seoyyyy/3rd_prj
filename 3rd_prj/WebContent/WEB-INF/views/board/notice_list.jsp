@@ -98,7 +98,7 @@ $(function(){
     <div class="form-group col-mb-2">
       <input type="button" class="btn btn-outline-secondary alert-danger" value="검색" id="searchBtn">
     </div>
-    <c:if test="${admin_id eq null }">
+    <c:if test="${admin_id ne null }">
      <div class="form-group col-mb-2" style="margin-left:750px; margin-top: 10px;">
       <input type="button"  class="btn btn-outline-secondary alert-secondary btn-sm" value="글쓰기" id="btnSearch" onclick="location.href='n_write_form.do'">
     </div>
@@ -118,7 +118,7 @@ $(function(){
 	 </div>
 </div>
 <div id="footer">
-<a href="#"><img src="http://localhost:8080/3rd_pprj/view/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%;  "/></a> 
+<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%;  "/></a> 
 	<div id="fLogo">
 		
 	</div>

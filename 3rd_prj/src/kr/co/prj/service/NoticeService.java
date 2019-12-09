@@ -120,37 +120,49 @@ public class NoticeService {
 		return nbdd;
 	}//searchDetailQnA
 	
-	public JSONObject insertNoticePost(NoticeWriteVO nwVO, MultipartFile multipartFile) {
+	public JSONObject insertNoticePost(NoticeWriteVO nwVO) {
 		boolean flag = false;
 		JSONObject json = new JSONObject();
 		
-		File file = null;
 		
-		String uploadPath = "C:/Users/owner/git/3rd_prj/3rd_prj/WebContent/common/images/";
 		
-		try {
-			if(!multipartFile.isEmpty()&&multipartFile.getName()!=null) {
-				file = new File(uploadPath, multipartFile.getOriginalFilename());
 
-				if(!file.exists()) {
-					multipartFile.transferTo(file);
-				}//end if
-				}//end if
 		
 			BoardDAO bDAO = BoardDAO.getInstance();
 			
 
 			flag = bDAO.insertNoticePost(nwVO)==1;
 		
+		json.put("result", flag);
+		return json;
+	}//insertNoticePost
+	
+	public JSONObject addFile(MultipartFile multipartFile) {
+		JSONObject json = new JSONObject();
+		boolean flag = false;
+		File file = null;
+		String uploadPath = "C:/Users/seoyy/git/3rd_prj/3rd_prj/WebContent/common/images/";
+		try {
+			if(!multipartFile.isEmpty()&&multipartFile.getName()!=null) {
+				file = new File(uploadPath, multipartFile.getOriginalFilename());
+				
+				if(!file.exists()) {
+					multipartFile.transferTo(file);
+				}//end if
+				}//end if
+		
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
+		if(multipartFile.getOriginalFilename()!=null) {
+			flag = true;
+		}//end if
 		json.put("result", flag);
+		
 		return json;
-	}//insertNoticePost
-	
+	}//addFile
 	
 	public JSONObject deletePostNotice(int n_num) {
 		JSONObject json = new JSONObject();
@@ -160,30 +172,12 @@ public class NoticeService {
 		return json;
 	}//deletePostNotice
 	
-	public JSONObject updatePostNotice(NoticeModifyVO nmVO, MultipartFile multipartFile) {
+	public JSONObject updatePostNotice(NoticeModifyVO nmVO) {
 		boolean flag=false;
 		JSONObject json = new JSONObject();
 		
-		File file = null;
-		String uploadPath = "C:/Users/owner/git/3rd_prj/3rd_prj/WebContent/common/images/";
-		
-		try {
-			if(!multipartFile.isEmpty()&&multipartFile.getName()!=null) {
-				file = new File(uploadPath, multipartFile.getOriginalFilename());
-
-				if(!file.exists()) {
-					multipartFile.transferTo(file);
-				}//end if
-				}//end if
-		
 		BoardDAO bDAO = BoardDAO.getInstance();
 		flag = bDAO.updatePostNotice(nmVO)==1;
-		
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}//end catch
 		
 		json.put("result", flag);
 		
