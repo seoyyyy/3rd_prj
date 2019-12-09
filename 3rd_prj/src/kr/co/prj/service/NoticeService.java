@@ -141,7 +141,7 @@ public class NoticeService {
 		JSONObject json = new JSONObject();
 		boolean flag = false;
 		File file = null;
-		String uploadPath = "C:/Users/seoyy/git/3rd_prj/3rd_prj/WebContent/common/images/";
+		String uploadPath = "C:/Users/owner/git/3rd_prj/3rd_prj/WebContent/common/images/";
 		try {
 			if(!multipartFile.isEmpty()&&multipartFile.getName()!=null) {
 				file = new File(uploadPath, multipartFile.getOriginalFilename());
