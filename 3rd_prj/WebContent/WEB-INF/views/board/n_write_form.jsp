@@ -40,9 +40,9 @@ $(function(){
 	$("#image").on("change", handleImgFileSelect);	
 	
 	$("#n_subject").keydown(function() {
-		if($("#n_subject").val().length>30){
-			alert("제목은 30자 이하만 작성 가능합니다.");
-			$("#n_subject").val($("#n_subject").val().substr(0, 30));
+		if($("#n_subject").val().length>50){
+			alert("제목은 50자 이하만 작성 가능합니다.");
+			$("#n_subject").val($("#n_subject").val().substr(0, 50));
 			return;
 		}//end if
 	})//keydown

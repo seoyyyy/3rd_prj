@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/3rd_pprj/common/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/3rd_prj/common/css/main.css"/>
 <style type="text/css">
 	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
 	/* 헤더 시작*/
@@ -38,9 +38,9 @@ $(function(){
 	
 	
 	$("#q_subject").keydown(function() {
-		if($("#q_subject").val().length>30){
-			alert("제목은 30자 이하만 작성 가능합니다.");
-			$("#q_subject").val($("#q_subject").val().substr(0, 30));
+		if($("#q_subject").val().length>50){
+			alert("제목은 50자 이하만 작성 가능합니다.");
+			$("#q_subject").val($("#q_subject").val().substr(0, 50));
 			return;
 		}//end if
 	})
@@ -63,6 +63,13 @@ $(function(){
 			return
 		}//end if
 	 if(confirm("변경사항을 수정하시겠습니까?")){
+		 
+		 if($("#q_subject").val().length>50){
+				alert("제목은 50자 이하만 작성 가능합니다.");
+				$("#q_subject").val($("#q_subject").val().substr(0, 50));
+				return;
+			}//end if
+		 
 		 var str = $("#q_content").val();
 			str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 			$("#q_content").val(str);

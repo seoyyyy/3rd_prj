@@ -58,7 +58,7 @@ where q_num = #{q_num}
 </delete>
 <update id="updatePost" parameterType="kr.co.prj.vo.QnAModifyVO">
 update qna
-set q_content=#{q_content}, q_subject=#{q_subject},q_input_date=sysdate
+set q_content=#{q_content}, q_subject=#{q_subject}
 where q_num= #{q_num}
 </update>
 <update id="updateRp" parameterType="kr.co.prj.vo.QnAAddRpVO">
