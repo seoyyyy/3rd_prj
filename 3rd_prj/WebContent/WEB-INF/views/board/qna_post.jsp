@@ -61,7 +61,7 @@ $(function(){
 					alert("문제발생\n" + xhr.status + "\n" + xhr.statusText);
 				},
 				success:function(json){
-				location.href="/3rd_prj/board/qna_post.do?q_num="+$("#q_num").val();	
+					location.href="/3rd_prj/board/qna_post.do?q_num="+$("#q_num").val();	
 				}//success
 			});//ajax 	
 			

@@ -37,10 +37,10 @@
 <script type="text/javascript">
 $(function(){
 	
-	$("#q_subject").keypress(function() {
-		if($("#q_subject").val().length>50){
-			alert("제목은 50자 이하만 작성 가능합니다.");
-			$("#q_subject").val($("#q_subject").val().substr(0, 50));
+	$("#q_subject").keydown(function() {
+		if($("#q_subject").val().length>30){
+			alert("제목은 30자 이하만 작성 가능합니다.");
+			$("#q_subject").val($("#q_subject").val().substr(0, 30));
 			return;
 		}//end if
 	})
