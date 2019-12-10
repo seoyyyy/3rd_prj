@@ -17,7 +17,7 @@
 	#naviBar{ min-width:1100px; min-height: 130px; position:relative; font-size: 20px;}
 	/* 헤더 끝 */
 	/* 컨테이너 시작  */
-	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%;}
+	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 5%;}
 	.btn{width: 100px;height: 40px;}
 	.nav-item{margin: 10px;}
 	#sub-menuItem{font-family:"고딕";}
@@ -143,8 +143,7 @@ function checkId(){
     </div>
 </div>
 </form>
-
-<div style="margin:0px auto; margin-left: 130px; margin-top: 10px;">
+<div style=" margin:0px auto; margin-left: 10%; margin-top: 10px;">
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 			<c:out value="${ indexList }" escapeXml="false"/>
@@ -152,6 +151,8 @@ function checkId(){
 		  </ul>
 		</nav>
 	 </div>
+    </div>
+
 
 
 </div>

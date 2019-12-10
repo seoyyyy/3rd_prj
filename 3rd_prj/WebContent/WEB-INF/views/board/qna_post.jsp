@@ -48,12 +48,9 @@ $(function(){
 			var str = $("#q_answer").val();
 			str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 			$("#q_answer").val(str);
-			
-		var formData = new FormData(document.getElementById('rpFrm'));
-			$.ajax({
+		formData = $("#rpFrm").serialize();	
+		$.ajax({
 				url:"/3rd_prj/board/addRp.do",
-				processData: false,
-				contentType: false,
 				data:formData,
 				type:"post",
 				dataType:"json",
@@ -98,11 +95,9 @@ $(function(){
 				str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 				$("#n_answer").val(str);	
 				
-	var formData = new FormData(document.getElementById('repFrm'));
+			formData = $("#repFrm").serialize();	
 			$.ajax({
 				url:"/3rd_prj/board/rp_modify.do",
-				processData: false,
-				contentType: false,
 				data:formData,
 				type:"post",
 				dataType:"json",
@@ -126,8 +121,6 @@ function del_process(q_num){
 		var q_num = q_num;
 		$.ajax({
 			url:"/3rd_prj/board/delete_post.do",
-			processData: false,
-			contentType: false,
 			data:"q_num="+q_num,
 			type:"get",
 			dataType:"json",
