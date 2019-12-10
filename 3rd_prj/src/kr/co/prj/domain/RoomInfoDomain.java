@@ -1,14 +1,7 @@
 package kr.co.prj.domain;
 
-
-/**
- * MyBatis에서 조회 결과를 저장할 객체.
- * 생성은 Framework에서 한다. 
- * @author owner
- */
-
 public class RoomInfoDomain {
-	private String room_name, room_name2, info, brief_info, image1, image2, image3, concept_name;
+	private String room_name, room_name2, info, brief_info, image3,image2,image1,concept_name;
 	private int person_num, charge;
 	public String getRoom_name() {
 		return room_name;
@@ -34,11 +27,11 @@ public class RoomInfoDomain {
 	public void setBrief_info(String brief_info) {
 		this.brief_info = brief_info;
 	}
-	public String getImage1() {
-		return image1;
+	public String getImage3() {
+		return image3;
 	}
-	public void setImage1(String image1) {
-		this.image1 = image1;
+	public void setImage3(String image3) {
+		this.image3 = image3;
 	}
 	public String getImage2() {
 		return image2;
@@ -46,11 +39,11 @@ public class RoomInfoDomain {
 	public void setImage2(String image2) {
 		this.image2 = image2;
 	}
-	public String getImage3() {
-		return image3;
+	public String getImage1() {
+		return image1;
 	}
-	public void setImage3(String image3) {
-		this.image3 = image3;
+	public void setImage1(String image1) {
+		this.image1 = image1;
 	}
 	public String getConcept_name() {
 		return concept_name;
@@ -70,7 +63,6 @@ public class RoomInfoDomain {
 	public void setCharge(int charge) {
 		this.charge = charge;
 	}
-	
 	
 	
 }

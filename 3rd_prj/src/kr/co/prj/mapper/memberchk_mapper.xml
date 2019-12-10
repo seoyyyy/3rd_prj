@@ -8,7 +8,7 @@
 	<select id="memberChk" resultType="kr.co.prj.domain.MemberCheckDomain" parameterType="String">
 	select		user_name, phone, email
 	from		member_info
-	where	user_id=#{ user_id }
+	where		user_id=#{ user_id }
 	</select>
 
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     info=""
     %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,18 +26,123 @@
 	#fContent{ width: 1100px;height: 110px; padding-top: 30px; margin-right: auto; margin-left: auto }
 	/* 푸터 끝  */
 	#hTitle{font-family: '고딕'; font-size: 30px; font-weight: bold;}
+	
+	html,body,div,ul,li {padding: 0;margin: 0;list-style: none;}
+	
+	/* .jhs-slider 의 높이를 100%로 했을 때 화면전체높이를 사용하도록 하기 위한 코드 */
+	html,body {height: 100%;}
+	
+	.jhs-slider {min-width:284px;height: 100%;position: relative;}
+	/* 후손요소들 중 absolute가 있어요. 그래서 이 코드로 후손 absolute 요소들을 가둬둡니다. */
+	
+	/* 슬라이드 */
+	.jhs-slider .slides > div {position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-repeat: no-repeat;background-size: cover;background-position: center;
+	    /* absolute 요소들 간 우선순위, 숫자가 높을 수록 보여지는 우선순위가 높아집니다. */
+	    z-index: 1;opacity:0;
+	    /* 이미지 페이드아웃, 페이드인 효과 */
+	    transition: opacity 0.5s;}
+	
+	/* active 클래스를 가진 슬라이드는 불투명도를 1로 줘서 보이도록 처리 */
+	.jhs-slider .slides > div.active {opacity:1;}
+	
+	.jhs-slider .side-bar {position: absolute; top: 0;left: 0;width: 40%;bottom:0;z-index: 2;cursor: pointer;}
+	/* 자식요소인 i 가 display:table-cell 이기 위해서는 부모가 display:table 이여야 한다. */
+	.jhs-slider .side-bar.right {left: 60%;}
+	.jhs-slider .side-bar:hover {background: linear-gradient(to right, rgba(45, 45, 45, 0.5), rgba(255, 255, 255, 0));}
+	.jhs-slider .side-bar.right:hover {background: linear-gradient(to left, rgba(45, 45, 45, 0.5), rgba(255, 255, 255, 0));}
+	.jhs-slider .side-bar i {position:absolute;top:50%;transform: translateY(-50%);left:10px;opacity: 0;}
+	/* table-cell 이면 수직 중앙정렬이 가능하다. *//* 수직 중앙정렬 */
+	
+	.jhs-slider .side-bar.right i {left:auto;right:10px;}
+	.jhs-slider .side-bar:hover i {opacity: 0.5;}
+	.jhs-slider .side-bar:active i::before {position: relative;top: 2px;}
+	
+	/* 테이블 소스코드 */
+	table.tb1 {width:100%;height:600px;}
+	table.tb1 .jhs-slider {height:600px;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<!-- jQuery 불러오기 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet">
 <style type="text/css">
 .alert-danger{color: #000000; background-color: #E3C6C2}
 </style>
 <script type="text/javascript">
 $(function(){
-	
+
+	/* each => .jhs-slider 에 해당하는 엘리먼트 하나하나 작업하겠습니다. */
+	$('.jhs-slider').each(function(index, node) {
+	    
+	    /* 개별 슬라이더 */
+	    var $slider = $(node);
+	    /* 슬라이더 안의 슬라이드 들 */
+	    var $slides = $slider.find('div.slides');
+	    /* 처음 슬라이더 */
+	    var $firstSlide = $slides.find(' > div:first-child');
+	    /* 마지막 슬라이더 */
+	    var $lastSlide = $slides.find(' > div:last-child');
+	    
+	    /* 좌측 버튼 */
+	    var $leftBtn = $slider.find('.side-bar').eq(0);
+	    /* 우측 버튼 */
+	    var $rightBtn = $slider.find('.side-bar.right');
+	    
+	    $leftBtn.on('click', function() {
+	        var $activeSlide = $slider.find('div.active');
+	        var $postSlide = null;
+	        if ( $activeSlide.prev().length == 0 )
+	        {
+	            $postSlide = $lastSlide;
+	        }
+	        else {
+	            $postSlide = $activeSlide.prev();
+	        }//end if
+	        
+	        $activeSlide.removeClass('active');
+	        $postSlide.addClass('active');
+	    });
+	    
+	    $rightBtn.on('click', function() {
+	        var $activeSlide = $slider.find('div.active');
+	        var $postSlide = null;
+	        
+	        if ( $activeSlide.next().length == 0 )
+	        {
+	            $postSlide = $firstSlide;
+	        }
+	        else {
+	            $postSlide = $activeSlide.next();
+	        }
+	        
+	        $activeSlide.removeClass('active');
+	        $postSlide.addClass('active');
+	    });
+	    
+	    $slider.on('mouseover', function() {
+	        if ( $slider.data('autoplay') == "Y" ) {
+	            $slider.data('autoplay-available', 'N');
+	        }
+	    });
+	    
+	    $slider.on('mouseout', function() {
+	        if ( $slider.data('autoplay') == "Y" ) {
+	            $slider.data('autoplay-available', 'Y');
+	        }
+	    });
+	    
+	    $slider.mouseout();
+	    
+	    setInterval(function() {
+	        if ( $slider.data('autoplay-available') == 'Y' ) {
+	            $rightBtn.click();
+	        }
+	    }, 3000);
+	});
 });//ready
 </script>
 </head>
@@ -48,99 +154,64 @@ $(function(){
  	<!-- MENU 끝 -->
 </div>
 <div id="container">   
-          
-<div style="font-size: 30px; font-weight: bold; text-align: center ">
-RoomA, RoomB
-</div>
+<div>      
+
+<%-- <div style="font-size: 30px; font-weight: bold; text-align: center ">
+<c:forEach var="list"  items="${RoomInfo}" >
+<c:out value="${ list.room_name}"/>
 <div style="font-size: 15px;  text-align: center ">
-"파티룸+브라이덜샤워+프로포즈"
+<c:out value="${concept.brief_Info}"/>
+</div>
+</c:forEach>
+</div> --%>
+<div style="font-size: 30px; font-weight: bold; text-align: center ">
+<c:out value="${conceptInfo.concept_name2}"/>
+<div style="font-size: 15px;  text-align: center ">
+<c:out value="${conceptInfo.brief_info}"/>
+</div>
 </div><br/>
+
 <div style="margin: auto;">
-<img style="width:1100px;height:300px" src="http://localhost:8080/3rd_pprj/view/images/main.PNG"></div><br/><br/>
-<div style="font-size: 30px; font-weight: bold; text-align: center;">
-RoomA
-</div><br/>
+<img style="width:1100px;height:300px" src="http://localhost:8080/3rd_prj/common/images/main.PNG">
+</div><br/><br/>
+</div>
+
 <div style="margin: auto;">
-
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner" style="width:1100px; height:700px; ">
-    <div class="carousel-item active">
-      <img src="http://localhost:8080/3rd_pprj/view/images/3-1.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/3-2.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/3.jpg" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<div style="font-size: 20px; width:250px; height:50px;" >
-<따뜻한 조명과 분위기>
-</div>
-<div  style="font-size: 15px;">
-행복이 시작되는 다목적 복합문화공간 <br/>
-강남구 중심에 위치해 접근성이 편리하며 9m의<br/> 높은 천고를 가진 넓은 홀에 콘서트도 가능한<br/> 최고의 조명, 음향 및 영상 시설을 보유하고 있어<br/> 세미나, 강연, 파티, 기업 행사등 다양한 목적에 따라 맞춤형 공간을 즐기실 수 있습니다.<br/>
-<br/>특별한 순간 이니에스타 등 국내에서 접하기<br/> 쉽지 않은 와인들을 엄선해 구비하여 와인 파티의 공간<br/> 및 찾아주시는 모든 분들께 특별함을 선사해 드립니다.
-</div><br/>
-
+<c:forEach var="list"  items="${RoomInfo}"><br/><br/>
 <div style="font-size: 30px; font-weight: bold; text-align: center;">
-RoomB
+<c:out value="${list.room_name}"/>
 </div><br/>
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner" style="width:1100px; height:700px;">
-    <div class="carousel-item active">
-      <img src="http://localhost:8080/3rd_pprj/view/images/11.PNG" class="d-block w-100" >
-    </div>
-    <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/10.PNG" class="d-block w-100" >
-    </div>
-    <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/12.PNG" class="d-block w-100" >
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<div style="font-size: 20px; width:400px; height:50px;">
-<고급스러운 파티의 주인공>
-</div>
-<div style="font-size: 15px; ">
-각각  구분된 공간으로서, 사용하고자 하시는 목적에 따라 선택하실 수 있습니다.<br/><br/>
-2인실에서부터 16인실까지의 그룹 스터디 또는 세미너 룸과<br/>
-1인실에서부터 5인실까지의 Co-working 공유 오피스, <br/>
-그리고, 각종 행사와 모임 진행이 가능한 전망 좋은 카페테리아, <br/>
-12층 건물의 최상층에 위치하여, 멋진 낙조를 매일 저녁 감상하실 수 있는 곳입니다.<br/>
+
+<h1 class="sliders-count"></h1>
+<table class="tb1">
+    <tr>
+        <td>
+            <div class="jhs-slider" data-autoplay="Y">
+                <div class="side-bar">
+                    <i class="fa fa-angle-double-left fa-2x fa-inverse" aria-hidden="true"></i>
+                </div>
+                <div class="side-bar right">
+                    <i class="fa fa-angle-double-right fa-2x fa-inverse" aria-hidden="true"></i>
+                </div>
+                <div class="slides">
+                    <div class="active" style="background-image:url(http://localhost:8080/3rd_prj/common/images/<c:out value="${list.image3}"/>);"></div>
+                    <div style="background-image:url(http://localhost:8080/3rd_prj/common/images/<c:out value="${list.image3}"/>);"></div>
+                    <div style="background-image:url(http://localhost:8080/3rd_prj/common/images/<c:out value="${list.image2}"/>);"></div>
+                    <div style="background-image:url(http://localhost:8080/3rd_prj/common/images/<c:out value="${list.image1}"/>);"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<h5 class="title" style="font-weight: bold; color: black; ">&lt;<c:out value="${list.room_name2}"/>&gt;</h5>
+  	<a class="card-text" style="color: black; "><c:out value="${list.info}"/></a>
+  <br/><br/>
+  </c:forEach>
 </div>
 
 </div>
-</div>
-
 <div id="footer">
+<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
   <div id="fContent">
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
 		<h4><strong>[:P]</strong></h4>
@@ -163,7 +234,7 @@ RoomB
 		​예금주 : 백승규<br/><br/><br/>
 			&copy;CopyRight. AllRight Reserved.<br/>
 		</div>
-	</div>
+	</div></div>
 </div>
 </div>
 

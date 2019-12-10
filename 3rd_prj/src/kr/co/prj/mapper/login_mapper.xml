@@ -18,6 +18,18 @@
 	FROM MEMBER_INFO
 	WHERE USER_ID=#{inputId} AND PASSWORD=#{inputPassword}
 </select>
+
+	<resultMap type="kr.co.prj.domain.PassHintDomain"  id="passHintResult">
+	<result column="hint_code" property="hintCode"/>
+	<result column="hint" property="hint"/>
+	</resultMap>
+
+<select id="passHint" resultMap="passHintResult">
+	SELECT HINT_CODE, HINT
+	FROM PASS_HINT_LIST
+</select>
+
+
 </mapper>
 
 

@@ -10,10 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import kr.co.prj.domain.NoticeListDomain;
+import kr.co.prj.domain.ConceptBriefDomain;
 import kr.co.prj.domain.RoomInfoDomain;
-import kr.co.prj.vo.LoginVO;
-import kr.co.prj.vo.SearchVO;
 
 public class RoomDAO {
 	private static RoomDAO rDao;
@@ -43,18 +41,33 @@ public class RoomDAO {
 		return ssf;
 	}//getsSessionFactory
 	
-	public List<RoomInfoDomain> RoomInfo()throws SQLException{
+	public List<RoomInfoDomain> RoomInfo(String concept)throws SQLException{
 		List<RoomInfoDomain> list = null;
 		
 		//3.Handler얻기
 		try {
 			SqlSession ss = getsSessionFactory().openSession();
-			list=ss.selectList("selectRoomInfo"); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
+			System.out.println(concept);
+			list=ss.selectList("selectRoomInfo",concept); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
 			ss.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
 		return list;
+	}//selectAllNotice
+	public ConceptBriefDomain conceptInfo(String concept)throws SQLException{
+		ConceptBriefDomain cbD = null;
+		
+		//3.Handler얻기
+		try {
+			SqlSession ss = getsSessionFactory().openSession();
+			System.out.println(concept);
+			cbD=ss.selectOne("conceptBrief",concept); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
+			ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		return cbD;
 	}//selectAllNotice
 	
 }//class

@@ -42,14 +42,12 @@ from qna
 
 </select>
 
-
 <insert id="writePost"  parameterType="kr.co.prj.vo.QnAWriteVO">
 insert 
 into 
 qna(q_num,user_id,q_input_date,q_subject,q_content,q_answer_flag) 
 values
-(seq_qna_board.nextval,#{user_id},sysdate,#{q_subject},#{q_content},'N'
-)
+(seq_qna_board.nextval,#{user_id},sysdate,#{q_subject},#{q_content},'N')
 </insert>
 <delete id="deletePost" parameterType="int">
 delete 

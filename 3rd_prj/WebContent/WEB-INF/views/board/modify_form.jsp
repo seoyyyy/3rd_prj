@@ -75,10 +75,9 @@ $(function(){
 			$("#q_content").val(str);
 		 
 		 var formData = new FormData(document.getElementById('modify_process'));
+		 formData = $("#modify_process").serialize();
 		 $.ajax({
 				url:"/3rd_prj/board/modify_process.do",
-				processData: false,
-				contentType: false,
 				data:formData,
 				type:"post",
 				dataType:"json",

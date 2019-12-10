@@ -78,7 +78,6 @@ public class QnAController {
 	
 	@RequestMapping(value="board/write_form.do",method=GET)
 	public String writeForm() {
-	
 		return "board/write_form";
 	}//searchQnADetail
 	/**
@@ -89,6 +88,11 @@ public class QnAController {
 	@RequestMapping(value="board/write_post.do",method=POST)
 	@ResponseBody
 	public String writeProcess(HttpSession session,QnAWriteVO qwVO) {
+		System.out.println(qwVO.getUser_id()+"ȣȣȫȫȫ");
+	
+		System.out.println(qwVO);
+		System.out.println("-----------------------------");
+		System.out.println(session.getAttribute("memberId"));
 		JSONObject json = null;
 		QnAService qs = new QnAService();
 		 json = qs.insertQnAPost(qwVO);

@@ -9,29 +9,14 @@ public class MainController {
 	public String mainForm() {
 		return "main/home";
 	}
-	//임시 매핑들
-	@RequestMapping(value="reservation/rsv_main.do")
-	public String rsvForm() {
-		return "reservation/rsv_main";
-	}//rsvForm
-	@RequestMapping(value="introduce/introduce.do")
-	public String introForm() {
-		return "introduce/about";
-	}//introduceForm
-	@RequestMapping(value="introduce/about1.do")
-	public String about1Form() {
-		return "introduce/about1";
-	}//introduceForm
-	@RequestMapping(value="introduce/about2.do")
-	public String about2Form() {
-		return "introduce/about2";
-	}//introduceForm
-	@RequestMapping(value="contact/location.do")
-	public String locationForm() {
-		return "contact/location";
-	}//introduceForm
-
 	
+	
+		@RequestMapping(value="contact/location.do")
+		public String locationForm() {
+			return "contact/location";
+		}//introduceForm
+
+		
 	
 	
 	

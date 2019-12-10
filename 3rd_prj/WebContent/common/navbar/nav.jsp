@@ -19,8 +19,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
            <a class="dropdown-item" href="/3rd_prj/introduce/introduce.do" id="sub-menuItem">introduce</a>
             <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/3rd_prj/introduce/about1.do" id="sub-menuItem" >party & bride</a>
-          <a class="dropdown-item" href="/3rd_prj/introduce/about2.do" id="sub-menuItem" >meeting & conference</a>
+         <a class="dropdown-item" href="/3rd_prj/introduce/about1.do?concept=Concept_1" id="sub-menuItem" >party & bride</a>
+          <a class="dropdown-item" href="/3rd_prj/introduce/about1.do?concept=Concept_2"" id="sub-menuItem" >meeting & conference</a>
         </div>
       </li>
       <li class="nav-item"> 

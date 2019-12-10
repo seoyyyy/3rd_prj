@@ -66,17 +66,15 @@ $(function(){
 			var str = $("#q_content").val();
 			str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 			$("#q_content").val(str);
-			
-			var formData = new FormData(document.getElementById('writeFrm'));
+		var formData = new FormData(document.getElementById('writeFrm'));
+		formData = $("#writeFrm").serialize();
 		$.ajax({
 			url:"/3rd_prj/board/write_post.do",
-			processData: false,
-			contentType: false,
 			data:formData,
 			type:"post",
-			
 			dataType:"json",
 			error:function(xhr){
+		alert(formData);
 				alert("문제발생\n" + xhr.status + "\n" + xhr.statusText);
 			},
 			success:function(json){
@@ -110,7 +108,6 @@ $(function(){
    <form id="writeFrm" name="writeFrm">
    <div style="margin-left: 50px;">
          <table>
-            
             <tr>
                <td id="ex">제목</td>
                <td>
@@ -126,14 +123,13 @@ $(function(){
             </tr>         
             </table>
              
-             
             </div>
+		<input type="hidden" id="user_id" name="user_id" value="<c:out value='${memberId}'/>"/>
            <div id="btnClass"style="position: relative; margin-top: 50px;" align="center">
 				<input type="button" value="등록" class="btn btn-secondary alert-danger" id="goBtn" style="margin-right: 25px;" >
 				<input type="button" value="돌아가기" class="btn btn-secondary alert-secondary" id="backBtn">
 				
 			</div>
-	<input type="hidden" name="user_id" value="<c:out value='${memberId}'/>"/>
          </form>
          
 </div>

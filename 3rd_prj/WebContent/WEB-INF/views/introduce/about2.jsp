@@ -44,7 +44,7 @@ $(function(){
 <div id="class4Wrap">
 <div id="naviBar">
  	<!-- MENU 시작 -->
-	<%@include file="../../../common/navbar/nav.jsp" %>
+		<%@include file="../../../common/navbar/nav.jsp" %>
  	<!-- MENU 끝 -->
 </div>
 <div id="container">   
@@ -56,7 +56,7 @@ RoomC, RoomD
 "그룹스터디룸+세미나실+공유오피스"
 </div><br/>
 <div style="margin: auto;">
-<img style="width:1100px;height:300px" src="http://localhost:8080/3rd_pprj/view/images/main.PNG"></div><br/><br/>
+<img style="width:1100px;height:300px" src="http://localhost:8080/3rd_prj/common/images/main.PNG"></div><br/><br/>
 <div style="font-size: 30px; font-weight: bold; text-align: center;">
 RoomC
 </div><br/>
@@ -71,16 +71,16 @@ RoomC
   </ol>
   <div class="carousel-inner" style="width:1100px; height:700px; ">
     <div class="carousel-item active">
-      <img src="http://localhost:8080/3rd_pprj/view/images/4.jpg" class="d-block w-100" alt="...">
+      <img src="http://localhost:8080/3rd_prj/common/images/4.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/4-1.jpg" class="d-block w-100" alt="...">
+      <img src="http://localhost:8080/3rd_prj/common/images/4-1.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/4-2.jpg" class="d-block w-100" alt="...">
+      <img src="http://localhost:8080/3rd_prj/common/images/4-2.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/4-5.jpg" class="d-block w-100" alt="...">
+      <img src="http://localhost:8080/3rd_prj/common/images/4-5.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -114,13 +114,13 @@ RoomD
   </ol>
   <div class="carousel-inner" style="width:1100px; height:700px;">
     <div class="carousel-item active">
-      <img src="http://localhost:8080/3rd_pprj/view/images/7-5.png" class="d-block w-100" >
+      <img src="http://localhost:8080/3rd_prj/common/images/7-5.png" class="d-block w-100" >
     </div>
     <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/7.png" class="d-block w-100" >
+      <img src="http://localhost:8080/3rd_prj/common/images/7.png" class="d-block w-100" >
     </div>
     <div class="carousel-item">
-      <img src="http://localhost:8080/3rd_pprj/view/images/7-1.png" class="d-block w-100" >
+      <img src="http://localhost:8080/3rd_prj/common/images/7-1.png" class="d-block w-100" >
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

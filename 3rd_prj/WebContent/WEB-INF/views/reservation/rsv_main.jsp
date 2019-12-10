@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""
+    isELIgnored="false"
     %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -159,6 +160,13 @@ $(function(){
 	//여기서 이미지가 클릭되었을 때 캘린더 예약창으로
 	
 });//ready
+function moveDiary(room_name, image1, charge){
+	$("#room_name").val(room_name);
+	$("#image1").val(image1);
+	$("#charge").val(charge);
+	$("#DiaryFrm").submit();
+	
+}
 </script>
 </head>
 <body>
@@ -175,7 +183,7 @@ $(function(){
 	<div align="center" style="font-size: 35px; font-weight: bold;">Reservation</div>
 		<div style="text-align: center; margin-bottom: 20px">
 			<span style="font-size: 25px; font-weight: bold; background-color: red; color: white; ">
-				12월 얼리버드 EVENT Room2 10% 할인
+				12월 얼리버드 EVENT Room2 10% 할인	<%-- <c:out value="${ sessionScope.memberId }"/> --%>
 			 </span>
 		</div>	
 
@@ -185,24 +193,25 @@ $(function(){
 		<!-- image:  %ED%8C%8C%ED%8B%B0%EB%A3%B81.jpg -->
 		<c:forEach var="ri" items="${ RoomInfo }">
 		<figure class="snip1200" style="float: left; margin-left: 33px">
-		  <img src="http://localhost:8080/3rd_prj/common/images/${ ri.image1 }" id="partyRoom1"/>
+		  <img src="http://localhost:8080/3rd_prj/common/images/${ ri.image1 }" id="partyRoom1" width="500" height="333"/>
 		  <figcaption>
-		    <p><c:out value="${ ri.room_name2 }"/></p>
+		    <p><c:out value="${ ri.brief_info }"/></p>
 		    <div class="heading">
-		      <h2><c:out value="${ ri.room_name }"/><span></span></h2>
+		      <h2><c:out value="${ ri.room_name2 }"/><span></span></h2>
 		    </div>
 		  </figcaption>
-		 <a href="/3rd_prj/diary/diary.do" ></a>
+		<%--  <a href="/3rd_prj/diary/diary.do?room_name=${ ri.room_name }"></a> <!-- 링크로 넘어가는 건 GET방식이다~ --> --%>
+		 <a href="javascript:moveDiary('${ ri.room_name }','${ ri.image1 }','${ ri.charge }')"></a>
 		</figure>
-			
+		
 
-		</c:forEach>
+		</c:forEach> 
+		    <form action="/3rd_prj/diary/diary.do" method="post" id="DiaryFrm">
+            <input type="hidden" name="room_name" id="room_name"/>
+            <input type="hidden" name="image1" id="image1"/>
+            <input type="hidden" name="charge" id="charge"/>
+            </form>
 		
-		<c:if test="${ empty RoomInfo }">
-		
-			사원정보가 없습니다.
-		
-		</c:if>
 	
 	</div>
 		

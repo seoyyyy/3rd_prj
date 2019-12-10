@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/3rd_prj/common/css/main.css"/>
 <style type="text/css">
 	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
 	/* 헤더 시작*/
@@ -99,10 +99,10 @@ $(function(){
 저희는 완벽한 프로포즈 준비를 위해 한분한분 친절하게 상담을 진행하고 있으며 또 그에 맞는 준비를 도와드립니다.
 
   </div>
-  <img src="http://localhost:8080/3rd_pprj/view/images/8-2.jpg" class="ml-3" style="width:450px; height:300px" >
+  <img src="http://localhost:8080/3rd_prj/common/images/8-2.jpg" class="ml-3" style="width:450px; height:300px" >
 </div>
   <li class="media my-4">
-   <img src="http://localhost:8080/3rd_pprj/view/images/4-1.jpg" class="mr-3" style="width:450px; height:300px" >
+   <img src="http://localhost:8080/3rd_prj/common/images/4-1.jpg" class="mr-3" style="width:450px; height:300px" >
     <div class="media-body">
       <h5 class="mt-0 mb-1">List-based media object</h5>
       가게 내부는 초록초록한 식물과 화이트톤의 인테리어로 구성되어있으며, 전문 플로리스트가 직접 테이블 꽃장식과 포토테이블의 꽃을 세팅해드리기 때문에 고급스럽고 유니크한 공간을 연출해드리고 있습니다. 그리고 사전에 예비신부와 신랑의 사진을 받아 보정하고 출력하여 이름과 함께 공간 곳곳을 데코해드립니다. 
@@ -114,7 +114,7 @@ $(function(){
     <h5 class="mt-0 mb-1">Media object</h5>
    한 팀만을 위한 원테이블 레스토랑 아름다운 공간과 꽃, 맛있는 음식이 제공됩니다. 조용하고 프라이빗한 공간에서 여러분의 소중한 추억을 정성스럽게 담아드립니다. 프로포즈, 소규모돌잔치, 웨딩, 각종파티 준비해드리고 있습니다. 상세페이지를 참조하시거나 모바일메신저 혹은 전화로 예약해주시면 친절히 상담해드릴게요. 
   </div>
-  <img src="http://localhost:8080/3rd_pprj/view/images/2-5.jpg" class="ml-3" style="width:450px; height:300px" >
+  <img src="http://localhost:8080/3rd_prj/common/images/2-5.jpg" class="ml-3" style="width:450px; height:300px" >
 </div>
 </div>
 
@@ -122,6 +122,7 @@ $(function(){
 </div>
 
 <div id="footer">
+<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
   <div id="fContent">
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
 		<h4><strong>[:P]</strong></h4>

@@ -33,49 +33,116 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet">
 <script type="text/javascript">
+
 $(function(){
+	
+    var regExp1 = /^[a-zA-Z0-9]{4,12}$/;
+    //id와 비밀번호의 유효성 검사
+    var regExp2 = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/i;
+    //e-mail의 유효성 검사
+    var regname = /^[가-힝]{2,}$/;
+    //이름의 유효성 검사
+
+
+    
 	$("#id").focusout(function(){
-		 if($("#id").val()!=""){
+		 if( $("#id").val()!="" & regExp1.test( $("#id").val() ) ){
 			$("#id").attr('class','form-control is-valid');
 			$("#id_div").attr('class','valid-feedback');
 			$("#id_div").text("");
-		}else{
+		} else  {
 			$("#id").attr('class','form-control is-invalid');
 			$("#id_div").attr('class','invalid-feedback');
-			$("#id_div").text("아이디를 입력해주세요.");
+			$("#id_div").text("형식에 맞춰 ID를 입력해주세요.");
 			
 		}//아이디 값 존재 여부
 		
 	});//focusout - id
 	
+		//아이디 중복체크
+		    $('#id').blur(function(){
+		        $.ajax({
+			     type:"POST",
+			     url:"checkSignup.do",
+			     data:{
+			            "id":$('#id').val()
+			     },
+			     success:function(data){	//data : checkSignup에서 넘겨준 결과값
+			            if($.trim(data)=="YES"){
+			               if($('#id').val()!=''){ 
+			            	$("#id").attr('class','form-control is-valid');
+			            	$("#id_div").attr('class','valid-feedback');
+			            	$("#id_div").text("");
+			               }
+			           	}else{
+			               if($('#id').val()!=''){
+			            	$("#id").attr('class','form-control is-invalid');
+			       			$("#id_div").attr('class','invalid-feedback');
+			       			$("#id_div").text("중복된 아이디입니다.");
+/* 			                  alert("중복된 아이디입니다.");
+			                  $('#id').val('');
+			                  $('#id').focus(); */
+			               }
+			            }
+			         }
+			    }) 
+		     });
+
+	
+	
 	$("#userName").focusout(function(){
-		 if($("#userName").val()!=""){
+		 if($("#userName").val()!="" & regname.test( $("#userName").val() ) ){
 				$("#userName").attr('class','form-control is-valid');
 				$("#userName_div").attr('class','valid-feedback');
 				$("#userName_div").text("");
 			}else{
 				$("#userName").attr('class','form-control is-invalid');
 				$("#userName_div").attr('class','invalid-feedback');
-				$("#userName_div").text("이름 입력해주세요.");
+				$("#userName_div").text("한글로 이름을 입력해주세요.");
 				
 			}//이름 존재 여부
 	});//focusout - name
 	
+	
+	//비밀번호부터 해야함
+	
+	
+	
+	
+	
+	
 	$("#inputPassword").focusout(function(){
-		 if($("#inputPassword").val()!=""){
+		 if($("#inputPassword").val()!="" & regExp1.test( $("#inputPassword").val() ) ){
+				 
 				$("#inputPassword").attr('class','form-control is-valid');
 				$("#inputPassword_div").attr('class','valid-feedback');
 				$("#inputPassword_div").text("");
-			}else{
+				 
+		}else{
+			 if( $("#id").val() ==	$("#inputPassword").val() ){
+					$("#inputPassword").attr('class','form-control is-invalid');
+					$("#inputPassword_div").attr('class','invalid-feedback');
+					if ( $("#id").val()==""  ) {
+						$("#inputPassword_div").text("필수입력항목입니다.");				 
+					} else {
+						$("#inputPassword_div").text("아이디와 비밀번호가 같습니다.");				 
+					}//end else
+
+			 } else {
 				$("#inputPassword").attr('class','form-control is-invalid');
 				$("#inputPassword_div").attr('class','invalid-feedback');
-				$("#inputPassword_div").text("비밀번호를 입력해주세요.");
-				
-			}//비밀번호 존재여부 
+				$("#inputPassword_div").text("형식에 맞춰 비밀번호를 입력해주세요.");
+			 }//end else	
+		}//비밀번호 존재여부 
 	});//focusout - pass
+	
+	
+	
+	
 	$("#inputPasswordCheck").focusout(function(){
 		 if($("#inputPasswordCheck").val()!=""){
 			if($("#inputPassword").val()!=$("#inputPasswordCheck").val()){
+				
 				alert("값이 다름");
 			}//end if
 			 
@@ -105,13 +172,28 @@ $(function(){
 				
 			}//비밀번호 힌트 정답 존재 여부
 	});//focusout - hintAw
+	
 	$("#phone2").focusout(function(){
+		var regNumber = /^[0-9]*$/;
+	    var temp2 = $("#phone2").val();
+	    var temp1 = $("#phone1").val();
+
+		
+		
 		 if($("#phone1").val()!=""&& $("#phone2").val()!=""){
 			 
-			 $("#phone1").attr('class','form-control is-valid');
-			 $("#phone2").attr('class','form-control is-valid');
-				$("#phone_div").attr('class','valid-feedback');
-				$("#phone_div").text("");
+			 //숫자가 아닌 다른 문자가 들어간다면
+			 if( !regNumber.test(temp1) |  !regNumber.test(temp2) ){
+					$("#phone1").attr('class','form-control is-invalid');
+					$("#phone2").attr('class','form-control is-invalid');
+					$("#phone_div").attr('class','invalid-feedback');
+					$("#phone_div").text("숫자만 입력 가능합니다.");				 				 
+			 } else { 				 
+					 $("#phone1").attr('class','form-control is-valid');
+					 $("#phone2").attr('class','form-control is-valid');
+					 $("#phone_div").attr('class','valid-feedback');
+					 $("#phone_div").text("");
+			 }
 			
 		 	}else{
 				$("#phone1").attr('class','form-control is-invalid');
@@ -122,22 +204,46 @@ $(function(){
 			}//비밀번호 확인 존재여부 
 	});//focusout - pass
 	
-	$("#email2").focusout(function(){
-		 if($("#email").val()!=""&& $("#email2").val()!=""){
-			 
-			 $("#email").attr('class','form-control is-valid');
-			 $("#email2").attr('class','form-control is-valid');
-				$("#email_div").attr('class','valid-feedback');
-				$("#email_div").text("");
-			
-		 	}else{
-				$("#email").attr('class','form-control is-invalid');
+	
+	
+	$("#email2").change(function(){
+		
+		
+		var regNumber=/^[a-zA-Z0-9]+$/ 
+		
+		var tempEm2=$("#email2").val();
+		var tempEm3=$("#email3").val();
+		
+		if( tempEm2 !="직접입력"){
+		//	if( tempEm2 !="직접입력"){
+				$("#email3").val( tempEm2 );
+		//	}//end if
+		}else{
+			//. 또는 영문+숫자가 아니라면 
+			if ( !regNumber.test(tempEm3) ) {			
 				$("#email2").attr('class','form-control is-invalid');
+				$("#email3").attr('class','form-control is-invalid');
 				$("#email_div").attr('class','invalid-feedback');
 				$("#email_div").text("핸드폰 번호를 입력해주세요.");
-				
-			}//이메일 존재 여부
-	});//focusout - pass
+			}//end if
+				$("#email3").val("");
+				$("#email3").focus();
+		}
+	});
+	
+	
+	
+	$("#goBtn").click(function(){
+		if ( $("#id").val() !="" &&  $("#userName").val() !="" && $("#inputPassword").val() !="" && $("#hintAw").val() !="" && $("#phone2").val() !="" && $("#phone3").val() !="" ) {			
+			$("#signUpFrm").submit();			
+		} else {
+			alert("필요정보를 입력해야만 가입이 가능합니다.");		
+		}
+	});//click
+	
+
+	
+	
 	
 });//ready
 </script>
@@ -151,16 +257,16 @@ $(function(){
 </div>
 <div id="container">
 
-<form id="signUpFrm">
+<form id="signUpFrm" action="input_card.do" method="post" >
  <h2 align="center"><strong>Register</strong></h2>
 <div style="margin-left: 200px;">
- 
+<!--  <span name="span">sadasdad</span> -->
   <br/>
   
   <div class="form-group row">
     <label for="staticEmail" class="col-sm-2 col-form-label">아이디</label>
     <div class="col-sm-3">
-       <input type="text" class="form-control " id="id" placeholder="아이디 입력"  required/>
+       <input type="text" class="form-control " id="id" placeholder="아이디 입력"  required name="user_id"/>    
       <div  id="id_div"> </div> 
       
     </div>
@@ -169,7 +275,7 @@ $(function(){
   <div class="form-group row">
     <label for="staticEmail" class="col-sm-2 col-form-label">이름</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="userName" value="">
+      <input type="text" class="form-control" id="userName" value="" name="user_name">
       <div  id="userName_div"> </div> 
     </div>
   </div> 
@@ -177,14 +283,14 @@ $(function(){
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
     <div class="col-sm-3" >
-      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
       <div  id="inputPassword_div"> </div> 
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호 확인</label>
     <div class="col-sm-3">
-      <input type="password" class="form-control" id="inputPasswordCheck" placeholder="Password">
+      <input type="password" class="form-control" id="inputPasswordCheck" placeholder="Password" name="password2">
       <div  id="inputPasswordCheck_div"> </div> 
     </div>
   </div>
@@ -192,10 +298,13 @@ $(function(){
  <div class="form-group row">
   <label for="staticEmail" class="col-sm-2 col-form-label">비밀번호 힌트</label>
     <div class="col-sm-3">
-      <select class="form-control">
-  		<option>나의 보물 1호는?</option>
-  		<option>강아지</option>
-  		<option>고양이</option>
+  
+    
+      <select class="form-control" name="hint_code" id="hint_code">
+  		  <c:forEach var="passHintList" items="${passHintList }">
+			<option value="${ passHintList.hintCode }"><c:out value="${ passHintList.hint }"/></option>
+		  </c:forEach>
+    
 	  </select>
     </div>
   </div>
@@ -203,7 +312,7 @@ $(function(){
   <div class="form-group row">
     <label for="staticEmail" class="col-sm-2 col-form-label">힌트 정답</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="hintAw" >
+      <input type="text" class="form-control" id="hintAw" name="answer">
       <div  id="hintAw_div"> </div> 
     </div>
   </div> 
@@ -211,17 +320,20 @@ $(function(){
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">휴대전화</label>
     <div class="col-sm-1" >
-      <select class="form-control" style="width:80px">
-  		<option>010</option>
-  		<option>011</option>
-  		<option>012</option>
+      <select class="form-control" style="width:80px" name="phon1">
+  		<option value="010">010</option>
+  		<option value="011">011</option>
+  		<option value="016">016</option>
+  		<option value="017">017</option>
+  		<option value="018">018</option>
+  		<option value="019">019</option>
 	  </select>
     </div>
     <div class="col-sm-3" align="left">
-     <input type="text" class="form-control" id="phone1" style="margin-left: 15px;">
+     <input type="text" class="form-control" id="phone1" name="phon2" style="margin-left: 15px;">
     </div><span style="margin-top: 10px; margin-left: 10px;" >-</span>
     <div class="col-sm-3">
-     <input type="text" class="form-control" id="phone2">
+     <input type="text" class="form-control" id="phone2" name="phon3">
       <div  id="phone_div"> </div> 
     </div>
   </div>
@@ -229,24 +341,26 @@ $(function(){
  <div class="form-group row">
   <label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" placeholder="mail" id="email">
+      <input type="text" class="form-control" placeholder="mail"  name="email1" id="email1">
     </div>
     @
     <div class="col-sm-3">
-      <select class="form-control">
-  		<option>직접입력</option>
-  		<option>naver.com</option>
-  		<option>hanmail.co.kr</option>
+      <select id="email2" class="form-control">
+		<option value="직접입력">직접입력</option>
+		<option value="daum.net">daum.net</option>
+		<option value="naver.com">naver.com</option>
+		<option value="gmail.com">gmail.com</option>
+		<option value="hotmail.com">hotmail.com</option>
 	  </select>
     </div>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="email2"/>
+      <input type="text" class="form-control" name="email3" id="email3"/>
   </div>
       <div  id="email_div"></div> 
   </div>
     <div id="btnClass"style="position: relative; margin-top: 50px; margin-left: 250px; margin-bottom: 100px;" >
-				<input type="button" value="취소" class="btn btn-outline-secondary alert-danger" id="goBtn" style="margin-right: 25px;" >
-				<input type="button" value="다음" class="btn btn-outline-secondary alert-secondary" id="backBtn">
+				<input type="button" value="취소" class="btn btn-outline-secondary alert-danger" id="backBtn" style="margin-right: 25px;" >
+				<input type="button" value="다음" class="btn btn-outline-secondary alert-secondary" id="goBtn">
 				
 			</div>
     

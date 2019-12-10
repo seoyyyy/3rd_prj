@@ -1,7 +1,7 @@
 package kr.co.prj.vo;
 
 public class QnAWriteVO {
-	private String q_subject , q_content,user_id;
+	private String q_subject,q_content,user_id;
 
 	public String getQ_subject() {
 		return q_subject;
@@ -25,6 +25,11 @@ public class QnAWriteVO {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	@Override
+	public String toString() {
+		return "QnAWriteVO [q_subject=" + q_subject + ", q_content=" + q_content + ", user_id=" + user_id + "]";
 	}
 
 

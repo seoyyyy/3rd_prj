@@ -1,3 +1,6 @@
+<%@page import="kr.co.prj.vo.DiaryResultVO"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -13,7 +16,7 @@
       ne.printStackTrace();
    
    }
-   System.out.println(":"+paramYear+"/"+paramMonth);
+   //System.out.println(":"+paramYear+"/"+paramMonth);
    
    Calendar bCal = Calendar.getInstance();
      Calendar cal=Calendar.getInstance();     int nowYear=cal.get(Calendar.YEAR);
@@ -34,14 +37,14 @@
    int month = Calendar.getInstance().get(Calendar.MONTH);
    int date = Calendar.getInstance().get(Calendar.DATE);
    
-   System.out.println(year+"/"+month+"/"+date);
+   //System.out.println(year+"/"+month+"/"+date);
    
    
-   System.out.println(nowYear+"/"+nowMonth);
+ //  System.out.println(nowYear+"/"+nowMonth);
     cal.set(nowYear,nowMonth,1);
    bCal.set(nowYear,nowMonth-1, 1);
    int backLastDay = bCal.getActualMaximum(Calendar.DATE);
-   System.out.println(backLastDay+":마지막");
+  // System.out.println(backLastDay+":마지막");
    
  %>
 <!DOCTYPE html>
@@ -115,6 +118,16 @@ $(function(){
       
    })
 });
+function moveResv( year,month,day){
+	
+	$("#param_year").val(year);
+	$("#param_month").val(month);
+	$("#param_day").val(day);
+	$("#resvFrm").submit();
+	
+}
+
+
 </script>
 </head>
 <body>
@@ -129,18 +142,30 @@ $(function(){
          <%
       
          
-   
-         
+
+    	
    
          %>
          <div id="calWrap">
             <div id="calHeader">
-            <a href='diary.do?<%="year="+nowYear+"&"+"month="+(nowMonth-1)%>'><img src="/3rd_prj/common/images/prev_btn.png"title="이전월"id="pre"/></a>
+           <%--  <a href='diary.do?<%="year="+nowYear+"&"+"month="+(nowMonth-1)%>'><img src="/3rd_prj/common/images/prev_btn.png"title="이전월"id="pre"/></a> --%>
+            <a href="diary.do?month=<%=nowMonth-1==0?12:nowMonth-1%>&year=<%=
+         nowMonth-1<0?nowYear-1:nowYear %>"><img src="/3rd_prj/common/images/prev_btn.png" title="이전월"/></a>
             <span style="font-family: 고딕  SansSerif;font-weight: bold;font-size: 27px"><%=nowYear%>.<%=nowMonth+1 %></span>
-            <a href='diary.do?<%="year="+nowYear+"&"+"month="+(nowMonth+1)%>'><img src="/3rd_prj/common/images/next_btn.png"title="다음월"id="next"/></a>
+            <%-- <a href='diary.do?<%="year="+nowYear+"&"+"month="+(nowMonth+1)%>'><img src="/3rd_prj/common/images/next_btn.png"title="다음월"id="next"/></a> --%>
+               <a href="diary.do?month=<%=nowMonth+1==12?1:nowMonth+1%>&year=<%=
+            nowMonth+1==12?nowYear+1:nowYear %>"><img src="/3rd_prj/common/images/next_btn.png" title="다음월"/></a>    
             <a href='diary.do'><img src="/3rd_prj/common/images/today_btn.png"title="현재월"/></a>
             </div>         
             <div id="calContent">
+            
+            
+            <form action="/3rd_prj/reservation/rsv_input.do" method="post" id="resvFrm">
+            <input type="hidden" name="param_year" id="param_year"/>
+            <input type="hidden" name="param_month" id="param_month"/>
+            <input type="hidden" name="param_day" id="param_day"/>
+            </form>
+            
             <table id="diaryTab">
             <tr style="text-align: center; height:40px">
                <th class="sunTitle" style="background-color: #E3C6C2">일</th>
@@ -157,7 +182,7 @@ $(function(){
                cal.set(Calendar.DAY_OF_MONTH, tempDay);//증가하는 가상의 일자를 달력객체에 설정
                if(cal.get(Calendar.DAY_OF_MONTH)!=tempDay ){
                   //증가하는 임시일자와 설정된 날짜를 꺼내온것이 다르다면 다음달 1일 이므로 반복문을 빠져 나간다.
-                  System.out.println(cal.get(Calendar.MONTH)+"월/"+cal.get(Calendar.DAY_OF_WEEK)+"요일");
+                //  System.out.println(cal.get(Calendar.MONTH)+"월/"+cal.get(Calendar.DAY_OF_WEEK)+"요일");
                   
                   if(cal.get(Calendar.DAY_OF_WEEK) != 1){
                   int nextDay = 1;
@@ -184,9 +209,9 @@ $(function(){
                   
                
                   for(int blankTd=cal.get(Calendar.DAY_OF_WEEK)-1;blankTd>0;blankTd--){
-                     System.out.println(blankTd-1);
+                   //  System.out.println(blankTd-1);
                %>
-               <td class="blankTd"><a href="/3rd_prj/reservation/rsv_input.do">
+               <td class="blankTd"><!-- <a href="/3rd_prj/reservation/rsv_input.do"> -->
          
                <%= backLastDay-(blankTd-1)%></a></td>
                <%
@@ -212,21 +237,62 @@ $(function(){
                case Calendar.SUNDAY:
                   color ="style='color:#FF0000'"; 
                break;
+               default:
+            	   color="style='color:#007BFF'";
+            	   break;
                }
             
                
                %>
                
                		
-                  <a href="/3rd_prj/reservation/rsv_input.do?param_year=<%=nowYear %>&param_month=<%=nowMonth+1 %>&param_day=<%=tempDay %>"><div <%=color %>><%=tempDay %></div></a>
+                <%--   <a href="javascript:moveResv('<%=nowYear %>','<%=nowMonth+1 %>', '<%=tempDay %>')"><div <%=color %>><%=tempDay %></div></a> --%>
                   <%-- <input type="hidden" value="<%= nowYear %>-<%= nowMonth %>-<%=tempDay %>" name="rsvDate">  --%>
-               	  <% if (cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY | cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ) { %>                    
-	                  <div style="background-color: yellow">ㅎㅇㅎㅇ</div>
-	                  <div style="background-color: red">ㅎddd</div>
+<%--                	  <% if (cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY | cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ) { %>                    
+                  <%} %> --%>
+                  <%
+                  Map<Integer, DiaryResultVO[]> map = (HashMap<Integer, DiaryResultVO[]>)request.getAttribute("rListMap");
+                  if(map.containsKey(tempDay)){
+                	  DiaryResultVO[] drArr =  map.get(tempDay);
+                	  String[] dayColor = {"white","white","white","white"};
+                	  String[] dayTime = {"8-12","12-16","16-20","20-24"};
+                	  int cnt=0;
+                	  for(int i=0;i<drArr.length;i++){
+                		  
+                		  if(drArr[i] != null){
+                			  dayColor[i] ="gray";
+                		  	cnt++;
+                		  }else{
+                			  dayTime[i]="&nbsp;";
+                			  
+                		  }
+                		  
+                	  }
+                	  if(cnt==4){%>
+                		  
+                		
+                		 <div <%=color %>><%=tempDay %></div>
+                		  
+                <%}else{ %>	  
+                	
+                	
+                	 <a href="javascript:moveResv('<%=nowYear %>','<%=nowMonth+1 %>', '<%=tempDay %>')"><div <%=color %>><%=tempDay %></div></a>
+                	
+                	 <%} %> 
+              
+                  
+	                  <div style="background-color: <%=dayColor[0]%>"><%=dayTime[0]%></div>
+	                  <div style="background-color: <%=dayColor[1]%>"><%=dayTime[1]%></div>
+	                  <div style="background-color: <%=dayColor[2]%>"><%=dayTime[2]%></div>
+	                  <div style="background-color: <%=dayColor[3]%>"><%=dayTime[3]%></div>
+                	  
+                	  
+                	  
+                <% }else{%>  
+                  
+                  <a href="javascript:moveResv('<%=nowYear %>','<%=nowMonth+1 %>', '<%=tempDay %>')"><div <%=color %>><%=tempDay %></div></a>
+                  
                   <%} %>
-                  
-                  
-                  
                   
                </td>
                <%

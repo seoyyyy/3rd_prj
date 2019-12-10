@@ -19,6 +19,7 @@
 	.nav-item{margin: 10px;}
 	#sub-menuItem{font-family:"고딕";}
 	#ex{padding-bottom: 20px; width: 150px; font-size: 15px;}
+	.media-body{margin-left: 120px}
 	/* 컨테이너 끝  */
 	/* 푸터 시작  */
 	#footer{  min-width:1100px;min-height: 250px;position:relative;  background-color: #E3C6C2;}
@@ -55,12 +56,12 @@ $(function(){
 	<div style=" font-size: 15px; text-align: center">
 	서울특별시 성동구 성수동2가 281-2<br/>
 	(서울특별시 성동구 광나루로8길 11)
-	</div><br/>
+	</div><br/><br/>
          
     <div class="media">
-  <div class="col-12 col-md-7">
-      <div id="map" style="width:450px;height:500px; border-top-left-radius:10px; border-bottom-left-radius:10px"></div>
-      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e4bdcc1fb70d973afd14f2b64b6b7cd"></script>
+  <div class="col-12 col-md-6">
+      <div id="map" style="width:460px;height:500px; border-top-left-radius:10px; border-bottom-left-radius:10px; margin-left: 140px"></div>
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3be8edf26b33f7734075714b4c580d88"></script>
       <script>
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
           mapOption = { 
@@ -81,7 +82,7 @@ $(function(){
       // 마커가 지도 위에 표시되도록 설정합니다
       marker.setMap(map);
       
-      var iwContent = '<div style="width:300px;">Yul\'s&nbsp;Coffee(율스커피)<br><a href="https://map.kakao.com/link/map/율스커피(서울시 강남구 테헤란로 132),37.49932297018342,127.03320846700835" style="color:blue" target="_blank">서울특별시 강남구 테헤란로 132</a> <a href="https://map.kakao.com/link/to/Yul\'s&nbsp;Coffee(율스커피),37.49932297018342,127.03320846700835" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+      var iwContent = '<div style="padding:5px;">Party [ : P ] <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도 </a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">| 길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
           iwPosition = new kakao.maps.LatLng(37.49932297018342 , 127.03320846700835 ); //인포윈도우 표시 위치입니다
       
       // 인포윈도우를 생성합니다
@@ -96,17 +97,17 @@ $(function(){
       </div>
 
   <div class="media-body" >
-    <h5 class="mt-0"><img src="http://localhost:8080/3rd_pprj/view/images/bus.png" style="width:60px; height:55px"></h5>
+    <h5 class="mt-0"><img src="http://localhost:8080/3rd_prj/common/images/bus.png" style="width:60px; height:55px"></h5>
     <p >
     	성산2교 정류장(ID:14186) 도보2분<br/>
 		성미약수터 정류장(ID:14910) 도보2분<br/><br/>
 	</p>
-   <img src="http://localhost:8080/3rd_pprj/view/images/car.png" style="width:60px; height:55px">
+   <img src="http://localhost:8080/3rd_prj/common/images/car.png" style="width:60px; height:55px">
 	  <p class="mb-0">서울시 마포구 월드컵북로 12안길 35 <br/>
 		서울시 마포구 성산동 108-5 <br/>
 		주소를 네비게이션에 입력해 주세요.<br/><br/><br/>
 	
-	<img src="http://localhost:8080/3rd_pprj/view/images/subway.png" style="width:60px; height:55px">
+	<img src="http://localhost:8080/3rd_prj/common/images/subway.png" style="width:60px; height:55px">
 	  <p class="mb-0">2호선 역삼역 3번출구 도보 3분<br/>
 		2호선 강남역 10번출구 도보 7분<br/>
 		경의중앙선 강남역 10번출구 도보 7분</p>
@@ -114,13 +115,14 @@ $(function(){
 </div><br/><br/>
     
 <div>
-<img src="http://localhost:8080/3rd_pprj/view/images/50.PNG" id="img1" style="width:400px; height:250px; margin: auto; margin-left: 155px">
-<img src="http://localhost:8080/3rd_pprj/view/images/51.PNG" id="img2"  style="width:400px; height:250px; margin: auto;">
+<img src="http://localhost:8080/3rd_prj/common/images/50.PNG" id="img1" style="width:400px; height:250px; margin: auto; margin-left: 155px">
+<img src="http://localhost:8080/3rd_prj/common/images/51.PNG" id="img2"  style="width:400px; height:250px; margin: auto;">
 </div> 
     
 </div>
 
 <div id="footer">
+<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
   <div id="fContent">
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
 		<h4><strong>[:P]</strong></h4>

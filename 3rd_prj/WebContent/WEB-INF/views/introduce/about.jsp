@@ -52,38 +52,30 @@ $(function(){
 	<div style="font-size: 30px; font-weight: bold; text-align: center">
 	about
 	</div>
-	<div style="font-size: 20px; margin: auto; text-align: center">
+	<div style="font-size: 15px;  text-align: center; font-weight: bold ">
 	가치에 의미를 더하다
 	</div><br/>
 	<div style="margin: auto;">
 	<img style="width:1100px;height:300px" src="http://localhost:8080/3rd_prj/common/images/main.PNG"></div><br/>
 	
-  <div class="card-deck">
-  <c:forEach var="list"  items="${RoomInfo}">
-			<c:if test="${ list.room_name eq 'RoomA' or list.room_name eq 'RoomC'}">
+  <div class="card-deck" style="margin-top: 80px">
+  <c:forEach var="list"  items="${concept}">		
   <div class="card">
-			<c:choose>
-				<c:when test="${ list.room_name eq 'RoomA' }"><a href="about1.do"></c:when>
-				<c:when test="${ list.room_name eq 'RoomC' }"><a href="about2.do"></c:when>
-				</c:choose>
-    <img src='http://localhost:8080/3rd_prj/common/images/<c:out value="${list.image3}"/>' class="card-img-top">
+			
+			<a href="about1.do?concept=${ list.concept_name }">
+			
+    <img src="http://localhost:8080/3rd_prj/common/images/<c:out value="${list.image}"/>" class="card-img-top">
     <div class="card-body">
-      <h5 class="card-title" style="font-weight: bold"><c:out value="${list.room_name2}"/></h5>
-      <p class="card-text"><c:out value="${list.info}"/></p>
+      <h5 class="card-title" style="font-weight: bold; color: black; "><c:out value="${list.concept_name2}"/></h5>
+    	<a style=" text-decoration: none;"></a>
+      	<a class="card-text" style="color: black;"><c:out value="${list.info}"/>
+      	</a>
     </div>
-    </div>
-    </c:if>
+    </a>
+  </div>
     </c:forEach>
   </div>
-  
- 
 </div>
-	  
-	  
-	  
-	  
-	  
-	  
 	  
 </div>
 

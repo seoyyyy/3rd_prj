@@ -36,7 +36,14 @@
 </style>
 <script type="text/javascript">
 $(function(){
-	
+	$("#b1").click(function() {
+		$("#a").show();
+		$("#b").hide();
+	});
+	$("#b2").click(function() {
+		$("#a").hide();
+		$("#b").show();
+	});
 });//ready
 </script>
 </head>
@@ -49,31 +56,35 @@ $(function(){
 </div>
 <div id="container">   
 
+
 	<div align="center" style="margin-left: auto; margin-right: auto; width: 510px; height: 500px;" >
 		<img src="http://localhost:8080/3rd_pprj/kr.co.sist.user.view/images/id1.png"><strong><font size="5px">&nbsp;아이디 찾기</font></strong><br/><br/><br/>
-		<input type="radio" name="radio">&nbsp;<strong>내정보에 등록된 휴대폰으로 찾기</strong><br/><br/>
-		<input type="text" class="form-control" id="findIDbyPhone" value="이름을 입력해 주세요" style="width:230px; margin-bottom: 10px;">
+		<input type="radio" name="radio" id="b1">&nbsp;<strong>내정보에 등록된 휴대폰으로 찾기</strong><br/><br/>
+		<input type="radio" name="radio" id="b2">&nbsp;<strong>내정보에 등록된 이메일로 찾기</strong><br/><br/>
 		
-		
+		<div id="a">
 		<form class="form-inline" style="padding-left: 123px ">
+			<input type="text" class="form-control" id="findIDbyPhone" value="이름을 입력해 주세요" style="width:230px; margin-bottom: 10px;">
 			  <div class="form-group mx-sm-3 mb-2" >
 			    <label for="inputPassword2" class="sr-only" >휴대폰 번호를 입력해주세요.</label>
 			    <input type="text" class="form-control" id="inputPassword2" placeholder="휴대폰 번호를 입력해주세요." style="width:230px; ">
 			  </div>
 			 <input type="button" value="찾기" class="btn btn-secondary alert-secondary" id="backBtn">
 		</form>
+		</div>
 	
 		<br/>
 				
-		<input type="radio" name="radio2">&nbsp;<strong>내정보에 등록된 이메일로 찾기</strong><br/><br/>
+		<div id="b" style="display: none">
 		<input type="text" class="form-control" id="findIDbyEmail" value="이름을 입력해 주세요" style="width:230px; margin-bottom: 10px;">
 		<form class="form-inline" style="padding-left: 123px ">
 			  <div class="form-group mx-sm-3 mb-2" >
-			    <label for="inputPassword2" class="sr-only" >휴대폰 번호를 입력해주세요.</label>
-			    <input type="text" class="form-control" id="inputPassword2" placeholder="휴대폰 번호를 입력해주세요." style="width:230px; ">
+			    <label for="inputPassword2" class="sr-only" >이메일 번호를 입력해주세요.</label>
+			    <input type="text" class="form-control" id="inputPassword2" placeholder="이력해주세요." style="width:230px; ">
 			  </div>
 			  <input type="button" value="찾기" class="btn btn-secondary alert-secondary" id="backBtn">
 		</form>		
+		</div>
 
 
 	</div>
