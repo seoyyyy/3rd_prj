@@ -14,7 +14,6 @@ import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
 import kr.co.prj.vo.RpModifyVO;
-import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
 
@@ -149,10 +148,10 @@ public class QnAService {
 		return json;
 	}//deletePostQnA
 	
-	public JSONObject replyModify(RpModifyVO rmVO) {
+	public JSONObject replyModify(QnAAddRpVO qarVO) {
 		JSONObject json = new JSONObject();
 		BoardDAO bDAO = BoardDAO.getInstance();
-		boolean flag =bDAO.replyModify(rmVO)==1;
+		boolean flag =bDAO.replyModify(qarVO)==1;
 		return json;
 	}//replyModify 
 	

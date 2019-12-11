@@ -19,7 +19,6 @@ import kr.co.prj.vo.NoticeWriteVO;
 import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
-import kr.co.prj.vo.RpModifyVO;
 import kr.co.prj.vo.SearchVO;
 
 
@@ -178,12 +177,12 @@ public class BoardDAO {
 		return flag;
 	}//updatePostQnA
 	
-	public int replyModify(RpModifyVO rmVO) {
+	public int replyModify(QnAAddRpVO qarVO) {
 		int cnt=0;
 		
 		try {
 			SqlSession ss = getSessionFactory().openSession();
-			cnt = ss.update("rpModify",rmVO);
+			cnt = ss.update("rpModify",qarVO);
 			ss.commit();
 			ss.close();
 		} catch (IOException e) {

@@ -26,7 +26,6 @@ import kr.co.prj.vo.IndexListVO;
 import kr.co.prj.vo.NoticeModifyVO;
 import kr.co.prj.vo.NoticeWriteVO;
 import kr.co.prj.vo.QnAModifyVO;
-import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
 
@@ -66,7 +65,6 @@ public class NoticeController {
 
 		
 		
-		SearchRangeVO srVO = new SearchRangeVO(startNum,endNum);
 		List<NoticeListDomain> list= ns.searchAllNotice(sVO);
 		model.addAttribute("list",list);
 		model.addAttribute("totalPage", totalPage);
@@ -115,6 +113,7 @@ public class NoticeController {
 	}//modifyForm
 	
 	@RequestMapping(value="board/addFile.do",method=POST)
+	@ResponseBody
 	public String addFile(@RequestParam(value ="image",required = false)MultipartFile file) {
 		JSONObject json = null;
 		NoticeService ns = new NoticeService();

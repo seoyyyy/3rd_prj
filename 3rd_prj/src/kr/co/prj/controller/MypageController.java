@@ -169,7 +169,7 @@ public class MypageController {
 	public String modifyInfo(modifyInfoVO miVo) {
 		JSONObject json =null;
 		MypageService ms = new MypageService();
-		System.out.println(miVo.getPassword()+"eeeee");
+		System.out.println(miVo.getEmail()+"오예예ㅔ에에");
 		json = ms.modifyInfo(miVo);
 		return json.toJSONString(); 
 	}//modifyInfo

@@ -18,7 +18,6 @@ import kr.co.prj.vo.NoticeModifyVO;
 import kr.co.prj.vo.NoticeWriteVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
-import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
 public class NoticeService {

@@ -51,7 +51,6 @@ $(function(){
 	
 	
 	$("#btnMyInfoChange").click(function() {
-		
 		if($("#curPassword").val()==""){
 			alert("현재 비밀번호를 입력해주세요")
 			return ;
@@ -69,6 +68,14 @@ $(function(){
 			alert("이메일을 입력해주세요.");
 			return;
 		}//end if
+		if($("#phone2").val().length>4 || $("#phone2").val().length<3){
+			alert("연락처를 올바르게 입력해주세요.");
+			return;
+		}//end if
+		if($("#phone3").val().length!=4){
+			alert("연락처를 올바르게 입력해주세요.");
+			return;
+		}//end if
 		if($("#email2").val()=="none"){
 			alert("도메인 주소를 선택해주세요");
 			return;
@@ -81,47 +88,53 @@ $(function(){
 			alert("핸드폰번호를 입력해주세요.");
 			return;
 		}//end if
-
+	if(confirm("회원정보를 변경하시겠습니까?")){
 		var newPhone=$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val();
 		$("#phone").val(newPhone);
 		var newEmail=$("#email1").val()+"@"+$("#email3").val();
 		$("#email").val(newEmail);
 		var newHintCode = $("#hint_code").val();
 		$("#hint_code").val(newHintCode);
-		
-		if($("#curPassword").val()==$("#password").val() &&$("#curPhone").val()==newPhone &&
-				$("#curEmail").val()==newEmail && newHintCode==$("#hhint_code").val()){
-			alert("변경하실 정보가 존재하지 않습니다.")
+		if($("#inputPassword").val()==""&& $("#curPhone").val()==newPhone && $("#curEmail").val()==newEmail && newHintCode==$("#hhint_code").val()){
+			alert("변경하실 정보가 존재하지 않습니다.");
 			return;
 		}//end if
-		
-		formData = $("#frm").serialize();
-		
-		$.ajax({
-			url:"/3rd_prj/mypage/modifyInfo.do",
-			type:"post",
-			data:formData,
-			dataType:"json",
-			error:function(xhr){
-				alert("서비스가 원활하지 못한 점 죄송합니다.");
-				console.log("에러코드 : "+xhr.status);
-				console.log("/ 에러 메세지 : "+xhr.statusText);
-			},//error
-			success:function(json_obj){
-				var flag= json_obj.result;
-				if(flag==true){
-					location.href="/3rd_prj/login/mypage.do";	
-					
-				}else{
-					alert("현재 입력하신 비밀번호가 올바르지 않습니다.")
-				}
-				
-			}//success
-		});//ajax
-		
+		if($("#inputPassword").val()==$("#curPassword").val()){
+			alert("현재 비밀번호와 변경하실 비밀번호가 일치합니다.");
+			return;
+		}
+	modifyRun();
+	}//end if
 	});//click
 	
 });//ready
+function modifyRun(){
+	formData = $("#frm").serialize();
+	
+	$.ajax({
+		url:"/3rd_prj/mypage/modifyInfo.do",
+		type:"post",
+		data:formData,
+		dataType:"json",
+		error:function(xhr){
+			alert("서비스가 원활하지 못한 점 죄송합니다.");
+			console.log("에러코드 : "+xhr.status);
+			console.log("/ 에러 메세지 : "+xhr.statusText);
+		},//error
+		success:function(json_obj){
+			var flag= json_obj.result;
+			if(flag==true){
+				alert("회원정보 변경 성공하였습니다.")
+				location.href="/3rd_prj/login/mypage.do";	
+				
+			}else{
+				alert("현재 입력하신 비밀번호가 올바르지 않습니다.")
+			}
+			
+		}//success
+	});//ajax
+	
+}//modifyRun
 </script>
 </head>
 <body>
@@ -171,7 +184,7 @@ $(function(){
   </div>
   <div class="container">
   <div class="form-group row">
-  <label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
+ <label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
     <div class="col-sm-3">
       <input type="text" class="form-control" id="email1" value="<c:out value='${list.email1}'/>">
     </div>
@@ -220,7 +233,7 @@ $(function(){
   <div class="form-group row">
   <label for="staticEmail" class="col-sm-2 col-form-label">비밀번호 힌트</label>
     <div class="col-sm-3">
-      <select class="form-control" name="hint_code" id="hint_code">
+      <select class="form-control" name="hint_code" id="hint_code" style="width: 300px;">
   		  <c:forEach var="passHintList" items="${passHintList }">
 			<option value="${ passHintList.hintCode }"><c:out value="${ passHintList.hint }"/></option>
 		  </c:forEach>

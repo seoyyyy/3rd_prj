@@ -37,34 +37,48 @@
 </style>
 <script type="text/javascript">
 $(function(){
+		$("#inputPassword").keydown(function(evt){
+			if(evt.which == 13){
+				if($("#inputPassword").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					return;
+				}//end if
+			chkNull();
+			}//end if
+		});//keydown
 	$("#btnMyChk").click(function() {
 		if($("#inputPassword").val()==""){
 		alert("비밀번호를 입력해주세요.");
 		return;
 		}//end if
-		formData = $("#frm").serialize();
-		$.ajax({
-			url:"/3rd_prj/mypage/passwdChkProc.do",
-			type:"post",
-			data:formData,//여기까지 보내는 설정
-			dataType:"json",
-			error:function(xhr){
-				alert("서비스가 원활하지 못한 점 죄송합니다.");
-				console.log("에러코드 : "+xhr.status);
-				console.log("/ 에러 메세지 : "+xhr.statusText);
-			},//error
-			success:function(json_obj){
-				var flag= json_obj.result;
-				if(flag==true){
-					location.href= "/3rd_prj/mypage/information.do";
-				}else{
-					alert("입력하신 비밀번호가 맞지 않습니다.")
-				}//end else
-			}//success
-		});//ajax
+		chkNull();
 		
 	});//click
 });//ready
+function chkNull(){
+	formData = $("#frm").serialize();
+	$.ajax({
+		url:"/3rd_prj/mypage/passwdChkProc.do",
+		type:"post",
+		data:formData,//여기까지 보내는 설정
+		dataType:"json",
+		error:function(xhr){
+			alert("서비스가 원활하지 못한 점 죄송합니다.");
+			console.log("에러코드 : "+xhr.status);
+			console.log("/ 에러 메세지 : "+xhr.statusText);
+		},//error
+		success:function(json_obj){
+			var flag= json_obj.result;
+			if(flag==true){
+				location.href= "/3rd_prj/mypage/information.do";
+			}else{
+				alert("입력하신 비밀번호가 맞지 않습니다.")
+			}//end else
+		}//success
+	});//ajax
+	
+	
+}
 </script>
 </head>
 <body>

@@ -78,7 +78,7 @@ function move(reservation_num){
 <div class="row" style="margin-bottom: 20px;" >
   <div class="col-sm-12">
     <div class="card" id="top" style="background-color: #E3C6C2; font-family: '고딕';" >
-    	<h3 class="card-title">MyPage</h3>
+    	<h3 class="card-title" style="margin-left: 20px;"><strong>MyPage</strong></h3>
       </div>
     </div>
  </div>
@@ -87,17 +87,17 @@ function move(reservation_num){
   <div class="col-sm-6"  >
     <div class="card" id="information">
       <div class="card-body" >
-        <h5 class="card-title">회원정보</h5>
+        <h5 class="card-title"><strong>회원정보</strong></h5>
         <p class="card-text">
         <div>
         <c:forEach var="infoData" items="${infoData}">
-        	아이디 :<c:out value="${infoData.user_id}"/> 
+        	<strong>아이디 : </strong> <c:out value="${infoData.user_id}"/>
         	<br/>
-        	이름 :<c:out value="${infoData.user_name}"/>
+        	<strong>이름 : </strong> <c:out value="${infoData.user_name}"/>
         	<br/>
-        	이메일 :<c:out value="${infoData.email}"/>
+        	<strong>이메일 : </strong> <c:out value="${infoData.email}"/>
         	<br/>
-        	휴대폰 :<c:out value="${infoData.phone}"/>
+        	<strong>휴대폰 : </strong> <c:out value="${infoData.phone}"/>
         	</c:forEach>
         </div>
         </p>
@@ -112,11 +112,11 @@ function move(reservation_num){
   <div class="col-sm-6">
     <div class="card" id="information">
       <div class="card-body" style="position: relative;">
-        <h5 class="card-title">예약확인</h5>
+        <h5 class="card-title"><strong>예약확인</strong></h5>
         <p class="card-text">
 			<div style="overflow:auto; width:490px; height:200px;">
-			<table class="table table-sm" style="text-align: center; ">
-			  <thead class="thead-dark">
+			<table class="table table-hover table-sm" style="text-align: center; ">
+			  <thead class="table" style="background-color:#C8C4C1;">
 			    <tr>
 			      <th scope="col">이용날짜</th>
 			      <th scope="col">이름</th>
@@ -159,10 +159,10 @@ function move(reservation_num){
   <div class="col-sm-6">
     <div class="card" id="information">
     <div class="card-body" >
-<h5 class="card-title">등록된 카드</h5>
+<h5 class="card-title"><strong>등록된 카드</strong></h5>
 <div style="overflow:auto; width:490px; height:150px;">
-<table class="table table-sm" style="text-align: center">
-  <thead class="thead-dark">
+<table class="table table-hover table-sm" style="text-align: center">
+  <thead class="table" style="background-color:#C8C4C1;">
     <tr>
       <th scope="col">유형</th>
       <th scope="col" style="width: 80px;">카드번호</th>
@@ -197,12 +197,12 @@ function move(reservation_num){
   <div class="col-sm-1">
     <div class="card" id="information">
       <div class="card-body" style="position: relative;">
-        <h5 class="card-title">문의확인</h5>
+        <h5 class="card-title"><strong>문의확인</strong></h5>
         <p class="card-text">
 			<div class="table-responsive">
 			<div style="overflow:auto; width:490px; height:200px;">
-			<table class="table table-sm" style="text-align: center; ">
-			  <thead class="thead-dark">
+			<table class="table table-hover table-sm" style="text-align: center; ">
+			   <thead class="table" style="background-color:#C8C4C1;">
 			    <tr>
 			      <th scope="col">제목</th>
 			      <th scope="col">작성일</th>
@@ -212,7 +212,7 @@ function move(reservation_num){
 			  <tbody>
 			  <c:forEach var="qd" items="${qnaData }">
 			    <tr>
-			      <td><a href="../board/qna_post.do?q_num=${qd.q_num}"><c:out value="${qd.q_subject }"/></a></td>
+			      <td><a href="../board/qna_post.do?q_num=${qd.q_num}" class="text-reset"><c:out value="${qd.q_subject }"/></a></td>
 			      <td><c:out value="${qd.q_input_date }"/></td>
 			      <td>
 			      <c:choose>

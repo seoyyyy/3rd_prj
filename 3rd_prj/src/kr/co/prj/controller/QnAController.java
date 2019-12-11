@@ -22,7 +22,6 @@ import kr.co.prj.vo.QnAAddRpVO;
 import kr.co.prj.vo.QnAModifyVO;
 import kr.co.prj.vo.QnAWriteVO;
 import kr.co.prj.vo.RpModifyVO;
-import kr.co.prj.vo.SearchRangeVO;
 import kr.co.prj.vo.SearchVO;
 
 
@@ -58,7 +57,6 @@ public class QnAController {
 			 indexList=qs.indexList(new IndexListVO(tempPage, totalPage, "qna_list.do?field="+field+"&keyword="+keyword+"&"));
 		}
 
-		SearchRangeVO srVO = new SearchRangeVO(startNum,endNum);
 		 List<QnAListDomain> list = qs.searchAllQnA(sVO);
 		 model.addAttribute("list", list);
 		 model.addAttribute("totalPage", totalPage);
@@ -90,9 +88,6 @@ public class QnAController {
 	public String writeProcess(HttpSession session,QnAWriteVO qwVO) {
 		System.out.println(qwVO.getUser_id()+"ȣȣȫȫȫ");
 	
-		System.out.println(qwVO);
-		System.out.println("-----------------------------");
-		System.out.println(session.getAttribute("memberId"));
 		JSONObject json = null;
 		QnAService qs = new QnAService();
 		 json = qs.insertQnAPost(qwVO);
@@ -131,10 +126,10 @@ public class QnAController {
 	}//addRp_process
 	@RequestMapping(value="board/rp_modify.do", method=POST)
 	@ResponseBody
-	public String rpModifyProcess(RpModifyVO rmVO) {
+	public String rpModifyProcess(QnAAddRpVO qarVO) {
 		JSONObject json = null;
 		QnAService qs = new QnAService();
-		json = qs.replyModify(rmVO);
+		json = qs.replyModify(qarVO);
 		
 		return  json.toJSONString();
 	}//rpModifyProcess
