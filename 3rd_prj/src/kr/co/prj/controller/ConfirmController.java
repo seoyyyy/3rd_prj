@@ -26,7 +26,7 @@ import kr.co.prj.vo.ReservationVO;
 @Controller
 public class ConfirmController {
 
-	@RequestMapping(value = "payment/confirm_parameter.do", method = RequestMethod.GET)
+	@RequestMapping(value = "payment/confirm_parameter.do")
 	// 매개변수로 HttpServletRequest를 선언 : Spring MVC Framework에서
 	// WAS에서 접속자가 요청할 때 생성되는 요청객체를 얻어 method arguments로
 	// 할당한다.

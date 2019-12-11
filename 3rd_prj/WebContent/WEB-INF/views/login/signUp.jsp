@@ -142,8 +142,9 @@ $(function(){
 	$("#inputPasswordCheck").focusout(function(){
 		 if($("#inputPasswordCheck").val()!=""){
 			if($("#inputPassword").val()!=$("#inputPasswordCheck").val()){
-				
-				alert("값이 다름");
+				$("#inputPasswordCheck").attr('class','form-control is-invalid');
+				$("#inputPasswordCheck_div").attr('class','invalid-feedback');
+				$("#inputPasswordCheck_div").text("입력하신 비밀번호가 다릅니다.");
 			}//end if
 			 
 			 $("#inputPasswordCheck").attr('class','form-control is-valid');
@@ -188,11 +189,19 @@ $(function(){
 					$("#phone2").attr('class','form-control is-invalid');
 					$("#phone_div").attr('class','invalid-feedback');
 					$("#phone_div").text("숫자만 입력 가능합니다.");				 				 
-			 } else { 				 
+			 } else { 				
+		 		if( $("#phone1").val().length >=3 && $("#phone1").val().length<=4 && $("#phone2").val().length >=3 && $("#phone2").val().length <=4 ){
+		 			
 					 $("#phone1").attr('class','form-control is-valid');
 					 $("#phone2").attr('class','form-control is-valid');
 					 $("#phone_div").attr('class','valid-feedback');
 					 $("#phone_div").text("");
+		 		} else {
+					$("#phone1").attr('class','form-control is-invalid');
+					$("#phone2").attr('class','form-control is-invalid');
+					$("#phone_div").attr('class','invalid-feedback');
+		 			$("#phone_div").text("번호는 각각 3~4자리만 입력 가능합니다.");	
+		 		}//end else
 			 }
 			
 		 	}else{

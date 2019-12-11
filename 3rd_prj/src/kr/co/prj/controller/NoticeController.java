@@ -115,12 +115,11 @@ public class NoticeController {
 	}//modifyForm
 	
 	@RequestMapping(value="board/addFile.do",method=POST)
-	public String addFile(@RequestParam(value ="image",required = false, defaultValue = "null")MultipartFile file) {
+	public String addFile(@RequestParam(value ="image",required = false)MultipartFile file) {
 		JSONObject json = null;
 		NoticeService ns = new NoticeService();
 		
 		json = ns.addFile(file);
-		
 		
 		return json.toJSONString();
 	}//addFile

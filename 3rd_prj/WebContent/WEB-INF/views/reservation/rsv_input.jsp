@@ -230,7 +230,7 @@ $(function(){
 		
 		
 		<div id="rightside">
-		<form action="/3rd_prj/payment/confirm_parameter.do" method="get">
+		<form action="/3rd_prj/payment/confirm_parameter.do" method="post">
 			<h6><c:out value="${ param.param_year }"/>-<c:out value="${ param.param_month }"/>-<c:out value="${ param.param_day }"/>
 			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 <a href="/3rd_prj/diary/diary.do" method="post">

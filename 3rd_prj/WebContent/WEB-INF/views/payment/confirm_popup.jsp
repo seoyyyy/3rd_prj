@@ -83,6 +83,9 @@ $(function(){
 				<td class="tdTable">이메일</td><td class="tdTable2"><c:out value="${rInfo.email }"></c:out></td>				
 			</tr>			
 			
+			<tr class="trTable">
+				<td class="tdTable">예약일자</td><td class="tdTable2"><c:out value="${rInfo.reservation_date }"></c:out></td>				
+			</tr>		
 			
 			<%
 			if("B".equals(rsVO.getPay_method())){

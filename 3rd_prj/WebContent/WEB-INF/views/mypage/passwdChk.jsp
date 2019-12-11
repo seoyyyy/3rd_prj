@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"
     info=""
     %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/3rd_prj/common/css/main.css"/>
 <style type="text/css">
 	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
 	/* 헤더 시작*/
@@ -36,7 +37,33 @@
 </style>
 <script type="text/javascript">
 $(function(){
-	
+	$("#btnMyChk").click(function() {
+		if($("#inputPassword").val()==""){
+		alert("비밀번호를 입력해주세요.");
+		return;
+		}//end if
+		formData = $("#frm").serialize();
+		$.ajax({
+			url:"/3rd_prj/mypage/passwdChkProc.do",
+			type:"post",
+			data:formData,//여기까지 보내는 설정
+			dataType:"json",
+			error:function(xhr){
+				alert("서비스가 원활하지 못한 점 죄송합니다.");
+				console.log("에러코드 : "+xhr.status);
+				console.log("/ 에러 메세지 : "+xhr.statusText);
+			},//error
+			success:function(json_obj){
+				var flag= json_obj.result;
+				if(flag==true){
+					location.href= "/3rd_prj/mypage/information.do";
+				}else{
+					alert("입력하신 비밀번호가 맞지 않습니다.")
+				}//end else
+			}//success
+		});//ajax
+		
+	});//click
 });//ready
 </script>
 </head>
@@ -50,16 +77,16 @@ $(function(){
 <div id="container">   
 
 
-<form class="form-signin" style="width: 200px; margin-left: 430px">
+<form id="frm" name="frm" class="form-signin" style="width: 200px; margin-left: 430px">
 <div align="center">
   <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h5 mb-3 font-weight-bold">회원정보 수정 확인</h1>
   <label for="inputEmail" class="sr-only">Username</label>
-  <input type="text" readonly="readonly" id="inputId" class="form-control" value="yolo" placeholder="Username" required="" autofocus="">
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+  <input type="text" readonly="readonly" name="inputId" id="inputId" class="form-control" value="<c:out value='${memberId}'/>" placeholder="Username">
+  <label for="inputPassword" class="sr-only" >Password</label>
+  <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password"/>
      <div style="margin-left: 0px; margin-top: 10px;" >
-     	<input type="button" class="btn btn-secondary alert-danger" value="본인확인" id="btnMyChk" onclick="location.href='information.jsp'">
+     	<input type="button" class="btn btn-secondary alert-danger" value="본인확인" id="btnMyChk" >
    </div>
 </div>
 </form>

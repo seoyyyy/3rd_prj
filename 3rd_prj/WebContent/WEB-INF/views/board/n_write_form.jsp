@@ -66,12 +66,9 @@ $(function(){
 			str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 			$("#n_content").val(str);
 			
-			var formData = new FormData(document.getElementById('writeFrm'));
-			
+			formData = $("#writeFrm").serialize();
 			$.ajax({
 				url:"/3rd_prj/board/n_write_process.do",
-				processData: false,
-				contentType: false,
 				data:formData,
 				type:"post",
 				dataType:"json",
@@ -129,17 +126,18 @@ function handleImgFileSelect(e){
 		reader.readAsDataURL(f);
 		$("#n_content").val($("#n_content").val()+"<img src='http://localhost:8080/3rd_prj/common/images/"+fileName+"'/>");
 	});
+	 formData = new FormData(document.getElementById('addFile'));
 	
-	var formData = new FormData(document.getElementById('addFile'));
 	$.ajax({
 		url:"/3rd_prj/board/addFile.do",
 		processData: false,
 		contentType: false,
 		data:formData,
+		async:false,
 		type:"post",
 		dataType:"json",
 		error:function(xhr){
-			/* alert("문제발생\n" + xhr.status + "\n" + xhr.statusText); */
+			/* alert("문제발생\n" + xhr.status + "\n" + xhr.statusText);  */
 		},
 		success:function(json){
 			if(json.result == true){

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     info=""
     %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,30 +36,91 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	
+	$("#email2").click(function() {
+		if($("#email2").val()=="none"){
+			$("#email3").val("");
+		}else{
+		$("#email3").val($("#email2").val());
+		}//end else
+			
+	})//click
+	$("#email2").val($("#hemail").val()).selected=true;
+	$("#phone1").val($("#phone0").val()).selected=true;
+	$("#hint_code").val($("#hhint_code").val()).selected=true;
+	
+	
 	$("#btnMyInfoChange").click(function() {
-		if($("#inputPassword").val()==""){
-			alert("비밀번호를 입력해주세요.");
+		
+		if($("#curPassword").val()==""){
+			alert("현재 비밀번호를 입력해주세요")
+			return ;
+		}//end if
+		if($("#inputPassword").val()!=$("#inputPasswordCheck").val()){
+			alert("변경하실 비밀번호를 올바르게 작성해주세요.");
 			return;
 		}//end if
-		if($("#inputPasswordCheck").val()==""){
-			alert("비밀번호확인을 입력해주세요.");
+		
+		if($("#email1").val()==""){
+			alert("이메일을 입력해주세요.");
 			return;
 		}//end if
-		if($("#email").val()==""){
+		if($("#email3").val()==""){
 			alert("이메일을 입력해주세요.");
 			return;
 		}//end if
 		if($("#email2").val()=="none"){
-			alert("선택해주세요");
+			alert("도메인 주소를 선택해주세요");
 			return;
 		}//end if
-		if($("#phon").val()==""){
+		if($("#phone2").val()==""){
+			alert("핸드폰번호를 입력해주세요.");
+			return;
+		}//end if
+		if($("#phone3").val()==""){
 			alert("핸드폰번호를 입력해주세요.");
 			return;
 		}//end if
 
-			location.href="loginMyPage.jsp";		
+		var newPhone=$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val();
+		$("#phone").val(newPhone);
+		var newEmail=$("#email1").val()+"@"+$("#email3").val();
+		$("#email").val(newEmail);
+		var newHintCode = $("#hint_code").val();
+		$("#hint_code").val(newHintCode);
+		
+		if($("#curPassword").val()==$("#password").val() &&$("#curPhone").val()==newPhone &&
+				$("#curEmail").val()==newEmail && newHintCode==$("#hhint_code").val()){
+			alert("변경하실 정보가 존재하지 않습니다.")
+			return;
+		}//end if
+		
+		formData = $("#frm").serialize();
+		
+		$.ajax({
+			url:"/3rd_prj/mypage/modifyInfo.do",
+			type:"post",
+			data:formData,
+			dataType:"json",
+			error:function(xhr){
+				alert("서비스가 원활하지 못한 점 죄송합니다.");
+				console.log("에러코드 : "+xhr.status);
+				console.log("/ 에러 메세지 : "+xhr.statusText);
+			},//error
+			success:function(json_obj){
+				var flag= json_obj.result;
+				if(flag==true){
+					location.href="/3rd_prj/login/mypage.do";	
+					
+				}else{
+					alert("현재 입력하신 비밀번호가 올바르지 않습니다.")
+				}
+				
+			}//success
+		});//ajax
+		
 	});//click
+	
 });//ready
 </script>
 </head>
@@ -71,63 +133,118 @@ $(function(){
 </div>
 
 <div id="container">
-<form style="margin-left: 140px">
-<div class="card" style="width: 900px;"  >
-<div style="margin-left: 100px"; >
+<form id="frm" style="margin-left: 140px">
+<div class="card" style="width: 1000px;"  >
+<c:forEach var="list" items="${infoList}">
+<div style="margin-left: 100px">
   <h2 style="margin-top: 30px"><strong>회원정보 관리</strong></h2>
   <br/>
   <div class="form-group row" >
     <label for="staticEmail" class="col-sm-2 col-form-label">아이디</label>
     <div class="col-sm-3">
-      <input type="text" readonly class="form-control-plaintext" id="id" value="yolo">
+      <input type="text" readonly class="form-control-plaintext" id="id" name="user_id" value='<c:out value="${list.user_id }"/>'>
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호 변경</label>
+    <label for="inputPassword" class="col-sm-2 col-form-label">현재비밀번호</label>
     <div class="col-sm-3" >
-      <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="Password">
+      <input type="password" class="form-control"  id="curPassword" name="curPassword"  placeholder="현재비밀번호 입력">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">비밀번호 확인</label>
+    <label for="inputPassword" class="col-sm-2 col-form-label">새비밀번호 변경</label>
+    <div class="col-sm-3" >
+      <input type="password" class="form-control"  id="inputPassword" name="password" placeholder="새 비밀번호 입력">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">새비밀번호 확인</label>
     <div class="col-sm-3">
-      <input type="password" class="form-control" id="inputPasswordCheck" placeholder="Password">
+      <input type="password" class="form-control" id="inputPasswordCheck" placeholder="새 비밀번호 확인">
     </div>
   </div>
     <div class="form-group row">
     <label for="staticEmail" class="col-sm-2 col-form-label">이름</label>
     <div class="col-sm-3">
-      <input type="text" readonly class="form-control-plaintext" id="userName" value="강다혜">
+      <input type="text" readonly class="form-control-plaintext" id="userName" value='<c:out value="${list.user_name }"/>'>
     </div>
   </div>
+  <div class="container">
   <div class="form-group row">
   <label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="email" placeholder="mail">
+      <input type="text" class="form-control" id="email1" value="<c:out value='${list.email1}'/>">
     </div>
     @
     <div class="col-sm-3">
-      <select class="form-control" id="email2">
+    <input type="hidden" id="hemail"  value="<c:out value='${list.email2}'/>"/>
+    <input type="hidden" id="curEmail" value="<c:out value='${list.email}'/>"/>
+      <select class="form-control" id="email2" >
   		<option value="none">직접입력</option>
-  		<option>naver.com</option>
-  		<option>hanmail.co.kr</option>
+  		<option value="naver.com">naver.com</option>
+  		<option value="hanmail.com">hanmail.com</option>
+  		<option value="daum.net">daum.net</option>
+  		<option value="gmail.com">gmail.com</option>
+	  </select>
+    </div>
+	 	<div class="col-sm-3" id="inputEmail">
+	  		<input type="text" class="form-control" id="email3" value="<c:out value='${list.email2}'/>">
+    	</div>
+  <input type="hidden" id="email" name="email"/>
+  </div>
+  </div>
+  <div class="form-group row">
+    <input type="hidden" id="phone0"  value="<c:out value='${list.phone0}'/>"/>
+    <label for="inputPassword" class="col-sm-2 col-form-label">휴대전화</label>
+    <div class="col-sm-3" >
+      <select class="form-control" style="width:200px" id="phone1">
+  		<option value="010">010</option>
+  		<option value="011">011</option>
+  		<option value="016">016</option>
+  		<option value="017">017</option>
+  		<option value="018">018</option>
+  		<option value="019">019</option>
+	  </select>
+    </div>
+    <div class="col-sm-3" align="left">
+     <input type="text" class="form-control" id="phone2"  value="<c:out value='${list.phone1}'/>" >
+    </div><span style="margin-top: 10px; margin-left: 10px;" >-</span>
+    <div class="col-sm-3">
+     <input type="text" class="form-control" id="phone3" value="<c:out value='${list.phone2}'/>">
+      <div  id="phone_div"> </div> 
+    </div>
+    <input type="hidden"  id="curPhone" value="<c:out value='${list.phone}'/>"/>
+    <input type="hidden" name="phone" id="phone"/>
+  </div>
+  <br/>
+  <div class="form-group row">
+  <label for="staticEmail" class="col-sm-2 col-form-label">비밀번호 힌트</label>
+    <div class="col-sm-3">
+      <select class="form-control" name="hint_code" id="hint_code">
+  		  <c:forEach var="passHintList" items="${passHintList }">
+			<option value="${ passHintList.hintCode }"><c:out value="${ passHintList.hint }"/></option>
+		  </c:forEach>
 	  </select>
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">핸드폰 번호</label>
+    <label for="staticEmail" class="col-sm-2 col-form-label">힌트 정답</label>
+    <input type="hidden" id="hhint_code"  value="<c:out value='${list.hint_code }'/>"/>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="phon" >
+      <input type="text" class="form-control" id="hintAw" name="answer">
+      <div  id="hintAw_div"> </div> 
     </div>
-  </div><br/>
+  </div> 
   </div>
+  </c:forEach>
 </div>  
     <div class="form-group row" style="margin-top: 20px; margin-left: 300px">
     <div class="col-sm-10" >
     	<input type="button" class="btn btn-secondary alert-danger btn" value="회원정보 수정" id="btnMyInfoChange"/>
-    	<input type="button" class="btn btn-secondary alert-secondary btn" value="취소" id="btnCancle" onclick="location.href='loginMyPage.jsp'"/>
+    	<input type="button" class="btn btn-secondary alert-secondary btn" value="취소" id="btnCancle" onclick="location.href='/3rd_prj/login/mypage.do'"/>
     </div>
 </div>
+
 </form>   
 </div>
 

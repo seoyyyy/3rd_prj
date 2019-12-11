@@ -68,7 +68,7 @@ $(function(){
 	<% ReservationTotalVO rsVO = (ReservationTotalVO)request.getAttribute("rInfo"); %>
 		<table>
 			<tr class="trTable">
-				<td class="tdTable">예약날짜</td><td class="tdTable2"><c:out value="${rInfo.use_date }"></c:out></td>
+				<td class="tdTable">이용날짜</td><td class="tdTable2"><c:out value="${rInfo.use_date }"></c:out></td>
 			</tr>
 			<tr class="trTable">
 				<td class="tdTable">예약시간</td><td class="tdTable2"><c:out value="${rTime }"></c:out></td>
@@ -82,6 +82,7 @@ $(function(){
 			<tr class="trTable">
 				<td class="tdTable">이메일</td><td class="tdTable2"><c:out value="${rInfo.email }"></c:out></td>				
 			</tr>			
+			
 			
 			
 			

@@ -149,11 +149,11 @@ function moveResv( year,month,day){
          <div id="calWrap">
             <div id="calHeader">
            <%--  <a href='diary.do?<%="year="+nowYear+"&"+"month="+(nowMonth-1)%>'><img src="/3rd_prj/common/images/prev_btn.png"title="이전월"id="pre"/></a> --%>
-            <a href="diary.do?month=<%=nowMonth-1==0?12:nowMonth-1%>&year=<%=
+            <a href="diary.do?month=<%=nowMonth-1<0?11:nowMonth-1%>&year=<%=
          nowMonth-1<0?nowYear-1:nowYear %>"><img src="/3rd_prj/common/images/prev_btn.png" title="이전월"/></a>
             <span style="font-family: 고딕  SansSerif;font-weight: bold;font-size: 27px"><%=nowYear%>.<%=nowMonth+1 %></span>
             <%-- <a href='diary.do?<%="year="+nowYear+"&"+"month="+(nowMonth+1)%>'><img src="/3rd_prj/common/images/next_btn.png"title="다음월"id="next"/></a> --%>
-               <a href="diary.do?month=<%=nowMonth+1==12?1:nowMonth+1%>&year=<%=
+               <a href="diary.do?month=<%=nowMonth+1==12?0:nowMonth+1%>&year=<%=
             nowMonth+1==12?nowYear+1:nowYear %>"><img src="/3rd_prj/common/images/next_btn.png" title="다음월"/></a>    
             <a href='diary.do'><img src="/3rd_prj/common/images/today_btn.png"title="현재월"/></a>
             </div>         

@@ -27,7 +27,7 @@
 	/* 푸터 끝  */
 	#hTitle{font-family: '고딕'; font-size: 30px; font-weight: bold;}
 	
-	#mustAnswer, #warnAnswer, #mustId, #warnId, #warnNum, #mustNum, #mustEmail, #warnEmail { color: red ; display: none; margin-bottom: 0px;}
+	#mustAnswer, #warnAnswer, #mustId, #warnId, #warnNum, #warnNum2, #mustNum, #mustEmail, #warnEmail, #warnEmail2 { color: red ; display: none; margin-bottom: 0px;}
 	#validAnswer, #validId, #validNum, #validEmail { color: green ; display: none; margin-bottom: 0px;}
 
 </style>
@@ -46,26 +46,7 @@ $(function(){
 	////////////////////////////////// 유효성 검증 ///////////////////////////////////////////////
 	
 
-	/**
- 	$("#inputPassword").focusout(function (event) {
- 		$("#warnNum1").hide();
- 		$("#validNum1").hide(); 		
- 		$("#mustNum1").hide();
- 		
-		if( $("#inputPassword").val().indexOf("-") == -1 ) {
-			$("#warnNum1").show();
-			return;
-	    } else if( $("#inputPassword").val()=="" ) {
-	    	$("#mustNum1").show();
-			return;	    	
-		} else {
-			$("#validNum1").show();
-			return;
-		}//end if 		
- 	});//keyup
- 	*/
-	
-	
+
 	
 	 $("#id").focusout(function (event) {	 
 		$("#warnId").hide();
@@ -88,6 +69,9 @@ $(function(){
 
 	
  	$("#phone").focusout(function (event) {
+ 		
+ 		var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+ 		
 		 $("#warnNum").hide();
 		 $("#validNum").hide();
 		 $("#mustNum").hide();
@@ -98,7 +82,10 @@ $(function(){
 			    return;
 		    } else if( $("#phone").val()=="" ) {
 			    	$("#mustNum").show();
-					return;	    	
+					return;	   
+			} else if ( !regExp.test( $("#phone").val() ) )  {
+				$("#warnNum2").show();
+				      return;
 			} else {
 				 $("#validNum").show();
 				 return;
@@ -109,18 +96,25 @@ $(function(){
 	 
 
 	 $("#email").focusout(function (event) {
+		 
+		 var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 	
+		 
 		 $("#warnEmail").hide();
 		 $("#validEmail").hide();
 		 $("#mustEmail").hide();
+		 $("#warnEmail2").hide();
 		 
-		 if( $("#email").val().indexOf("@") == -1 ) {
+		 if( $("#email").val().indexOf("@") == -1 || $("#email").val().indexOf(".") == -1 ) {
 			 $("#warnEmail").show();
 				return;
 		    } else if( $("#email").val()=="" ) {
 		    	$("#mustEmail").show();
 				return;	    
-			} else {
-			$("#validEmail").show();	
+		    } else if ( !regExpEmail.test($("#email").val() ) ){
+		    	$("#warnEmail2").show();	 
+		    	return;
+			} else {				
+				$("#validEmail").show();	
 			return;
 			}//end if 		
 	 });//focusout
@@ -235,8 +229,8 @@ $(function(){
    <div class="col-sm-4" style="margin-bottom: 0px">
       <input type="email" class="form-control" name="id" id="id" placeholder="ID">
    </div>
-	  <p id="warnId" style="margin-left:160px;">ID는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.</p>
-	  <p id="validId" >맞는 입력형식입니다.</p>
+	  <p id="warnId" style="margin-left:160px;">ID는 4~20자 영문자 또는 숫자이어야 합니다.</p>
+	  <p id="validId" >유효한 입력형식입니다.</p>
 	  <p id="mustId" >필수 입력값입니다. </p>
   </div>
   <div class="form-group row">
@@ -245,16 +239,18 @@ $(function(){
       <input type="password" class="form-control" name="phone" id="phone" placeholder="EX ) 010-XXXX-XXXX" >
     </div>
      <p id="warnNum" style="margin-left:160px;">전화번호는 -을 포함한 숫자를 입력해주세요.</p>
-     <p id="validNum" >맞는 입력형식입니다.</p>
+     <p id="validNum" >유효한 입력형식입니다.</p>
      <p id="mustNum" >필수 입력값입니다. </p>
+     <p id="warnNum2"> 휴대폰 번호는 10~11자리 내여야 합니다.</p>
   </div>
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">이메일</label>
     <div class="col-sm-4">
       <input type="password" class="form-control" name="email" id="email" placeholder="EX ) XXX@gmail.com">
     </div>
-    <p id="warnEmail" style="margin-left:160px;">이메일은 @을 포함한 영문과 숫자를 입력해주세요.</p>
-    <p id="validEmail" >맞는 입력형식입니다.</p>
+    <p id="warnEmail" style="margin-left:160px;">'@'과 '.'을 포함한 이메일을 입력해주세요.</p>
+    <p id="warnEmail2" style="">유효한 이메일 형식이 아닙니다.</p>
+    <p id="validEmail" >유효한 입력형식입니다.</p>
     <p id="mustEmail" >필수 입력값입니다.</p>
   </div>
   <div class="form-group row">

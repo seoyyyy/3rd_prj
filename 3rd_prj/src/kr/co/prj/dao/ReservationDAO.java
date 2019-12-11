@@ -102,6 +102,21 @@ public class ReservationDAO {
 		return rVO;
 		
 	}//selectAllEmp
+	public List<ReservationTotalVO> selectReservation2(String id) throws SQLException{
+		List<ReservationTotalVO> list = null;
+		
+		//3.Handler얻기
+		try {
+			SqlSession ss = getSessionFactory().openSession();
+			list=ss.selectList("reservation2",id); //parameterType속성이 존재하지 없기 때문에 아이디만 넣는다.
+			ss.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end catch
+		
+		return list;
+		
+	}//selectAllEmp
 	
 	public List<RsvTimeDomain> selectRsvTime() throws SQLException{
 		List<RsvTimeDomain> list = null;

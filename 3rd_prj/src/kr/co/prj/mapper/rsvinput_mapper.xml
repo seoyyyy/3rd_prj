@@ -11,8 +11,8 @@
   
   
   <insert id="insertReservation" parameterType="kr.co.prj.vo.ReservationVO">
-  INSERT INTO RESERVATION(reservation_num,USER_ID,USE_DATE,NAME,PHONE,EMAIL,	CHARGE,	RESERVATION_DATE, PAY_STATUS)
-  VALUES(RESERCATION_CODE,#{ id }, #{ year }||'-'||#{ month }||'-'||#{ day } , #{rsv_person}, #{ phone1}||'-'||#{ phone2}||'-'||#{phone3}, #{ email }, #{totalCharge}, SYSDATE, 'N' )	
+  INSERT INTO RESERVATION(reservation_num,USER_ID,USE_DATE,NAME,PHONE,EMAIL,	CHARGE,	RESERVATION_DATE, PAY_STATUS, REQUIRE)
+  VALUES(RESERCATION_CODE,#{ id }, #{ year }||'-'||#{ month }||'-'||#{ day } , #{rsv_person}, #{ phone1}||'-'||#{ phone2}||'-'||#{phone3}, #{ email }, #{totalCharge}, SYSDATE, 'N',#{rsvRequest} )	
   
   </insert>
   

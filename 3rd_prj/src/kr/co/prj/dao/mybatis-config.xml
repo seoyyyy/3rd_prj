@@ -22,7 +22,6 @@
 	  </environments>
 	  <mappers>
 
-    
      <mapper resource="kr/co/prj/mapper/qna_mapper.xml"/>
     <mapper resource="kr/co/prj/mapper/notice_mapper.xml"/>
     

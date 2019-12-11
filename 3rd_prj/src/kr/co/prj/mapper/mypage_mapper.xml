@@ -16,16 +16,32 @@
   </select>
   
   <select id="memberInfo" resultType="kr.co.prj.domain.MypageDomain" parameterType="String">
-	select admin_id, user_name, email, phone
-	from admin
-	where user_id like #{memberId}
+	select user_id, user_name, email, phone,hint_code
+	from MEMBER_INFO
+	where user_id = #{memberId}
   </select>
   
  <delete id="deleteCard" parameterType="String">
  	delete from card_info
  	where card_info_code=#{card_info_code}
  </delete>
+ 
+<select id="passwdChk" resultType="java.lang.String" parameterType="kr.co.prj.vo.LoginVO">
+	SELECT USER_ID 
+	FROM MEMBER_INFO 
+	WHERE USER_ID=#{inputId} AND PASSWORD=#{inputPassword}
+</select>
   
-
-  
+ <update id="modifyInfo" parameterType="kr.co.prj.vo.modifyInfoVO">
+ 	UPDATE MEMBER_INFO
+	SET
+	<if test="password !=null and password !=''">
+	 PASSWORD=#{password},
+	</if> 
+	 EMAIL=#{email}, PHONE =#{phone}, HINT_CODE=#{hint_code}
+	<if test="answer != null and answer !=''">
+	, ANSWER=#{answer}
+	</if>
+	WHERE USER_ID =#{user_id} and PASSWORD=#{curPassword}
+ </update>
 </mapper>

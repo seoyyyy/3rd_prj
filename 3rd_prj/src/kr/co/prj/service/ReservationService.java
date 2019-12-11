@@ -27,6 +27,18 @@ public class ReservationService {
 		return rVO;
 	}//searchRsvTime
 	
+	public List<ReservationTotalVO> selectReservation2(String id){
+		List<ReservationTotalVO> list= null;
+		ReservationDAO rsvDao = ReservationDAO.getInstance();
+		try {
+			list=rsvDao.selectReservation2(id);
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}//end catch
+		return list;
+	}//searchRsvTime
+	
 	
 	public List<RTimeVO> selectReservationTime(String rNum){
 		List<RTimeVO> list= null;

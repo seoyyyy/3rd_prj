@@ -10,40 +10,48 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main.css"/>
 <style type="text/css">
-	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
-	/* 헤더 시작*/
-	#naviBar{ min-width:1100px; min-height: 130px; position:relative; font-size: 20px;}
-	/* 헤더 끝 */
-	/* 컨테이너 시작  */
-	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%;}
-	#information{width: 535px; height: 300px;}
-	.nav-item{margin: 10px;}
-	#sub-menuItem{font-family:"고딕";}
-	#ex{padding-bottom: 20px; width: 150px; font-size: 15px;}
-	/* 컨테이너 끝  */
-	/* 푸터 시작  */
-	#footer{  min-width:1100px;min-height: 250px;position:relative;  background-color: #E3C6C2;}
-	#fContent{ width: 1100px;height: 110px; padding-top: 30px; margin-right: auto; margin-left: auto }
-	/* 푸터 끝  */
-	#hTitle{font-family: '고딕'; font-size: 30px; font-weight: bold;}
+   #class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
+   /* 헤더 시작*/
+   #naviBar{ min-width:1100px; min-height: 130px; position:relative; font-size: 20px;}
+   /* 헤더 끝 */
+   /* 컨테이너 시작  */
+   #container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%;}
+   #information{width: 535px; height: 300px;}
+   .nav-item{margin: 10px;}
+   #sub-menuItem{font-family:"고딕";}
+   #ex{padding-bottom: 20px; width: 150px; font-size: 15px;}
+   /* 컨테이너 끝  */
+   /* 푸터 시작  */
+   #footer{  min-width:1100px;min-height: 250px;position:relative;  background-color: #E3C6C2;}
+   #fContent{ width: 1100px;height: 110px; padding-top: 30px; margin-right: auto; margin-left: auto }
+   /* 푸터 끝  */
+   #hTitle{font-family: '고딕'; font-size: 30px; font-weight: bold;}
 </style>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Amaranth&display=swap" rel="stylesheet">
+
 <style type="text/css">
 .alert-danger{color: #000000; background-color: #E3C6C2}
 </style>
 <script type="text/javascript">
 $(function(){
 	$("#DeleteBtn").click(function(){
-		if($('#chk').is(":checked")){
-			alert("선택한 카드를 삭제합니다.");
+		if($('input[name=chk]').is(":checked")){
+			if(confirm("선택한 카드를 삭제할까요?")){
 			$("#deleteCardFrm").submit();
+				
 			return;
+			};
 		}
-		if(!$('#chk').is(":checked")){
+		if(!$('input[name=chk]').is(":checked")){
 			alert("삭제할 카드를 선택해 주세요.");		
 			return;
 		}
@@ -51,6 +59,11 @@ $(function(){
 
 	
 });//ready
+
+function move(reservation_num){
+	$("#reservation_num").val(reservation_num);
+	$("#searchRsv").submit();
+}
 </script>
 </head>
 <body>
@@ -75,19 +88,21 @@ $(function(){
     <div class="card" id="information">
       <div class="card-body" >
         <h5 class="card-title">회원정보</h5>
-        <p class="card-text"  >
+        <p class="card-text">
         <div>
-        	아이디 :<c:out value="${infoData.admin_id}"></c:out> 
+        <c:forEach var="infoData" items="${infoData}">
+        	아이디 :<c:out value="${infoData.user_id}"/> 
         	<br/>
-        	이름 :<c:out value="${infoData.user_name}"></c:out>
+        	이름 :<c:out value="${infoData.user_name}"/>
         	<br/>
-        	이메일 :<c:out value="${infoData.email}"></c:out>
+        	이메일 :<c:out value="${infoData.email}"/>
         	<br/>
-        	휴대폰 :<c:out value="${infoData.phone}"></c:out>
+        	휴대폰 :<c:out value="${infoData.phone}"/>
+        	</c:forEach>
         </div>
         </p>
         <div style="margin-left: 365px;  margin-bottom: 100px">
-        <input type="button" class="btn btn-secondary alert-danger btn-sm" value="회원정보수정" id="btnChange" onclick="location.href='passwdChk.jsp'"/>
+        <input type="button" class="btn btn-secondary alert-danger btn-sm" value="회원정보수정" id="btnChange" onclick="location.href='/3rd_prj/mypage/passwdChk.do'"/>
         </div>
       </div>
     </div>
@@ -103,20 +118,23 @@ $(function(){
 			<table class="table table-sm" style="text-align: center; ">
 			  <thead class="thead-dark">
 			    <tr>
-			      <th scope="col">제목</th>
-			      <th scope="col">작성일</th>
-			      <th scope="col" >답변여부</th>
+			      <th scope="col">이용날짜</th>
+			      <th scope="col">이름</th>
+			      <th scope="col" >요금</th>
+			      <th scope="col" >결제상태</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			  <c:forEach var="qd" items="${qnaData }">
+			  <c:forEach var="rsv" items="${rsvData }">
 			    <tr>
-			      <td><a href="../board/qna_post.do?q_num=${qd.q_num}"><c:out value="${qd.q_subject }"/></a></td>
-			      <td><c:out value="${qd.q_input_date }"/></td>
+			      <td><a href="javascript:move('${ rsv.reservation_num }')"><c:out value="${rsv.use_date }"/></a></td>
+			      <td><c:out value="${rsv.name }"/></td>
+			      <td><c:out value="${rsv.charge }"/></td>
 			      <td>
 			      <c:choose>
-			      	<c:when test="${qd.q_answer_flag eq 'N'}"><font color="red" >답변미완료</font></c:when>			      
-			      	<c:when test="${qd.q_answer_flag eq 'Y'}"><font color="blue">답변 완료</font></c:when>			      
+			      	<c:when test="${rsv.pay_status eq 'N' }"><font color="red" >미완료</font></c:when>			      
+			      	<c:when test="${rsv.pay_status eq 'D' }"><font color="red" >입금대기중</font></c:when>			      
+			      	<c:when test="${rsv.pay_status eq 'Y' }"><font color="blue" >결제완료</font></c:when>			      
 			      </c:choose>
 			      </td>
 			    </tr>
@@ -128,6 +146,9 @@ $(function(){
       </div>
     </div>
   </div>
+   <form action="checkReservation.do" method="post" id="searchRsv">
+            <input type="hidden" name="reservation_num" id="reservation_num"/>
+   </form>
   
 </div>
 <!-- 등록된 카드 -->
@@ -164,7 +185,7 @@ $(function(){
     </div>
     <div class="form-group row" id="button" style="margin-left: 390px;">
     <div class="col-sm-10">
-	  <button type="button" class="btn btn-secondary alert-danger btn-sm">추가</button>
+	  <button type="button" class="btn btn-secondary alert-danger btn-sm" onClick="location.href='inputCardInfo.do'">추가</button>
 	  <button type="button" class="btn btn-secondary alert-secondary btn-sm" id="DeleteBtn">삭제</button>
     </div>
   </div>

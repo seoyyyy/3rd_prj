@@ -13,7 +13,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.prj.domain.PassHintDomain;
@@ -25,7 +24,6 @@ import kr.co.prj.vo.FindIdPhoneVO;
 import kr.co.prj.vo.FindPwVO;
 import kr.co.prj.vo.LoginVO;
 import kr.co.prj.vo.SendEmailVO;
-import kr.co.prj.vo.SignUpVO;
 import kr.co.sist.util.cipher.DataEncrypt;
  @Controller
 public class LoginController {
@@ -141,32 +139,38 @@ public class LoginController {
 	// return "login/send_email";
 	 }//findId
 	 
+
+	 
 	 
 	 public void updatePw(SendEmailVO sevo) {
+		 
+		 
 		 
 		 String setfrom = "";
 			String tomail = sevo.getEmail(); // 받는 사람 이메일
 			String title = sevo.getId() +"님의 임시 비밀번호 발급 메일입니다.";  // 제목
 			StringBuilder content=new StringBuilder();
 			
-			content.append("[ :P ] \n\n")
-					  .append("비밀번호는 관리자도 알 수 없도록\n")
-					  .append("암호화하여 저장되기 때문에\n")
-					  .append("새로운 임시비밀번호를 생성하여 안내해 드리오니\n")
-					  .append("임시비밀번호로 로그인하신 후, \n")
-					  .append("비밀번호 분실 방지를 위해 개인정보 변경을 통해 \n")
-					  .append("새로운 비밀번호로 변경하여 사용해 주십시오. \n")
-					  .append("\n")
-					  .append(sevo.getId()+" 님의 임시 비밀번호는 "+sevo.getPassword()+"입니다.")
-					  .append("\n")
+
+			
+			content.append("<h1>"+"[ :P ]"+"</h1> \n\n")
+					  //.append("<img src=\"http://211.63.89.150:8080/3rd_prj/common/images/plogo.png\">")
+						
+					  .append("비밀번호는 관리자도 알 수 없도록<br/>")
+					  .append("암호화하여 저장되기 때문에<br/>")
+					  .append("새로운 임시비밀번호를 생성하여 안내해 드리오니<br/>")
+					  .append("임시비밀번호로 로그인하신 후, <br/>")
+					  .append("비밀번호 분실 방지를 위해 개인정보 변경을 통해 <br/>")
+					  .append("새로운 비밀번호로 변경하여 사용해 주십시오. <br/>")
+					  .append("<br/>")
+					  .append(sevo.getId()+" 님의 임시 비밀번호는 '<strong>"+sevo.getPassword()+"'</strong> 입니다.<br/>")
+					  .append("<br/>")
 					  .append("서울시 강남구 역삼동 409-7 3F, 4F [ :P ] | Copyright(C)2010 Worldjob.or.kr.All Rights Reserved. ");
 
 										 
-			//String content = sevo.getId()+" 님의 임시 비밀번호는 "+sevo.getPassword()+"입니다."; // 내용
 
 			try {
 				
-				System.out.println(mailSender+"---------------ㅎㅇㅎㅇ");
 				
 				
 				MimeMessage message = mailSender.createMimeMessage();
@@ -178,8 +182,18 @@ public class LoginController {
 				messageHelper.setFrom("pspace.rental@gmail.com"); // 보내는사람 생략하면 정상작동을 안함
 				messageHelper.setTo("rma1057@gmail.com"); // 받는사람 이메일
 				messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-				messageHelper.setText(String.valueOf(content)); // 메일 내용
+				messageHelper.setText(String.valueOf(content), true); // 메일 내용
 
+				/**
+				 * 이미지 보내기 안됨 시간 나면 하기
+				String contents = content+ "<img src=\"cid:plogo.png\">";
+				messageHelper.setText(contents, true);
+				
+				FileSystemResource file = new FileSystemResource(new File("c:/plogo.png")); 
+				messageHelper.addInline("plogo.png", file);
+				*/
+				
+				
 				mailSender.send(message);
 			} catch (Exception e) {
 				System.out.println(e);
@@ -189,15 +203,5 @@ public class LoginController {
 		 
 	 }//updatePw
 
-	 
-	 /**
-		public void passEncrypt(FindPwVO fpvo) {
-			try {
-				fpvo.setPassword(DataEncrypt.messageDigest("MD5", fpvo.getPassword()));
-			} catch (NoSuchAlgorithmException e) {
-				e.printStackTrace();
-			}
-		//	return suVO;
-		}
-	 */
+
 }
