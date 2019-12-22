@@ -9,19 +9,20 @@
 	<typeAlias type="kr.co.prj.domain.NoticeBoardDetailDomain" alias="nbdd"/>
 	<typeAlias type="kr.co.prj.domain.NoticeListDomain" alias="nld"/>
 </typeAliases>
-		   <environments default="development">
+	  <environments default="development">
 	    <environment id="development">
 	      <transactionManager type="JDBC"/>
 	      <dataSource type="POOLED">
-	        <property name="driver" value="${driver}"/>
-	        <property name="url" value="${url}"/>
-	        <property name="username" value="${username}"/>
-	        <property name="password" value="${password}"/>
+	        <property value="${driver}" name="driver"/>
+			<property value="${url}" name="url"/>
+			<property value="${username}" name="username"/>
+			<property value="${password}" name="password"/>
 	      </dataSource>
 	    </environment>
 	  </environments>
 	  <mappers>
 
+    
      <mapper resource="kr/co/prj/mapper/qna_mapper.xml"/>
     <mapper resource="kr/co/prj/mapper/notice_mapper.xml"/>
     

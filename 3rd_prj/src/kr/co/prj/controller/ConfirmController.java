@@ -5,10 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.prj.domain.AccountListDomain;
 import kr.co.prj.domain.BankInfoDomain;
@@ -123,11 +121,11 @@ public class ConfirmController {
 	
 	@RequestMapping(value = "payment/payForCard.do")
 	public String payForCard(HttpSession session,String chk,HttpServletRequest request) {
-		System.out.println(chk);
+		System.out.println(chk+"------------------- chk 뭐냐");
 		PaymentService ps = new PaymentService();
-		System.out.println("-- 카드 "+(String)session.getAttribute("reservationCode"));
+		System.out.println("-- 카드결제 예약 코드 "+(String)session.getAttribute("reservationCode"));
 		System.out.println(ps.payForCard(new PayForCardVO((String)session.getAttribute("reservationCode"), chk)));
-		System.out.println("-- 카드 ");
+		System.out.println("-- 카드결제 완료");
 			
 		
 		/*

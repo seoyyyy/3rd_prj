@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main.css"/>
+<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 <style type="text/css">
 	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
 	/* 헤더 시작*/
@@ -60,6 +61,8 @@
 	/* 테이블 소스코드 */
 	table.tb1 {width:100%;height:600px;}
 	table.tb1 .jhs-slider {height:600px;}
+	
+	#mt-2{font-family: 'Pacifico', cursive; }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -164,12 +167,12 @@ $(function(){
 </div>
 </c:forEach>
 </div> --%>
-<div style="font-size: 30px; font-weight: bold; text-align: center ">
+<div id="mt-2"style="font-size: 50px; font-weight: bold; text-align: center ">
 <c:out value="${conceptInfo.concept_name2}"/>
-<div style="font-size: 15px;  text-align: center ">
-<c:out value="${conceptInfo.brief_info}"/>
-</div>
 </div><br/>
+<div style="font-size: 15px;  text-align: center ; font-weight: bold;" >
+<c:out value="${conceptInfo.brief_info}"/>
+</div><br/><br/>
 
 <div style="margin: auto;">
 <img style="width:1100px;height:300px" src="http://localhost:8080/3rd_prj/common/images/main.PNG">
@@ -177,10 +180,14 @@ $(function(){
 </div>
 
 <div style="margin: auto;">
-<c:forEach var="list"  items="${RoomInfo}"><br/><br/>
-<div style="font-size: 30px; font-weight: bold; text-align: center;">
+<c:forEach var="list"  items="${RoomInfo}"><br/>
+<div id="mt-2" style="font-size: 35px; font-weight: bold; text-align: center; ">
 <c:out value="${list.room_name}"/>
 </div><br/>
+<div style="font-size: 20px; font-weight: bold; text-align: center; ">
+<c:out value="${list.room_name2}"/>
+</div><br/>
+
 
 <h1 class="sliders-count"></h1>
 <table class="tb1">

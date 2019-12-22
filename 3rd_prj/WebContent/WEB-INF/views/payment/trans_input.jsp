@@ -9,12 +9,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/3rd_prj/common/css/main.css"/>
 <style type="text/css">
-	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
+
+	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto; 
+	display: flex; min-height: 100vh; flex-direction: column; 
+	}
 	/* 헤더 시작*/
 	#naviBar{ min-width:1100px; min-height: 130px; position:relative; font-size: 20px;}
 	/* 헤더 끝 */
 	/* 컨테이너 시작  */
-	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%;}
+	#container{ width:1100px; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%; flex: 1;}
 	.btn{width: 110px;height: 40px;}
 	.nav-item{margin: 10px;}
 	#sub-menuItem{font-family:"고딕";}
@@ -56,6 +59,11 @@ $(function(){
 			})
 			
 			$("#cardBtn").click(function(){
+				 if(!$("input:radio[name='chk']").is(':checked')){
+					 alert("카드를 선택해 주세요");
+					 return;
+					 
+				 }
 				if(confirm("결제할까요?")){
 					$("#payCardFrm").submit();
 				}
@@ -63,6 +71,12 @@ $(function(){
 			})
 			
 				$("#bankBtn").click(function(){
+					 if(!$("input:radio[name='bank']").is(':checked')){
+						 alert("은행을를 선택해 주세요");
+						 return;
+						 
+					 }
+					
 				if(confirm("결제할까요?")){
 					$("#payBankFrm").submit();
 				}
@@ -81,7 +95,7 @@ $(function(){
  	<!-- MENU 끝 -->
 </div>
 <div id="container" align="center">   
-		<div id="transaction" style="width:450px ; height: 450px;">
+		<div id="transaction" style="width:450px ; ">
 	
 		<div style="text-align: left; padding-top: 5px">&nbsp;&nbsp;<input type="radio" name="radio" value="카드결제" > <strong >&nbsp;&nbsp;카드결제</strong></div>
  	<form action="payForCard.do" method="post" id="payCardFrm">
@@ -178,7 +192,7 @@ $(function(){
 </div>
 
 <div id="footer">
-	<a href="#"><img src="http://localhost:8080/3rd_prj/view/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
+		<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
 	<div id="fLogo">
 		
 	</div>

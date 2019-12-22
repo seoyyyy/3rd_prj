@@ -203,6 +203,10 @@ $(function(){
 			location.href="login.do"; //로그인창 연결해주기
 		});//click
 		
+		$("#backBtn").click(function(){
+			location.href="login.do"; //로그인창 연결해주기
+		});//click
+		
 	
 });//ready
 </script>
@@ -221,7 +225,7 @@ $(function(){
 비밀번호 찾기
 </div>
 
-
+<br/><br/><br/>
 <div id="container1">
 <form>
   <div class="form-group row" >
@@ -236,7 +240,7 @@ $(function(){
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">전화번호</label>
     <div class="col-sm-4">
-      <input type="password" class="form-control" name="phone" id="phone" placeholder="EX ) 010-XXXX-XXXX" >
+      <input type="text" class="form-control" name="phone" id="phone" placeholder="EX ) 010-XXXX-XXXX" >
     </div>
      <p id="warnNum" style="margin-left:160px;">전화번호는 -을 포함한 숫자를 입력해주세요.</p>
      <p id="validNum" >유효한 입력형식입니다.</p>
@@ -246,7 +250,7 @@ $(function(){
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">이메일</label>
     <div class="col-sm-4">
-      <input type="password" class="form-control" name="email" id="email" placeholder="EX ) XXX@gmail.com">
+      <input type="text" class="form-control" name="email" id="email" placeholder="EX ) XXX@gmail.com">
     </div>
     <p id="warnEmail" style="margin-left:160px;">'@'과 '.'을 포함한 이메일을 입력해주세요.</p>
     <p id="warnEmail2" style="">유효한 이메일 형식이 아닙니다.</p>
@@ -277,7 +281,7 @@ $(function(){
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">정답</label>
     <div class="col-sm-4">
-      <input type="password" class="form-control" id="answer" placeholder="answer" name="ANSWER">
+      <input type="text" class="form-control" id="answer" placeholder="answer" name="ANSWER">
     </div>
 	    <p id="warnAnswer" style="margin-left:160px;">특수문자를 제외한 답변을 입력해주세요.</p>
 	    <p id="validAnswer" >맞는 입력형식입니다.</p>
@@ -309,7 +313,7 @@ $(function(){
 	      <br/>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="sendPw">Close</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="goLogin">Login으로</button>
 	      </div>
 	    </div>
@@ -319,6 +323,7 @@ $(function(){
 
 
 <div id="footer">
+		<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
   <div id="fContent">
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
 		<h4><strong>[:P]</strong></h4>
@@ -343,7 +348,7 @@ $(function(){
 		</div>
 	</div>
 </div>
-</div>
+
 
 </body>
 </html>

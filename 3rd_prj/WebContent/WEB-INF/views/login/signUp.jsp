@@ -243,14 +243,17 @@ $(function(){
 	
 	
 	$("#goBtn").click(function(){
-		if ( $("#id").val() !="" &&  $("#userName").val() !="" && $("#inputPassword").val() !="" && $("#hintAw").val() !="" && $("#phone2").val() !="" && $("#phone3").val() !="" ) {			
+		if ( $("#id").val() !="" &&  $("#userName").val() !="" && $("#inputPassword").val() !="" && $("#hintAw").val() !="" && $("#phone2").val() !="" && $("#phone3").val() !="" ) {		
+			alert("회원가입이 완료되었습니다.");
 			$("#signUpFrm").submit();			
 		} else {
 			alert("필요정보를 입력해야만 가입이 가능합니다.");		
 		}
 	});//click
 	
-
+	$("#backBtn").click(function(){
+		location.href="login.do"; //로그인창 연결해주기
+	});//click
 	
 	
 	
@@ -380,7 +383,7 @@ $(function(){
 </div>
 
 <div id="footer">
-	<a href="#"><img src="http://localhost:8080/3rd_pprj/view/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
+		<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
 	<div id="fLogo">
 		
 	</div>

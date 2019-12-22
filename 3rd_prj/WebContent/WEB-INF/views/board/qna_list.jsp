@@ -78,27 +78,28 @@ function checkId(){
   </thead>
   <tbody>
  <c:forEach var="list" items="${list}">
-			<tr>
+ 
+ 		<c:choose>
+ 			<c:when test="${memberId != null and list.id eq memberId }">
+				<tr onclick="location.href='qna_post.do?q_num=${list.num}'" style="cursor:pointer " >
+ 			</c:when>
+ 			<c:when test="${memberId eq null}">
+ 				<tr onclick="/3rd_prj/login/login.do" style="cursor:pointer " >
+ 			</c:when>
+ 			<c:when test="${memberId !=null and list.id ne memberId}">
+ 				<tr onclick="javascript:checkId()" style="cursor:pointer " >
+ 			</c:when>
+		</c:choose>
 				<th scope="row"><c:out value="${list.num}"/></th>
 				<td>
-					 <c:choose>
-					 	<c:when test="${memberId != null and list.id eq memberId}">
-					 	<a href="/3rd_prj/board/qna_post.do?q_num=${list.num}">
-					 	</c:when>
-					 	<c:when test="${memberId eq null}">
-					 	<a href = "/3rd_prj/login/login.do">
-					 	</c:when>
-					 	<c:when test="${memberId != null and list.id ne memberId}">
-					 	<a href="javascript:checkId()">
-					 	</c:when>
-					 </c:choose>
-				<font color="black"><c:out value="${list.subject}"/></font></a></td>
+					
+				<font color="black"><c:out value="${list.subject}"/></font></td>
 				<td><c:out value="${list.id}"/></td>
 				<td><c:out value="${list.input_date}"/></td>
 				<td>
 				<c:choose>
-					<c:when test="${list.answer_flag eq 'N'}"><font color="red">답변 미완료</font></c:when>
-					<c:when test="${list.answer_flag eq 'Y'}"><font color="blue">답변 완료</font></c:when>
+					<c:when test="${list.answer_flag eq 'N'}"><font color="#787878"><strong>답변 미완료</strong></font></c:when>
+					<c:when test="${list.answer_flag eq 'Y'}"><font color="#4d9be1"><strong>답변 완료</strong></font></c:when>
 				</c:choose>
 				
 				

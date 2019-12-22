@@ -78,7 +78,7 @@ function move(reservation_num){
 <div class="row" style="margin-bottom: 20px;" >
   <div class="col-sm-12">
     <div class="card" id="top" style="background-color: #E3C6C2; font-family: '고딕';" >
-    	<h3 class="card-title" style="margin-left: 20px;"><strong>MyPage</strong></h3>
+    	<h3 class="card-title" style="margin-left: 20px; text-align: center;"><strong>MyPage</strong></h3>
       </div>
     </div>
  </div>
@@ -126,8 +126,8 @@ function move(reservation_num){
 			  </thead>
 			  <tbody>
 			  <c:forEach var="rsv" items="${rsvData }">
-			    <tr>
-			      <td><a href="javascript:move('${ rsv.reservation_num }')"><c:out value="${rsv.use_date }"/></a></td>
+			    <tr onclick="javascript:move('${rsv.reservation_num}')" style="cursor:pointer ">
+			      <td><c:out value="${rsv.use_date }"/></td>
 			      <td><c:out value="${rsv.name }"/></td>
 			      <td><c:out value="${rsv.charge }"/></td>
 			      <td>
@@ -185,7 +185,7 @@ function move(reservation_num){
     </div>
     <div class="form-group row" id="button" style="margin-left: 390px;">
     <div class="col-sm-10">
-	  <button type="button" class="btn btn-secondary alert-danger btn-sm" onClick="location.href='inputCardInfo.do'">추가</button>
+	  <button type="button" class="btn btn-secondary alert-danger btn-sm" onclick="location.href='inputCardInfo.do'">추가</button>
 	  <button type="button" class="btn btn-secondary alert-secondary btn-sm" id="DeleteBtn">삭제</button>
     </div>
   </div>
@@ -201,18 +201,18 @@ function move(reservation_num){
         <p class="card-text">
 			<div class="table-responsive">
 			<div style="overflow:auto; width:490px; height:200px;">
-			<table class="table table-hover table-sm" style="text-align: center; ">
+			<table class="table table-hover table-sm" style="text-align: center;table-layout:fixed ">
 			   <thead class="table" style="background-color:#C8C4C1;">
 			    <tr>
-			      <th scope="col">제목</th>
+			      <th scope="col" style="width: 280px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis; ">제목</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col" >답변여부</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  <c:forEach var="qd" items="${qnaData }">
-			    <tr>
-			      <td><a href="../board/qna_post.do?q_num=${qd.q_num}" class="text-reset"><c:out value="${qd.q_subject }"/></a></td>
+			    <tr onclick="location.href='../board/qna_post.do?q_num=${qd.q_num}'" style="cursor:pointer ">
+			      <td style="width: 280px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis; "><c:out value="${qd.q_subject }"/></td>
 			      <td><c:out value="${qd.q_input_date }"/></td>
 			      <td>
 			      <c:choose>

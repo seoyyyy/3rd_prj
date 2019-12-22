@@ -40,6 +40,8 @@ public class PaymentService {
 		}//modifyEmp
 	  
 	  public boolean payForBank1(PayForBankVO pbVO) {
+		  
+		  System.out.println(pbVO.getBank()+"-----------------"+ pbVO.getrNum());
 		  boolean flag=false;
 		  
 		  PaymentDAO pDao=PaymentDAO.getInstance();

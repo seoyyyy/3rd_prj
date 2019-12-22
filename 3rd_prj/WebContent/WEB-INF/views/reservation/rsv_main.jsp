@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/3rd_prj/common/css/main.css"/>
+<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 <style type="text/css">
 	#class4Wrap{ min-width:1100px; margin: 0px auto;
 	display: flex; min-height: 100vh; flex-direction: column;
@@ -33,7 +34,7 @@
 	
 	html,body{ margin:0; padding:0; width:100%; height:100% }
 
-	
+	#mt-2{font-family: 'Pacifico', cursive; }
 	
 	@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,800);
 figure.snip1200 {
@@ -180,12 +181,15 @@ function moveDiary(room_name, image1, charge){
 
 
 
-	<div align="center" style="font-size: 35px; font-weight: bold;">Reservation</div>
-		<div style="text-align: center; margin-bottom: 20px">
+	<div align="center" id="mt-2" style="font-size: 60px; font-weight: bold;">Reservation</div>
+	<br/><br/>
+	
+	
+	<%-- 		<div style="text-align: center; margin-bottom: 20px">
 			<span style="font-size: 25px; font-weight: bold; background-color: red; color: white; ">
-				12월 얼리버드 EVENT Room2 10% 할인	<%-- <c:out value="${ sessionScope.memberId }"/> --%>
+				12월 얼리버드 EVENT Room2 10% 할인	<c:out value="${ sessionScope.memberId }"/>
 			 </span>
-		</div>	
+		</div>	 --%>
 
 	<!-- 추가되어야 할 부분 : 이미지 개수 홀수일 때  -->
 	
@@ -224,6 +228,7 @@ function moveDiary(room_name, image1, charge){
 </div>
 
 <div id="footer">
+		<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
   <div id="fContent">
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
 		<h4><strong>[:P]</strong></h4>

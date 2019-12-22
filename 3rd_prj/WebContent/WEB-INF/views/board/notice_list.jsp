@@ -11,12 +11,14 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/3rd_prj/common/css/main.css"/>
 <style type="text/css">
-	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
+	#class4Wrap{ min-width:1100px; margin: 0px auto;
+	display: flex; min-height: 100vh; flex-direction: column;
+	}
 	/* 헤더 시작*/
 	#naviBar{ min-width:1100px; min-height: 130px; position:relative; font-size: 20px;}
 	/* 헤더 끝 */
 	/* 컨테이너 시작  */
-	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%;}
+	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%; flex: 1;}
 	.btn{width: 100px;height: 40px;}
 	.nav-item{margin: 10px;}
 	#sub-menuItem{font-family:"고딕";}
@@ -70,9 +72,9 @@ $(function(){
   </thead>
   <tbody>
   <c:forEach var="list" items="${list}">
-    <tr>
+    <tr onclick="location.href='notice_post.do?n_num=${list.num}'" style="cursor:pointer " >
       <th scope="row" ><c:out value="${list.num }"/></th>
-      <td><a href="notice_post.do?n_num=${list.num}" style="color: black;"><c:out value="${list.subject}"/></a></td>
+      <td><c:out value="${list.subject}"/></td>
       <td><c:out value="${list.input_date}"/></td>
     </tr>
     </c:forEach>

@@ -12,7 +12,7 @@
   <select id="selectQna" resultType="kr.co.prj.domain.MypageQnaDomain" parameterType="String">
    	select q_subject, q_answer_flag, to_char(q_input_date,'yyyy-mm-dd') q_input_date, q_num
    	from qna
-   	where user_id like #{memberId}
+   	where user_id like #{memberId} order by q_num desc
   </select>
   
   <select id="memberInfo" resultType="kr.co.prj.domain.MypageDomain" parameterType="String">

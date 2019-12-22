@@ -12,12 +12,16 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main.css"/>
 <style type="text/css">
-	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
+
+
+	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto; 
+	display: flex; min-height: 100vh; flex-direction: column; 
+	}
 	/* 헤더 시작*/
 	#naviBar{ min-width:1100px; min-height: 130px; position:relative; font-size: 20px;}
 	/* 헤더 끝 */
 	/* 컨테이너 시작  */
-	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%;}
+	#container{ width:1100px; height: 0px auto; position:relative; margin: 0px auto; margin-top:70px; margin-bottom: 10%; flex: 1;}
 	.btn{width: 100px;height: 40px;}
 	.nav-item{margin: 10px;}
 	#sub-menuItem{font-family:"고딕";}
@@ -63,7 +67,7 @@ $(function(){
 <div id="container">   
 
 <div id="container" align="center"> 
-	<div style="border: 1px solid #333; width:400px ; height: 450px;">
+	<div style="border: 1px solid #333; border-color: #A4A19E ; width:450px ; height: 550px;">
 	<br/><br/>
 	<% ReservationTotalVO rsVO = (ReservationTotalVO)request.getAttribute("rInfo"); %>
 		<table>
@@ -144,7 +148,7 @@ $(function(){
 			
 		
 		%>
-		<input type="button" value="결제" class="btn btn-secondary alert-secondary" id="backBtn" onClick="location.href='paymentProcess.do'">
+		<input type="button" value="결제" class="btn btn-secondary alert-secondary" id="backBtn" onClick="location.href='/3rd_prj/payment/paymentProcess.do'">
 				
 				<%} %>
 
@@ -157,6 +161,7 @@ $(function(){
 
 
 <div id="footer">
+	<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
   <div id="fContent">
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
 		<h4><strong>[:P]</strong></h4>

@@ -154,7 +154,7 @@ public class LoginController {
 
 			
 			content.append("<h1>"+"[ :P ]"+"</h1> \n\n")
-					  //.append("<img src=\"http://211.63.89.150:8080/3rd_prj/common/images/plogo.png\">")
+					  //.append("<img src=\"http://localhost:8080/3rd_prj/common/images/plogo.png\">")
 						
 					  .append("비밀번호는 관리자도 알 수 없도록<br/>")
 					  .append("암호화하여 저장되기 때문에<br/>")
@@ -180,8 +180,8 @@ public class LoginController {
 				System.out.println("메일 보내고 싶어여ㅠ");
 
 				messageHelper.setFrom("pspace.rental@gmail.com"); // 보내는사람 생략하면 정상작동을 안함
-				messageHelper.setTo("rma1057@gmail.com"); // 받는사람 이메일
-				messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+				messageHelper.setTo( tomail ); // 받는사람 이메일
+				messageHelper.setSubject( title ); // 메일제목은 생략이 가능하다
 				messageHelper.setText(String.valueOf(content), true); // 메일 내용
 
 				/**

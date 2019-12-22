@@ -357,7 +357,8 @@ $(function(){
 </div>
 
 <div id="footer">
-  <div id="fContent">
+	<a href="#"><img src="http://localhost:8080/3rd_prj/common/images/arrow.png" width="50" height="50" style="position:fixed; left: 93%; top:85%; "/></a> 
+ 
 	<div style="float: left; margin-left:150px; margin-right:8%; font-size:14px;">
 		<h4><strong>[:P]</strong></h4>
 		사업자명 : (주)Baek's company<br/>
@@ -380,8 +381,8 @@ $(function(){
 			&copy;CopyRight. AllRight Reserved.<br/>
 		</div>
 	</div>
-</div>
-</div>
+
+
 
 </body>
 </html>

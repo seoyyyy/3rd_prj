@@ -57,7 +57,7 @@ RoomC, RoomD
 </div><br/>
 <div style="margin: auto;">
 <img style="width:1100px;height:300px" src="http://localhost:8080/3rd_prj/common/images/main.PNG"></div><br/><br/>
-<div style="font-size: 30px; font-weight: bold; text-align: center;">
+<div  id="mt-2" style="font-size: 30px; font-weight: bold; text-align: center;">
 RoomC
 </div><br/>
 <div style="margin: auto;">
@@ -103,7 +103,7 @@ RoomC
 12층 건물의 최상층에 위치하여, 멋진 낙조를 매일 저녁 감상하실 수 있는 곳입니다.<br/>
 </div><br/>
 
-<div style="font-size: 30px; font-weight: bold; text-align: center;">
+<div  id="mt-2" style="font-size: 30px; font-weight: bold; text-align: center;">
 RoomD
 </div><br/>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

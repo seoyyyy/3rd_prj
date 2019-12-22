@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main.css"/>
+<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 <style type="text/css">
 	#class4Wrap{ min-width:1100px; min-height: 1100px; margin: 0px auto;}
 	/* 헤더 시작*/
@@ -26,6 +27,8 @@
 	#fContent{ width: 1100px;height: 110px; padding-top: 30px; margin-right: auto; margin-left: auto }
 	/* 푸터 끝  */
 	#hTitle{font-family: '고딕'; font-size: 30px; font-weight: bold;}
+	
+	.mt-2,.card-title{font-family: 'Pacifico', cursive; }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -49,8 +52,8 @@ $(function(){
  	<!-- MENU 끝 -->
 </div>
 <div id="container">   
-	<div style="font-size: 30px; font-weight: bold; text-align: center">
-	about
+	<div style="font-size: 50px; font-weight: bold; text-align: center" class="mt-2">
+	About
 	</div>
 	<div style="font-size: 15px;  text-align: center; font-weight: bold ">
 	가치에 의미를 더하다
@@ -62,12 +65,13 @@ $(function(){
   <c:forEach var="list"  items="${concept}">		
   <div class="card">
 			
-			<a href="about1.do?concept=${ list.concept_name }">
+			<a href="about1.do?concept=${ list.concept_name }" >
 			
     <img src="http://localhost:8080/3rd_prj/common/images/<c:out value="${list.image}"/>" class="card-img-top">
     <div class="card-body">
-      <h5 class="card-title" style="font-weight: bold; color: black; "><c:out value="${list.concept_name2}"/></h5>
-    	<a style=" text-decoration: none;"></a>
+      <h5 class="card-title" style="font-weight: bold; color: black; font-size:25px; "><c:out value="${list.concept_name2}"/></h5>
+      <br/>	
+    	<a style="text-decoration: none;"></a>
       	<a class="card-text" style="color: black;"><c:out value="${list.info}"/>
       	</a>
     </div>
