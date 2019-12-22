@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 	@RequestMapping(value = "index.do")
 	public String mainForm() {
-		return "main/home";
+		return "3rd_prj/WebContent/WEB-INF/views/main/home";
 	}
 	
 	
